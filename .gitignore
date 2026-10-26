@@ -1,7 +1,10 @@
+# 依赖
 node_modules/
+# 构建产物
 dist/
 .astro/
 .cache/
-public/
+# 生成的图片（源在 assets/raw/，由 scripts/build-images.ts 现生成）
+public/img/
 *.log
 .DS_Store
