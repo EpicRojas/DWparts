@@ -2,46 +2,86 @@
 
 [English](README.md) | **简体中文**
 
-DWparts 是手机游戏《地牢深处》（Dungeon Within）的非官方资料站。该游戏由 Game Coaster 开发并发行。本站收录魔物、属性、伤害类型及相关游戏数据，并提供标签筛选功能以缩小检索范围。
+DWparts 是手机游戏《地牢深处》（Dungeon Within）的非官方资料站。该游戏由 Game Coaster 开发并发行。本站收录魔物及其部件、属性、伤害类型与相关游戏数据，并提供标签筛选功能以缩小检索范围。
 
-本站为静态文档，由一个 HTML 页面、一份项目样式表、一份筛选器样式表、一个筛选器脚本以及一份 jQuery 副本组成。不涉及构建步骤、包管理器或服务端组件。所有引用均为相对路径，因此既可由任意静态 HTTP 服务器提供，也可直接从文件系统打开，两种方式均可正常工作。
+本站为静态生成文档。魔物数据存放于 YAML 文件，模板为 Astro 组件，客户端 JavaScript 只有驱动筛选器的一个 Vue 岛。图片在构建期由 PNG 转码为无损 WebP。请求期不生成任何内容，也不存在服务端组件。
 
-本项目与 Game Coaster 无隶属、授权或赞助关系。授权是分层且不统一的：[LICENSE](LICENSE) 中的 MIT 许可仅适用于原创 HTML 与 CSS，不延伸至游戏素材或第三方代码。本仓库各类文件的适用条款见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)。
+本项目与 Game Coaster 无隶属、授权或赞助关系。授权是分层且不统一的：[LICENSE](LICENSE) 中的 MIT 许可仅适用于原创代码，不延伸至游戏素材或第三方代码。本仓库各类文件的适用条款见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)。
 
 ## 仓库结构
 
 | 路径 | 内容 | 授权 |
 | --- | --- | --- |
-| `index.html` | Wiki 文档，入口页面 | MIT |
-| `wiki_style.css` | 项目样式表 | MIT |
-| `filter/filter.css` | 标签筛选器样式 | MIT |
-| `filter/ft_tag.js` | 标签筛选器逻辑 | CC BY-NC-SA 3.0 |
-| `filter/jquery-3.7.1.min.js` | jQuery 3.7.1，未修改 | MIT |
-| `img/common/` | 图标与界面素材，无损 WebP，页面引用的即此目录（47 个文件） | © Game Coaster |
-| `img/characters/` | 角色立绘，无损 WebP，页面引用的即此目录（78 个文件） | © Game Coaster |
-| `img/raw/` | 上述文件的 PNG 原始件，页面不引用（125 个文件） | © Game Coaster |
-| `tools/build-images.sh` | 由 `img/raw/` 重新生成 WebP | MIT |
-| `CNAME` | GitHub Pages 自定义域名 | — |
+| `src/content/monsters/*.yaml` | 魔物数据，唯一数据源 | MIT |
+| `src/content.config.ts` | 上述数据的 zod schema | MIT |
+| `src/components/*.astro` | 卡片、图标、内联标记的模板 | MIT |
+| `src/components/FilterPanel.vue` | 标签筛选器（唯一的客户端岛） | MIT |
+| `src/lib/*.ts` | 词表、筛选键推导、内联标记解析 | MIT |
+| `src/pages/` | 索引页与各魔物详情页 | MIT |
+| `src/styles/wiki.css` | 项目样式表 | MIT |
+| `scripts/build-images.ts` | PNG → 无损 WebP 转码 | MIT |
+| `scripts/check.ts` | 构建前内容完整性校验 | MIT |
+| `assets/raw/common/`、`assets/raw/characters/` | PNG 原始件，唯一新增图片的位置 | © Game Coaster |
+| `legacy/` | v1 单页站点，仅作迁移参照 | 混合，见第三方声明 |
+| `CNAME`、`robots.txt` | 静态托管元数据，原样复制到产物 | — |
 
-## 本地运行
+生成的 WebP（`public/img/`）、构建产物（`dist/`）与依赖均被 git 忽略。
+
+## 本地开发
 
 ```bash
-git clone https://github.com/EpicRojas/DWparts.git
-cd DWparts
-python3 -m http.server 8000
+pnpm install
+pnpm dev          # 先转码图片，再在 :4321 启动
 ```
 
-访问 `http://localhost:8000`。其他等效的静态服务器亦可。
+需要 Node ≥ 22 与 `cwebp`（Debian：`apt install webp`）。
+
+| 命令 | 作用 |
+| --- | --- |
+| `pnpm check` | 校验内容：图标缺失、筛选键不可达、死按钮、立绘缺失 |
+| `pnpm images` | 将新增或变更的 PNG 转码为 WebP（按哈希增量） |
+| `pnpm images:force` | 全量重转 |
+| `pnpm images:prune` | 同时删除失去 PNG 源的 WebP 产物 |
+| `pnpm build` | `check` → `images` → `astro build` |
+| `pnpm check:types` | `astro check`（类型检查） |
+
+## 数据模型
+
+一只魔物为五张卡：`char_row`（头像、属性、基础动作）加四个部件（`b`、`m`、`s1`、`s2`）。
+
+筛选键由结构化字段**推导**，不再手写进 class：
+
+| 字段 | 推导出的键 |
+| --- | --- |
+| `level`、`race` | `lv1`、`野兽` |
+| `parts[].slot` | `part_m`、`part_s1`、`part_s2`（`b` 例外，与 v1 一致） |
+| `action` | `act_main`、`act_react`、`act_passive` |
+| `bonus[].stat` | `bon_*` |
+| `damage.type` | `tag_phy4` 等 |
+| `damageStat` | `mult_*` |
+| `save.dcStat` | `dc_*` |
+| `attackTypes[]` | `melee`、`ranged`、`spell`、`AoE` |
+| `hitStat` 与 `save` | `hit`、`save`、`hitnsave` |
+
+文本字段使用内联标记而非原始 HTML：`{ele1|火焰伤害}` 渲染为图标加着色文字，`{blue|优势}` 渲染为着色文字，未知键会使 `pnpm check` 失败。
+
+v1 → v2 的字段映射与回归基线见 [docs/MIGRATION.md](docs/MIGRATION.md)。
 
 ## 文件约定
 
 以下条目属于结构性约束，非风格偏好；违反者不予接受。
 
-- `img/` 下的文件名在 GitHub Pages 上区分大小写。HTML 中的引用须与磁盘上的大小写完全一致；`img/common/AC.webp` 与 `img/common/ac.webp` 指代不同文件。
-- 图片为带透明通道的无损 WebP。不得改用有损编码；图标为像素画，在显示尺寸下会出现可见失真。
-- `img/raw/` 存放 PNG 原始件，是唯一新增图片的位置。`img/common/` 与 `img/characters/` 下的 WebP 属于构建产物，不得手工编辑或新增。改动 `img/raw/` 后须运行 `tools/build-images.sh`，并将原始件与生成的 WebP 一并提交。
-- 页面只引用 `img/common/` 与 `img/characters/`。HTML 中不得引用 `img/raw/` 下的任何文件。
-- 本站保持无依赖。不接受前端框架与构建工具。
+- `assets/raw/` 下的文件名在 GitHub Pages 上区分大小写。引用须与磁盘上的大小写完全一致。
+- 图片为带透明通道的无损 WebP。不得改用有损编码；图标为像素画，在显示尺寸下会出现可见失真。`scripts/build-images.ts` 使用 `cwebp -lossless -z 9`，不得替换为有损编码器或降低压缩级别。
+- `assets/raw/` 存放 PNG 原始件，是唯一新增图片的位置。不得手工新增或编辑 `.webp`——它们属于构建产物且被 git 忽略。
+- 筛选键必须来自 `src/lib/filterKeys.ts`。若在数据中新增伤害类型或加成却没有对应的筛选按钮，该数据将不可达，`pnpm check` 会失败。
+- 本站不引入前端框架。筛选器是唯一的岛；不得将页面改为客户端渲染应用。
+
+## 持续集成
+
+`.github/workflows/ci.yml` 在每次推送与 Pull Request 时运行：安装 `cwebp`、以冻结锁文件安装依赖、运行 `pnpm check`、转码图片、构建、自检产物（入口页、CNAME、两个图片目录），并上传产物。推送到 `main` 时额外部署到 GitHub Pages。
+
+在 v1 迁移完成前，类型检查以 `continue-on-error` 运行。
 
 ## 参与贡献
 
@@ -55,12 +95,12 @@ python3 -m http.server 8000
 
 | 类别 | 权利人 | 授权 | 可否商用 |
 | --- | --- | --- | --- |
-| 原创 HTML 与 CSS | EpicRojas 及贡献者 | MIT | 可以 |
-| `filter/ft_tag.js` | 克鲁赛德战记 wiki（biligame） | CC BY-NC-SA 3.0 | 禁止 |
-| `filter/jquery-3.7.1.min.js` | OpenJS Foundation | MIT | 可以 |
-| `img/`、游戏内文本与数据 | Game Coaster | 保留所有权利 | 禁止 |
+| 原创代码（模板、数据、脚本） | EpicRojas 及贡献者 | MIT | 可以 |
+| `legacy/filter/ft_tag.js` | 克鲁赛德战记 wiki（biligame） | CC BY-NC-SA 3.0 | 禁止 |
+| `legacy/filter/jquery-3.7.1.min.js` | OpenJS Foundation | MIT | 可以 |
+| `assets/`、游戏内文本与数据 | Game Coaster | 保留所有权利 | 禁止 |
 
-由于 `filter/ft_tag.js` 含非商业条款，尽管原创代码采用 MIT 许可，本仓库整体不得用于商业用途。
+v2 的筛选器为原创实现，不承载任何第三方许可。上表中的 CC BY-NC-SA 3.0 义务仅约束归档的 `legacy/` 目录，该目录计划在迁移结束时移除；在此之前，本仓库整体仍不得用于商业用途。
 
 ## 免责声明
 
