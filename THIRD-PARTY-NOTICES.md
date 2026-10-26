@@ -9,7 +9,8 @@ This repository is not uniformly licensed. This document records every third-par
 ## 1. Game assets and game data
 
 - **Rights holder:** Game Coaster, developer and publisher of *Dungeon Within* (《地牢深处》)
-- **Scope:** all files under `img/` (icons, illustrations, character portraits), and all in-game text, numeric values and data reproduced in `index.html`
+- **Scope:** all files under `img/raw/`, `img/common/` and `img/characters/` (PNG originals, derived WebP icons, UI assets and character portraits), and all in-game text, numeric values and data reproduced in `index.html`
+- **Note:** the WebP files under `img/common/` and `img/characters/` are mechanically derived from `img/raw/` and carry the same rights as their sources. Converting a format does not create a new work or alter ownership.
 - **License:** none granted. All rights reserved.
 - **Basis for inclusion:** informational and commentary use within a non-commercial fan project.
 - **Reuse:** redistribution and reuse are not permitted. Forking this repository conveys no rights to these materials.

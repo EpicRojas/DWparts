@@ -17,7 +17,9 @@ The project is not affiliated with, endorsed by or sponsored by Game Coaster. Li
 | `filter/filter.css` | Styles for the tag filter | MIT |
 | `filter/ft_tag.js` | Tag filter logic | CC BY-NC-SA 3.0 |
 | `filter/jquery-3.7.1.min.js` | jQuery 3.7.1, unmodified | MIT |
-| `img/` | Icons, illustrations, character portraits (125 files) | © Game Coaster |
+| `img/common/` | Icons and UI assets, lossless WebP — referenced by the page (47 files) | © Game Coaster |
+| `img/characters/` | Character portraits, lossless WebP — referenced by the page (78 files) | © Game Coaster |
+| `img/raw/` | Original PNG sources for the above, never referenced by the page (125 files) | © Game Coaster |
 | `CNAME` | Custom domain for GitHub Pages | — |
 
 ## Running locally
@@ -34,7 +36,10 @@ Open `http://localhost:8000`. Any equivalent static server is acceptable.
 
 The following are structural constraints, not style preferences; changes that violate them will be rejected.
 
-- Filenames under `img/` are case-sensitive when served by GitHub Pages. References in the HTML must match the on-disk case exactly; `img/AC.png` and `img/ac.png` denote distinct files.
+- Filenames under `img/` are case-sensitive when served by GitHub Pages. References in the HTML must match the on-disk case exactly; `img/common/AC.webp` and `img/common/ac.webp` denote distinct files.
+- Images are lossless WebP with alpha. Do not introduce lossy re-encoding; the icons are pixel art and artefacts are visible at display size.
+- `img/raw/` holds the PNG originals and is the only place images are added. The WebP files under `img/common/` and `img/characters/` are build output; do not edit or add them by hand.
+- The page references `img/common/` and `img/characters/` only. Nothing under `img/raw/` is referenced from the HTML.
 - The site remains dependency-free. Frameworks and build tooling are not accepted.
 
 ## Contributing
