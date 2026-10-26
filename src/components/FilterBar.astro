@@ -20,6 +20,21 @@ const { tax } = Astro.props;
 <div class="filters" id="filters" data-filters hidden>
   <div class="filters__panel">
     <div class="filters__inner">
+
+    <!--
+      显示模式：控制渲染范围，与标签筛选相互独立。
+      all 全部 / monster 仅魔物 / part 仅部件
+      仅部件模式下不渲染魔物头部，只保留部件卡。
+    -->
+    <div class="filter-row filter-row--view">
+      <div class="filter-row__label">显示模式</div>
+      <div class="filter-row__values" role="group" aria-label="按显示范围筛选">
+        <button class="chip" type="button" aria-pressed="true" data-view="all" title="显示魔物与部件">全部</button>
+        <button class="chip" type="button" aria-pressed="false" data-view="monster" title="只显示魔物头部的信息">仅魔物</button>
+        <button class="chip" type="button" aria-pressed="false" data-view="part" title="只显示部件卡，不显示魔物信息">仅部件</button>
+      </div>
+    </div>
+
     {
       tax.groups.map((g) => (
         <div class="filter-row">

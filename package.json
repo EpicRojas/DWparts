@@ -27,7 +27,8 @@
     "fixes": "node scripts/verify-ui.mjs",
     "mask": "node scripts/verify-mask.mjs",
     "blur": "node scripts/verify-blur-anim.mjs",
-    "reference": "node scripts/build-tag-reference.mjs"
+    "reference": "node scripts/build-tag-reference.mjs",
+    "view": "node scripts/verify-view.mjs"
   },
   "dependencies": {
     "astro": "^7.4.2",

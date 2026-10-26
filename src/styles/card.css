@@ -17,6 +17,11 @@
 }
 .monster[hidden] { display: none; }
 
+/* 显示模式通过 hidden 属性控制卡内区块的显隐。
+   .parts 与 .monster__head 均显式声明了 display，需在此压过。 */
+.monster__head[hidden],
+.parts[hidden] { display: none !important; }
+
 /* 卡片被筛选命中时给个左侧提示条 */
 .monster[data-hit='full'] { border-color: var(--line-2); }
 
@@ -344,6 +349,12 @@
 
 /* ── 筛选态 ── */
 :root[data-filter-mode='part'] .part[hidden] { display: none !important; }
+
+/* 仅魔物模式：头部之下没有部件区，去掉其底部分隔线与留白 */
+:root[data-view='monster'] .monster__head {
+  border-bottom: none;
+  padding-block-end: 0;
+}
 
 /* ── 响应式 ── */
 @media (max-width: 1200px) {

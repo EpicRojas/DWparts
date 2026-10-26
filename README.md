@@ -63,6 +63,17 @@ shown whole; after switching, only the matching parts remain inside it. This mod
 requires at least one part-level category to be active, since race and level apply to
 the entire monster and produce no part-level subset.
 
+The first row of the filter panel, 显示模式, controls rendering scope independently of
+both tag filtering and granularity:
+
+| Mode | Effect |
+| --- | --- |
+| 全部 | Show monster header and part cards |
+| 仅魔物 | Show headers only, hide the part area |
+| 仅部件 | Show part cards only, render no monster information |
+
+The mode is stored in the `view` URL parameter and survives sharing.
+
 ## Contributing a monster
 
 Adding a monster requires one HTML file in `content/monsters/` and no code changes.
@@ -137,6 +148,7 @@ requires edits.
 | `pnpm contrast` | WCAG ratio for every text and background pairing |
 | `pnpm palette` | Rendered colours match the design baseline |
 | `pnpm panel` | Overlay coverage, open position, close direction |
+| `pnpm view` | Display mode: all / monsters only / parts only |
 | `pnpm blur` | Backdrop filter remains active throughout the panel animation |
 | `pnpm mask` | Badge masking uses one mask layer and leaves no frame edge |
 

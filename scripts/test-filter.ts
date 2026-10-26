@@ -64,8 +64,9 @@ const TOTAL = monsters().length;
 check(`全部 ${TOTAL} 个魔物可见`, shown() === TOTAL, `实际 ${shown()}`);
 check('每卡 4 张部件可见', monsters().every((m) => shownParts(m) === 4));
 check('每组「全部」默认按下', [...doc.querySelectorAll('.chip--all')].every((c) => c.getAttribute('aria-pressed') === 'true'));
-check('取值 chip 默认未选中', [...doc.querySelectorAll('.chip:not(.chip--all)')].every((c) => c.getAttribute('aria-pressed') === 'false'));
+check('取值 chip 默认未选中', [...doc.querySelectorAll('.chip[data-group]:not(.chip--all)')].every((c) => c.getAttribute('aria-pressed') === 'false'));
 check('URL 无 query', url() === '', url());
+check('显示模式默认「全部」', doc.querySelector('.chip[data-view="all"]')!.getAttribute('aria-pressed') === 'true');
 
 console.log('\n[2] 单选：种族=亡灵');
 chip('race', 'undead').click();

@@ -9,6 +9,14 @@
  */
 type Mode = 'card' | 'part';
 
+/**
+ * 显示模式：控制渲染范围，与标签筛选、筛选粒度相互独立。
+ *   all      显示魔物头部与部件卡
+ *   monster  只显示魔物头部
+ *   part     只显示部件卡，完全不显示魔物信息
+ */
+type View = 'all' | 'monster' | 'part';
+
 interface GroupDef {
   id: string;
   attr: string;
@@ -28,11 +36,13 @@ const state = {
   /** groupId → Set<valueId> */
   picked: new Map<string, Set<string>>(),
   mode: 'card' as Mode,
+  view: 'all' as View,
   query: '',
 };
 
 /* ────────── URL <-> 状态 ────────── */
 const PARAM_MODE = 'mode';
+const PARAM_VIEW = 'view';
 const PARAM_Q = 'q';
 
 function readUrl(groups: GroupDef[]) {
@@ -46,6 +56,8 @@ function readUrl(groups: GroupDef[]) {
     if (valid.length) state.picked.set(g.id, new Set(valid));
   }
   state.mode = params.get(PARAM_MODE) === 'part' ? 'part' : 'card';
+  const v = params.get(PARAM_VIEW);
+  state.view = v === 'monster' || v === 'part' ? v : 'all';
   state.query = (params.get(PARAM_Q) ?? '').trim();
 }
 
@@ -56,6 +68,7 @@ function writeUrl(groups: GroupDef[], { replace = false } = {}) {
     if (vals?.size) params.set(g.id, [...vals].join(','));
   }
   if (state.mode === 'part') params.set(PARAM_MODE, 'part');
+  if (state.view !== 'all') params.set(PARAM_VIEW, state.view);
   if (state.query) params.set(PARAM_Q, state.query);
   const qs = params.toString();
   const url = qs ? `${location.pathname}?${qs}${location.hash}` : `${location.pathname}${location.hash}`;
@@ -109,12 +122,14 @@ const els = {
   search: () => document.querySelector<HTMLInputElement>('[data-search]'),
   searchClear: () => document.querySelector<HTMLElement>('[data-search-clear]'),
   modeBtn: () => document.querySelector<HTMLButtonElement>('[data-mode-toggle]'),
+  viewChip: (v: string) => document.querySelector<HTMLButtonElement>(`.chip[data-view="${v}"]`),
   filters: () => document.querySelector<HTMLElement>('[data-filters]'),
 };
 
 function apply(groups: GroupDef[]) {
   const q = state.query.toLowerCase();
   root.dataset.filterMode = state.mode;
+  root.dataset.view = state.view;
   let visible = 0;
   let visibleParts = 0;
   let totalParts = 0;
@@ -122,6 +137,13 @@ function apply(groups: GroupDef[]) {
   for (const card of els.monsters()) {
     const parts = Array.from(card.querySelectorAll<HTMLElement>('.part'));
     totalParts += parts.length;
+
+    /* 显示模式：只影响卡内区块的显隐，不参与标签匹配。
+       hidden 属性在 CSS 中为 display: none，故不会被布局计入。 */
+    const head = card.querySelector<HTMLElement>('.monster__head');
+    const partsBox = card.querySelector<HTMLElement>('.parts');
+    if (head) head.hidden = state.view === 'part';
+    if (partsBox) partsBox.hidden = state.view === 'monster';
 
     // 关键词优先级最高：不匹配则整卡隐藏
     if (!textMatches(card, q)) {
@@ -158,9 +180,11 @@ function apply(groups: GroupDef[]) {
   }
 
   if (els.count()) {
-    els.count()!.textContent = state.mode === 'part'
-      ? `${visible} 魔物 · ${visibleParts} 部件`
-      : `${visible} / ${els.monsters().length} 魔物`;
+    els.count()!.textContent = state.view === 'part'
+      ? `${visibleParts} 部件`
+      : state.mode === 'part'
+        ? `${visible} 魔物 · ${visibleParts} 部件`
+        : `${visible} / ${els.monsters().length} 魔物`;
   }
   if (els.empty()) els.empty()!.hidden = visible > 0;
 
@@ -204,6 +228,9 @@ function syncChips(groups: GroupDef[]) {
         ? '当前：只显示命中的部件（点击切回整卡）'
         : '当前：命中即显示整个魔物（点击切换为只看部件）';
   }
+  for (const v of ['all', 'monster', 'part'] as const) {
+    els.viewChip(v)?.setAttribute('aria-pressed', String(state.view === v));
+  }
   const s = els.search();
   if (s && s.value !== state.query) s.value = state.query;
   els.searchClear()?.toggleAttribute('data-visible', Boolean(state.query));
@@ -241,7 +268,17 @@ function init() {
     }
   }
 
-  // 模式切换
+  // 显示模式
+  for (const btn of Array.from(document.querySelectorAll<HTMLButtonElement>('.chip[data-view]'))) {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.view;
+      if (v !== 'all' && v !== 'monster' && v !== 'part') return;
+      state.view = v;
+      update(groups);
+    });
+  }
+
+  // 筛选粒度
   els.modeBtn()?.addEventListener('click', (e) => {
     const btn = e.currentTarget as HTMLButtonElement;
     if (btn.disabled) return;
