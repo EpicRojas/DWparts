@@ -1,0 +1,350 @@
+/* ═══════════════════════════════════════════════
+   DW Wiki — 暗色主题样式表 (Jinja2 演示版)
+   基于原版 DW_wiki.css 并新增 tooltip / effects
+   ═══════════════════════════════════════════════ */
+
+/* ── 响应式网格 ── */
+* {box-sizing: border-box;}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* ── 部件筛选网格：所有部件放进 flex 容器，筛选后自动流式成 4 列 ── */
+.content_wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+.char_row {
+    flex: 0 0 100%;   /* 头像+属性+基础攻击 整行占满 */
+}
+.content_wrap > .col-3 {
+    flex: none;       /* 部件卡按 width(25%) 排布，不伸缩 */
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 8px;
+    --border: 1px solid gray;
+    align-content: center;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+}
+
+/* ── 基础 ── */
+body {
+    background-color: #0d1418;
+    color: white;
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    margin: 0;
+    padding: 16px;
+}
+.single {
+    margin-bottom: 16px;
+    border-bottom: 4px solid gray;
+}
+.part {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* ── 角色头像 ── */
+.icon img {width:95.4px; height: auto;}
+.icon {
+    position: relative;
+    width: 95.4px;
+    margin: auto;
+}
+.icon .name {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    bottom: 6px;
+    width: 95.4px;
+    text-align: center;
+    font-size: 0.8em;
+    text-shadow: 0 0 4px #000;
+}
+
+/* ── 属性网格 ── */
+.stats {padding: 6px 18px;}
+.stats img,.ministat img {height:1em; width:auto}
+.ministat {
+    display: grid;
+    text-align: center;
+    margin: 1px 0;
+}
+.col6 {
+    grid-template-columns: auto auto auto auto auto auto;
+    border-bottom: 1px solid gray;
+}
+.col3 {
+    grid-template-columns: auto auto auto;
+    border-bottom: 1px solid gray;
+}
+.col2 {
+    grid-template-columns: auto auto;
+    text-align: left;
+    border-bottom: 1px solid gray;
+    padding:4px 12px
+}
+.minititle {
+    font-size: 0.8em;
+    padding: 2px;
+}
+.adv {color: gold;}
+
+/* ── 通用图标 ── */
+.tags img, .dmg_show img {height:16px; width:auto; vertical-align: middle;}
+.dice_img {
+    align-self: center;
+}
+.dice_img img {
+    height: auto;
+    width: 1.4em;
+    margin: auto;
+}
+
+/* ── 标签 ── */
+.tags {
+    font-size: 0.8em;
+    color: gray;
+    margin-top: 6px;
+}
+.tags img {
+    width: 1em;
+    height: auto;
+}
+
+.tag {
+    display: inline-block;
+    padding: 2px 6px;
+    text-align: center;
+    border-right: 1px solid #333;
+}
+.tag img{margin: 0 !important;}
+.tag:last-child {border-right: none;}
+.tag_upp {font-size: 0.85em; color: #888;}
+.tag_low {font-size: 1em;}
+
+/* ── 伤害类型颜色 ── */
+.phy1 {color:#c9c9c9} /*挥砍*/
+.phy2 {color:#b0b0b0} /*穿刺*/
+.phy3,.phy4 {color:#dcdcdc} /*钝击，物理*/
+.ele1 {color:#ff8c5c} /*火焰*/
+.ele2 {color:#8fa8e8} /*寒冷*/
+.ele3 {color:#ffcc4d} /*闪电*/
+.ele4 {color:#b388e8} /*雷鸣*/
+.ele5 {color:#b5dc5c} /*强酸*/
+.ele6,.ele7 {color:#a8c97d} /*毒素，自然*/
+.mag1 {color:#f5e5a0} /*光耀*/
+.mag2 {color:#6fae9b} /*死灵*/
+.mag3 {color:#c84a4a} /*力场*/
+.mag4 {color:#ffa0c4} /*心灵*/
+.heal {color:#80e0cd} /*治疗*/
+
+/*其它颜色*/
+.pink,.buff,.debuff,.eff,.c{color:#ffbbff}
+.blue,.b{color:#55aaff}
+.lblue,.lb{color:#00ddff}
+.orange,.o,.org{color:#ffcc00}
+.green,.g{color:#63a440}
+.red,.r{color:#ff5555}
+.add,.lgreen,.lg{color:#55ff55}
+
+.cur{color:#d33b5c}
+.comm{color:#c9c8c9}
+.rare{color:#509cff}
+.epic{color:#a764ff}
+.lege{color:#ffb13b}
+
+/* ── 伤害显示 ── */
+.dmg_grid {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+}
+.dmg_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.dmg_show {
+    white-space: nowrap;
+    line-height: 1.4;
+}
+.dmg_show.bonus {
+    color: #8af;
+    font-size: 0.9em;
+}
+.dmg_mult {
+    color: lightgray;
+    font-size: 1em;
+}
+
+/* ── 部件标题 ── */
+.comp_title {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    margin-bottom: 0.6em;
+    padding-bottom: 0.6em;
+    border-bottom: 1px white solid;
+    column-gap: 1em
+}
+.comp_bonus {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    font-size: 0.85em;
+}
+.comp_bonus img{width: auto;height: 1em;}
+.comp_name {
+    flex: 0 0 auto;
+    font-weight: bold;
+}
+
+/* ── 部件图标三层叠加 ── */
+.part_icon {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+}
+.part_icon_top {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+}
+.part_icon_bottom {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+}
+.part_icon_char {
+    width: 48px;
+    height: auto;
+}
+.part_icon_charbox {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+}
+.part_icon_text {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 0;
+    width: 24px;
+    height: auto;
+}
+
+/* ── 部件内容 ── */
+.comp_cont img{
+    width: auto;height: 1em;
+    margin: 0 3px
+}
+
+/* ═══════════════════════════════════════════════
+   ★ 新增：Tooltip 系统
+   ═══════════════════════════════════════════════ */
+.tooltip {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dashed rgba(255,255,255,0.3);
+}
+
+.tooltip::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a2a33;
+    color: #e0e0e0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85em;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    border: 1px solid #3a5a6a;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+.tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #3a5a6a;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 100;
+}
+
+.tooltip:hover::after,
+.tooltip:hover::before {
+    opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════
+   ★ 新增：效果展示
+   ═══════════════════════════════════════════════ */
+.effects {
+    margin: 12px 0;
+    background: rgba(255, 255, 255, 0.04);
+    color:lightgray
+}
+
+.effect_tag {
+    margin: 4px 0;
+    padding: 4px;
+    border-left: 2px solid #555;
+    font-size: 0.9em;
+}
+
+.effect_name {
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* ── 滚动条美化 ── */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0d1418;
+}
+::-webkit-scrollbar-thumb {
+    background: #2a3a44;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3a5a6a;
+}
