@@ -1,0 +1,18 @@
+---
+import Icon from './Icon.astro';
+import { tagRows, type Ability } from '../lib/derive';
+interface Props { ability: Ability }
+const rows = tagRows(Astro.props.ability);
+---
+{rows.length ? (
+  <div class="tags">
+    {rows.map((r) => (
+      <div class="tag">
+        <div class="tag_upp">{r.icon ? <Icon file={r.icon} alt="" /> : null}{r.label}</div>
+        <div class="tag_low">
+          {r.parts.map((p) => (<>{p.icon ? <Icon file={p.icon} alt="" /> : null}{p.text}</>))}
+        </div>
+      </div>
+    ))}
+  </div>
+) : null}

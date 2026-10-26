@@ -1,0 +1,30 @@
+{
+  "name": "dwparts",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "pnpm images && astro dev",
+    "check": "tsx scripts/check.ts",
+    "check:types": "astro check",
+    "images": "tsx scripts/build-images.ts",
+    "images:force": "tsx scripts/build-images.ts --force",
+    "images:prune": "tsx scripts/build-images.ts --prune",
+    "build": "pnpm check && pnpm images && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/vue": "^7.1.2",
+    "astro": "^7.4.2",
+    "vue": "^3.5.44"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "yaml": "^2.9.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp"]
+  }
+}

@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { SECTIONS } from '../lib/filters';
+import { RACES } from '../lib/taxonomy';
+import MonsterRow from '../components/MonsterRow.astro';
+import AbilityCard from '../components/AbilityCard.astro';
+import FilterPanel from '../components/FilterPanel.vue';
+
+const raceOrder = Object.fromEntries(RACES.map((r, i) => [r, i])) as Record<string, number>;
+
+const monsters = (await getCollection('monsters')).sort((a, b) =>
+  a.data.level - b.data.level ||
+  (raceOrder[a.data.race] ?? 9) - (raceOrder[b.data.race] ?? 9) ||
+  a.data.id.localeCompare(b.data.id)
+);
+const cardCount = monsters.length * 5;
+---
+<Base title="DW Wiki · 地牢深处 魔物图鉴">
+  <h1 class="site_title">地牢深处 · 魔物图鉴</h1>
+  <p class="site_sub">
+    共 {monsters.length} 只魔物 / {cardCount} 张部件卡。点击下方标签筛选，条件为「且」关系，可叠加。
+  </p>
+
+  <table class="btable">
+    {SECTIONS.map((section, si) => (
+      section.groups.map((group, gi) => (
+        <tr>
+          {gi === 0 ? (
+            <th rowspan={section.groups.length} class={`sect ${si === 0 ? 'sect_monster' : 'sect_part'}`}>
+              {section.name}
+            </th>
+          ) : null}
+          <th class="group_name">{group.name}</th>
+          <td>
+            <div class="ft_group">
+              <div class="ft_tag ft_tag_on" data-group={group.key}>所有</div>
+              {group.tags.map((t) => (
+                <div class="ft_tag" data-group={group.key} data-key={t.key}>
+                  {t.iconUrl ? <img src={t.iconUrl} alt="" loading="lazy" decoding="async" /> : null}{t.label}
+                </div>
+              ))}
+            </div>
+          </td>
+        </tr>
+      ))
+    ))}
+  </table>
+
+  <FilterPanel client:idle />
+
+  <div class="content_wrap">
+    {monsters.map((m) => (
+      <>
+        <MonsterRow monster={m.data} link={`/m/${m.data.id}/`} />
+        {m.data.parts
+          .slice()
+          .sort((a, b) => ['b', 'm', 's1', 's2'].indexOf(a.slot) - ['b', 'm', 's1', 's2'].indexOf(b.slot))
+          .map((p) => (
+            <AbilityCard
+              monster={m.data}
+              ability={p}
+              slot={p.slot}
+              extraClass={p.slot === 'm' ? 'part_m' : p.slot === 's1' ? 'part_s1' : p.slot === 's2' ? 'part_s2' : ''}
+            />
+          ))}
+      </>
+    ))}
+  </div>
+</Base>

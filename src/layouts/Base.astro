@@ -1,0 +1,32 @@
+---
+import '../styles/wiki.css';
+interface Props { title: string; description?: string }
+const {
+  title,
+  description = '《地牢深处》（Dungeon Within）非官方资料站：魔物、部件、属性与伤害类型速查，支持标签筛选。',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta name="theme-color" content="#0d1418" />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    <footer class="site_footer">
+      <p>非官方资料站，与 Game Coaster 无隶属关系。游戏素材版权归 Game Coaster 所有。</p>
+    </footer>
+  </body>
+</html>

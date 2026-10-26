@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+  workflow_dispatch:
+
+# 只在 CI 里按需授予权限
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装 cwebp（无损 WebP 编码器）
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends webp
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 内容校验（图标 / 筛选键 / 立绘）
+        run: pnpm check
+
+      - name: 类型检查
+        run: pnpm check:types
+        continue-on-error: true   # P0 阶段先不卡构建，P1 转正
+
+      - name: 生成 WebP
+        run: pnpm images
+
+      - name: 构建静态站点
+        run: pnpm build
+
+      - name: 产物自检
+        run: |
+          set -e
+          test -f dist/index.html
+          test -f dist/CNAME
+          test -d dist/img/common
+          test -d dist/img/characters
+          echo "pages: $(find dist -name '*.html' | wc -l)"
+          echo "images: $(find dist/img -name '*.webp' | wc -l)"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: dist
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deploy
+        uses: actions/deploy-pages@v4

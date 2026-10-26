@@ -1,0 +1,12 @@
+---
+import { iconUrl } from '../lib/paths';
+interface Props { file: string; cls?: string; alt?: string }
+const { file, cls, alt = '' } = Astro.props;
+---
+<img
+  src={iconUrl(file)}
+  class={cls || undefined}
+  alt={alt || undefined}
+  loading="lazy"
+  decoding="async"
+/>

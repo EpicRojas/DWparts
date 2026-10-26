@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import MonsterRow from '../../components/MonsterRow.astro';
+import AbilityCard from '../../components/AbilityCard.astro';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('monsters')).sort((a, b) => a.data.id.localeCompare(b.data.id));
+  return all.map((m, i) => ({
+    params: { id: m.data.id },
+    props: { monster: m.data, prev: all[i - 1]?.data ?? null, next: all[i + 1]?.data ?? null },
+  }));
+}
+
+const { monster, prev, next } = Astro.props;
+const order = ['b', 'm', 's1', 's2'];
+const parts = monster.parts.slice().sort((a, b) => order.indexOf(a.slot) - order.indexOf(b.slot));
+---
+<Base
+  title={`${monster.name} · ${monster.level}级${monster.race} · 地牢深处`}
+  description={`${monster.name}（${monster.level}级${monster.race}）的属性、基础动作与 4 个部件的完整数据。`}
+>
+  <nav class="crumbs"><a href="/">← 返回图鉴</a></nav>
+
+  <h1 class="monster_name">{monster.name}</h1>
+  <p class="site_sub">
+    {monster.level}级 · {monster.race} · 支配力 {monster.dominance} · 生命值 {monster.hp} · 护甲 {monster.ac}
+  </p>
+
+  <div class="monster_page">
+    <MonsterRow monster={monster} />
+    <div class="content_wrap">
+      {parts.map((p) => (
+        <AbilityCard monster={monster} ability={p} slot={p.slot} extraClass={`part_${p.slot}`} />
+      ))}
+    </div>
+  </div>
+
+  <nav class="pager">
+    {prev ? <a href={`/m/${prev.id}/`}>← {prev.name}</a> : <span />}
+    {next ? <a href={`/m/${next.id}/`}>{next.name} →</a> : <span />}
+  </nav>
+</Base>

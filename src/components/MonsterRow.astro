@@ -1,0 +1,62 @@
+---
+import Icon from './Icon.astro';
+import DamageGrid from './DamageGrid.astro';
+import TagRow from './TagRow.astro';
+import Markup from './Markup.astro';
+import { dataTags, type Ability } from '../lib/derive';
+import { STAT_LABEL, STATS, type Stat } from '../lib/taxonomy';
+import { charUrl, iconUrl } from '../lib/paths';
+
+interface Props {
+  monster: {
+    id: string; name: string; level: number; race: string; dominance: number;
+    stats: Record<Stat, number>; statAdvantage?: Stat; hp: number; ac: number;
+    basic: Ability;
+  };
+  link?: string;
+}
+const { monster, link } = Astro.props;
+const portrait = charUrl(monster.id);
+---
+<div class="row ft_list char_row" data-tags={dataTags(monster)}>
+  <div class="basic part col-2">
+    <div class="icon">
+      {link ? <a href={link}><img src={portrait} alt={monster.name} loading="lazy" decoding="async" /></a>
+             : <img src={portrait} alt={monster.name} loading="lazy" decoding="async" />}
+      <div class="name">{monster.name}</div>
+    </div>
+  </div>
+
+  <div class="stats part col-4">
+    <div class="ministat col3">
+      <div>{monster.level}级</div>
+      <div>{monster.race}</div>
+      <div><Icon file="Dom" cls="ico" alt="支配力" />{monster.dominance}</div>
+    </div>
+    <div class="ministat col6">
+      {STATS.map((s) => (
+        <div class={`minititle ${monster.statAdvantage === s ? 'adv' : ''}`}>{STAT_LABEL[s]}</div>
+      ))}
+      {STATS.map((s) => (
+        <div class={monster.statAdvantage === s ? 'adv' : ''}>{monster.stats[s]}</div>
+      ))}
+    </div>
+    <div class="ministat col2">
+      <div><img src={iconUrl('MHP')} alt="" />最大生命值</div>
+      <div class="num">{monster.hp}</div>
+      <div><img src={iconUrl('AC')} alt="" />护甲等级（AC）</div>
+      <div class="num">{monster.ac}</div>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <div class="comp_title">
+      <div class="comp_name">{monster.basic.name}</div>
+    </div>
+    <div class="comp_cont">
+      {monster.basic.damage ? <DamageGrid damage={monster.basic.damage} /> : null}
+      {monster.basic.text ? <Markup src={monster.basic.text} /> : null}
+      <TagRow ability={monster.basic} />
+    </div>
+  </div>
+</div>

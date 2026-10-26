@@ -1,0 +1,40 @@
+---
+import Markup from './Markup.astro';
+import DamageGrid from './DamageGrid.astro';
+import TagRow from './TagRow.astro';
+import PartIcon from './PartIcon.astro';
+import type { Ability, BonusEntry } from '../lib/derive';
+import { bonusLine, dataTags } from '../lib/derive';
+import type { Slot } from '../lib/taxonomy';
+
+interface Props {
+  monster: { id: string; level: number; race: string };
+  ability: Ability;
+  slot?: Slot;          // 有 slot → 带部件图标
+  extraClass?: string;
+}
+const { monster, ability, slot, extraClass = '' } = Astro.props;
+const cls = `col-3 ${extraClass}`.trim();
+const bonus = ability.bonus.map(bonusLine);
+---
+<div class={cls} data-tags={dataTags(monster, ability, slot)}>
+  <div class="comp_title">
+    {slot ? <PartIcon slot={slot} charId={monster.id} /> : null}
+    <div class="comp_name">{ability.name}</div>
+    {bonus.length ? <div class="comp_bonus">{bonus.map((b) => <div><Markup src={b} /></div>)}</div> : null}
+  </div>
+  <div class="comp_cont">
+    {ability.damage ? <DamageGrid damage={ability.damage} /> : null}
+    {ability.text ? <Markup src={ability.text} /> : null}
+    {ability.effects.length ? (
+      <div class="effects">
+        {ability.effects.map((e) => (
+          <div class="effect_tag">
+            <span class="effect_name">{e.name}</span>：<Markup src={e.text} />
+          </div>
+        ))}
+      </div>
+    ) : null}
+    <TagRow ability={ability} />
+  </div>
+</div>

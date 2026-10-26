@@ -1,0 +1,16 @@
+---
+import { parseMarkup, iconExists, iconFile } from '../lib/markup';
+import { iconUrl } from '../lib/paths';
+interface Props { src: string }
+const nodes = parseMarkup(Astro.props.src);
+---
+{nodes.map((n) =>
+  n.kind === 'text' ? <>{n.text}</> :
+  n.kind === 'color' ? <span class={n.cls}>{n.text}</span> :
+  <span class={`mi-wrap ${n.color ?? ''}`}>
+    {iconExists(n.key)
+      ? <img src={iconUrl(iconFile(n.key))} class="mi" alt={n.text ?? ''} loading="lazy" decoding="async" />
+      : <span class="mi-missing" title={`图标缺失：${n.key}`}>◆</span>}
+    {n.text ? <span class={n.color}>{n.text}</span> : null}
+  </span>
+)}

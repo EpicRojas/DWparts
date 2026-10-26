@@ -1,0 +1,53 @@
+id: BST101
+name: 拉塔托斯克
+race: 野兽
+level: 1
+dominance: 1
+stats: { str: 5, dex: 12, con: 6, int: 7, wis: 10, cha: 8 }
+statAdvantage: dex
+hp: 10
+ac: 8
+
+basic:
+  name: 基础射击
+  action: main
+  damage: { dice: 1d10, type: phy4, stat: dex }
+  attackTypes: [ranged]
+  hitStat: dex
+  text: "用远程武器射击敌人。"
+
+parts:
+  - slot: b
+    name: 敏捷动作
+    bonus:
+      - { stat: ini, amount: 1 }
+    text: "在{blue|敏捷 豁免}上获得{blue|优势}。"
+
+  - slot: m
+    name: 嘲讽橡子
+    action: main
+    bonus:
+      - { stat: dc, amount: 1 }
+    damage: { dice: 1d12, type: phy4, stat: dex }
+    damageStat: dex
+    attackTypes: [ranged]
+    hitStat: dex
+    save: { stat: wis, dc: 12, dcStat: cha }
+    text: "使目标陷入{pink|嘲讽}状态。"
+    effects:
+      - name: 嘲讽
+        text: "选择攻击目标时，会被强制指定为嘲讽施放者。（持续时间：4.8秒 / 非战斗时9.6秒）"
+
+  - slot: s1
+    name: 世界树之眼
+    action: passive
+    bonus:
+      - { stat: wis, amount: 1 }
+    text: "获得先攻+2，并对{pink|盲目}状态获得{lb|免疫}。"
+
+  - slot: s2
+    name: 迅捷之尾
+    action: react
+    bonus:
+      - { stat: dex, amount: 1 }
+    text: "成为攻击目标时作为反应，对攻击者的命中检定赋予{blue|劣势}。"

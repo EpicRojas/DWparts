@@ -1,0 +1,18 @@
+---
+import Icon from './Icon.astro';
+import type { Damage } from '../lib/derive';
+import { DAMAGE_LABEL, STAT_ICON, type Stat } from '../lib/taxonomy';
+import { iconExists } from '../lib/markup';
+interface Props { damage: Damage }
+const { damage } = Astro.props;
+const label = (DAMAGE_LABEL as Record<string, string>)[damage.type] ?? damage.type;
+const hasIcon = iconExists(damage.type);
+---
+<div class="dmg_grid">
+  <div class="dice_img"><Icon file="dice" alt="" /></div>
+  <div class="dmg_right">
+    <div class={`${damage.type} dmg_show`}>
+      {damage.dice} {hasIcon ? <Icon file={damage.type} alt="" /> : <span class="mi-missing">◆</span>}{label}伤害<Icon file={STAT_ICON[damage.stat as Stat]} alt="" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+id: ELM101
+name: 下级水元素
+race: 精灵
+level: 1
+dominance: 1
+stats: { str: 6, dex: 9, con: 10, int: 12, wis: 10, cha: 6 }
+statAdvantage: int
+hp: 14
+ac: 8
+
+basic:
+  name: 冰霜箭
+  action: main
+  damage: { dice: 1d6, type: ele2, stat: int }
+  attackTypes: [ranged, spell]
+  hitStat: int
+  text: "降低目标的{lgreen|先攻}。"
+  effects:
+    - name: 先攻减值
+      text: "先攻减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+
+parts:
+  - slot: b
+    name: 水之形态
+    bonus:
+      - { resist: ele7 }
+      - { resist: ele1 }
+    text: "对{pink|擒抱}和{pink|束缚}状态获得{lb|免疫}。"
+
+  - slot: m
+    name: 波浪束缚臂
+    action: main
+    bonus:
+      - { stat: int, amount: 1 }
+    damage: { dice: 1d10, type: ele2, stat: int }
+    damageStat: int
+    attackTypes: [spell, melee]
+    save: { stat: str, dc: 12, dcStat: int }
+    text: "掀起波浪，使目标陷入{pink|束缚}状态。"
+    effects:
+      - name: 束缚
+        text: "无法移动。自身的{blue|命中检定}和{blue|敏捷 豁免}获得{blue|劣势}，且受击时攻击者的{blue|命中检定}获得{blue|优势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+
+  - slot: s1
+    name: 水膜皮肤
+    action: passive
+    bonus:
+      - { stat: ac, amount: 1 }
+    text: "交战开始时，获得{pink|水膜皮肤}。此效果在受到{ele1|火焰伤害}时解除。"
+    effects:
+      - name: 水膜皮肤
+        text: "交战开始时进行1d4的生命值{blue|治疗}，且护甲等级增加1。受到{ele1|火焰伤害}时会蒸发并解除。"
+
+  - slot: s2
+    name: 治愈水滴
+    action: react
+    bonus:
+      - { stat: mhp, amount: 5 }
+    damage: { dice: 1d8, type: heal, stat: cha }
+    text: "友军受到攻击时作为反应，对该友军进行{heal|1d8 治疗}{cha}。"

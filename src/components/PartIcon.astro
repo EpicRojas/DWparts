@@ -1,0 +1,15 @@
+---
+import { iconUrl, charUrl } from '../lib/paths';
+import type { Slot } from '../lib/taxonomy';
+interface Props { slot: Slot; charId: string }
+const { slot, charId } = Astro.props;
+const top = slot === 'b' ? 'b' : slot;
+const back = slot === 'b' ? 'b_back' : `${slot}_back`;
+const text = slot === 'b' ? 'bt' : `${slot}t`;
+---
+<div class="part_icon">
+  <img src={iconUrl(top)} class="part_icon_top" alt="" loading="lazy" decoding="async" />
+  <img src={iconUrl(back)} class="part_icon_bottom" alt="" loading="lazy" decoding="async" />
+  <div class="part_icon_charbox"><img src={charUrl(charId)} class="part_icon_char" alt="" loading="lazy" decoding="async" /></div>
+  <img src={iconUrl(text)} class="part_icon_text" alt="" loading="lazy" decoding="async" />
+</div>
