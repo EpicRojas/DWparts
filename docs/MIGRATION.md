@@ -105,6 +105,29 @@ Astro + Vue island、zod schema、推导式 `data-tags`、Vue 筛选岛（URL �
 | --- | --- |
 | `pnpm migrate` | 由 `legacy/index.html` 重新生成 76 个 YAML |
 | `pnpm verify:migration` | 筛选键对比 + 文本保真对比 |
+| `pnpm test:filter` | 筛选逻辑单元测试（15 项） |
+| `pnpm smoke` | 产物冒烟测试 |
+
+## 筛选器失效事故记录
+
+P1 期间有一个 bug 一路绿灯到成品：**部件卡模板漏写了 `ft_list` 类**。
+筛选器用 `querySelectorAll('.ft_list')` 选卡片，于是只选到 76 张 `char_row`，
+304 张部件卡永远筛不到——筛选器对部件完全不起作用。
+
+它没被发现的理由值得记下来：构建成功、`check.ts` 通过、筛选键与 v1 逐卡一致、
+文本 0 丢失，**没有任何一步去看成品里的筛选行为**。`verify.ts` 比的是数据，
+`textdiff.py` 比的是文本，两者都不碰交互。
+
+现在有三道防线：
+
+1. `src/lib/filterState.ts` —— 把筛选逻辑从 Vue 组件里抽成纯函数，可测；
+2. `scripts/test-filter.ts` —— 15 项用例，含「不做子串匹配」（`lv9` 不能命中 `lv90`）
+   与「查询串往返一致」；
+3. `scripts/smoke.ts` —— 直接读 `dist/index.html`，断言
+   `ft_list` 元素数 == `data-tags` 数（这条就是当时漏掉的检查）、无死按钮、
+   复合筛选既不空也不全命中、每怪 5 张卡、图片引用全部可解析。
+
+三者都接进了 `pnpm build` 与 CI。教训是：**验收要盯着成品，而不是盯着源数据。**
 
 `scripts/migrate/` 下的 Python 工具依赖 `minidom.py`（内置的小型 DOM）与 `yamlio.py`
 （内置的 YAML 输出），不是通用库，只为本项目的数据形态服务。
