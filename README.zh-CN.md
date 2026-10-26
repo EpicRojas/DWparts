@@ -20,6 +20,7 @@ DWparts 是手机游戏《地牢深处》（Dungeon Within）的非官方资料�
 | `img/common/` | 图标与界面素材，无损 WebP，页面引用的即此目录（47 个文件） | © Game Coaster |
 | `img/characters/` | 角色立绘，无损 WebP，页面引用的即此目录（78 个文件） | © Game Coaster |
 | `img/raw/` | 上述文件的 PNG 原始件，页面不引用（125 个文件） | © Game Coaster |
+| `tools/build-images.sh` | 由 `img/raw/` 重新生成 WebP | MIT |
 | `CNAME` | GitHub Pages 自定义域名 | — |
 
 ## 本地运行
@@ -38,7 +39,7 @@ python3 -m http.server 8000
 
 - `img/` 下的文件名在 GitHub Pages 上区分大小写。HTML 中的引用须与磁盘上的大小写完全一致；`img/common/AC.webp` 与 `img/common/ac.webp` 指代不同文件。
 - 图片为带透明通道的无损 WebP。不得改用有损编码；图标为像素画，在显示尺寸下会出现可见失真。
-- `img/raw/` 存放 PNG 原始件，是唯一新增图片的位置。`img/common/` 与 `img/characters/` 下的 WebP 属于构建产物，不得手工编辑或新增。
+- `img/raw/` 存放 PNG 原始件，是唯一新增图片的位置。`img/common/` 与 `img/characters/` 下的 WebP 属于构建产物，不得手工编辑或新增。改动 `img/raw/` 后须运行 `tools/build-images.sh`，并将原始件与生成的 WebP 一并提交。
 - 页面只引用 `img/common/` 与 `img/characters/`。HTML 中不得引用 `img/raw/` 下的任何文件。
 - 本站保持无依赖。不接受前端框架与构建工具。
 
