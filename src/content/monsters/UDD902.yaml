@@ -1,0 +1,100 @@
+# 菲西斯（UDD902）
+id: UDD902
+name: 菲西斯
+race: 亡灵
+level: 9
+dominance: 32
+stats:
+  str: 12
+  dex: 16
+  con: 32
+  int: 30
+  wis: 34
+  cha: 38
+statAdvantage: cha
+hp: 210
+ac: 8
+basic:
+  name: 血液提取
+  action: main
+  damage:
+  - dice: 5d6
+    type: mag2
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - melee
+  save:
+    stat: con
+    dc: 12
+    dcStat: cha
+  text: "抽取目标的血液，并使其陷入{pink|流血}状态。"
+  effects:
+  - name: 流血
+    text: "交战结束时，受到1d4{phy1|挥砍伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 鲜血统治
+  slot: b
+  bonus:
+  - text: 免疫魅惑
+  - text: "免疫{mag2|死灵伤害}"
+  text: "对入侵地下城的敌人赋予1层{pink|鲜血统治}。敌人每次被赋予{pink|流血}或受到{pink|流血}造成的伤害时，额外获得1层{pink|鲜血统治}。自身造成的{mag2|死灵伤害}无视敌人的{lb|抗性}和{lb|免疫}。"
+  effects:
+  - name: 鲜血统治
+    text: "每当{pink|流血}造成伤害时，额外造成等同于菲西斯的魅力调整值＋每层1d6的{mag2|死灵伤害}。（最大层数：20）"
+- name: 猩红王座
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 5
+  damage:
+  - dice: 8d10
+    type: mag2
+    stat: cha
+  - dice: 1d10
+    type: mag2
+    stat: cha
+    factor: 每层
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: con
+    dc: 12
+    dcStat: cha
+  text: "抽取后排敌人的血液，并赋予{pink|流血}状态。根据目标的{pink|鲜血统治}层数造成额外{mag2|死灵伤害}。"
+  effects:
+  - name: 流血
+    text: "交战结束时，受到1d4{phy1|挥砍伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+- name: 鲜血帷幕
+  slot: s1
+  bonus:
+  - stat: wis
+    amount: 4
+  text: "处于{pink|流血}状态的敌人死亡时，恢复已消耗的{main}{green|动作}。"
+  action: passive
+- name: 生命之源
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 2
+    text: 法术豁免难度+2
+  damage:
+  - dice: 3d10
+    type: mag2
+    stat: cha
+  - dice: 3d10
+    type: heal
+    stat: cha
+  damageStat: cha
+  text: "受到近战攻击时进行反应，对前排的攻击者造成{mag2|3d10 额外 死灵伤害}{CHA}并赋予{pink|流血}，随后为自身恢复{heal|3d10 治疗}{CHA}。"
+  effects:
+  - name: 流血
+    text: "交战结束时，受到1d4{phy1|挥砍伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"

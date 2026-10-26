@@ -1,0 +1,86 @@
+# 死亡祭司（UDD402）
+id: UDD402
+name: 死亡祭司
+race: 亡灵
+level: 4
+dominance: 4
+stats:
+  str: 7
+  dex: 9
+  con: 12
+  int: 13
+  wis: 16
+  cha: 9
+statAdvantage: wis
+hp: 40
+ac: 8
+basic:
+  name: 冻寒之触
+  action: main
+  damage:
+  - dice: 2d6
+    type: mag2
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - melee
+  save:
+    stat: con
+    dc: 12
+    dcStat: wis
+  text: "目标暂时陷入{pink|禁疗}状态。"
+  effects:
+  - name: 禁疗
+    text: 无法恢复生命值。（持续时间：2.4秒 / 非战斗时4.8秒）
+parts:
+- name: 死亡缓刑
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  attackTypes:
+  - AoE
+  text: "交战开始时，对前排友军赋予{pink|死亡喘息}。"
+  effects:
+  - name: 死亡喘息
+    text: 受到致命伤害时，恢复1点生命值并解除。（持续时间：2.4秒 / 非战斗时4.8秒）
+- name: 堕落之炎
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 1
+  damage:
+  - dice: 1d12
+    type: mag2
+    stat: int
+  - dice: 1d12
+    type: mag1
+    stat: wis
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: 用堕落之炎焚烧目标。
+- name: 死灵法师的誓约
+  slot: s1
+  bonus:
+  - stat: wis
+    amount: 1
+  text: "自身造成的{mag2|死灵伤害}无视目标的{lb|抗性}。"
+  action: passive
+- name: 死灵吸收护盾
+  slot: s2
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  attackTypes:
+  - AoE
+  text: "交战开始时，为所有友军附加吸收{mag2|死灵伤害}的{pink|死灵吸收护盾}。"
+  effects:
+  - name: 死灵吸收护盾
+    text: "使下1次{mag2|死灵伤害}无效，并进行等同于该数值的生命值{blue|治疗}后解除。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive

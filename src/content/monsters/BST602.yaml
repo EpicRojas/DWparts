@@ -1,0 +1,93 @@
+# 蛇发女妖（BST602）
+id: BST602
+name: 蛇发女妖
+race: 野兽
+level: 6
+dominance: 9
+stats:
+  str: 11
+  dex: 12
+  con: 17
+  int: 18
+  wis: 15
+  cha: 13
+statAdvantage: int
+hp: 88
+ac: 8
+basic:
+  name: 魔力箭
+  action: main
+  damage:
+  - dice: 4d6
+    type: mag3
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: 发射魔力箭。
+parts:
+- name: 黄金牛面具
+  slot: b
+  bonus:
+  - text: 免疫震慑
+  - text: 免疫盲目
+  damage:
+  - dice: 1d10
+    type: mag3
+    stat: cha
+  damageStat: cha
+  dcStat: int
+  save:
+    stat: str
+    dc: 15
+    dcStat: int
+  text: "交战开始时，使前排敌人陷入{pink|倒地}状态，并造成{mag3|1d10 额外 力场伤害}{CHA}。"
+  effects:
+  - name: 倒地
+    text: "自身的{blue|命中检定}获得{blue|劣势}。受到的近战命中会被赋予{blue|优势}，而受到的远程命中则被赋予{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 念动压杀
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 2
+  damage:
+  - dice: 4d8
+    type: mag3
+    stat: int
+  - dice: 2d8
+    type: mag3
+    stat: int
+  damageStat: int
+  dcStat: int
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: str
+    dc: 12
+    dcStat: int
+  text: "碾压目标及目标后方的敌人。对处于{pink|倒地}状态的目标造成额外{mag3|力场伤害}。"
+- name: 支配斗篷
+  slot: s1
+  bonus:
+  - stat: cha
+    amount: 2
+  text: "在带有{mag3|力场伤害}的攻击中，增加相当于{CHA}魅力调整值的{mag3|力场伤害}。"
+  action: passive
+- name: 冻结凝视
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  dcStat: cha
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: 友军成为攻击目标时作为反应，有一定概率使该攻击无效。

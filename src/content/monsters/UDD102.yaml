@@ -1,0 +1,65 @@
+# 骷髅（UDD102）
+id: UDD102
+name: 骷髅
+race: 亡灵
+level: 1
+dominance: 1
+stats:
+  str: 8
+  dex: 12
+  con: 8
+  int: 5
+  wis: 6
+  cha: 4
+statAdvantage: dex
+hp: 13
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 1d8
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 骨骼结构
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  text: 受到的近战攻击伤害减少1d10。
+- name: 盾牌猛击
+  slot: m
+  action: main
+  bonus:
+  - stat: ac
+    amount: 1
+  damage:
+  - dice: 1d10
+    type: phy4
+    stat: dex
+  damageStat: dex
+  hitStat: str
+  text: "使目标陷入{pink|震慑}状态。"
+  effects:
+  - name: 震慑
+    text: "无法行动或移动。受到的{blue|命中检定}会被赋予{blue|优势}，在{blue|力量 豁免}和{blue|敏捷 豁免}上获得{blue|劣势}，且护甲等级减少2。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 空洞头骨
+  slot: s1
+  bonus:
+  - text: 智力+-1
+  - stat: dex
+    amount: 1
+  text: "对{pink|魅惑}状态获得{lb|免疫}。"
+  action: passive
+- name: 咔哒作响的腿
+  slot: s2
+  bonus:
+  - stat: ini
+    amount: 1
+  text: "减少受到的{phy4|物理伤害}（物理伤害减免+2）。"
+  action: passive

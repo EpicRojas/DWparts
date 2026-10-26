@@ -1,0 +1,102 @@
+# 悲叹元素（ELM401）
+id: ELM401
+name: 悲叹元素
+race: 精灵
+level: 4
+dominance: 4
+stats:
+  str: 6
+  dex: 10
+  con: 10
+  int: 11
+  wis: 14
+  cha: 16
+statAdvantage: cha
+hp: 36
+ac: 8
+basic:
+  name: 精神压迫
+  action: main
+  damage:
+  - dice: 3d6
+    type: mag4
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: 压迫精神。
+parts:
+- name: 悲叹光环
+  slot: b
+  bonus:
+  - text: 免疫恐慌
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: wis
+    dc: 13
+    dcStat: cha
+  text: "交战开始时，有一定概率对所有敌人赋予1层{pink|悲叹}。"
+  effects:
+  - name: 悲叹
+    text: "{attack}命中和{save}{orange|豁免检定加值}每层减少1。（持续时间：2.4秒 / 非战斗时4.8秒，最大层数：5）"
+- name: 心灵斩击
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 2
+  damage:
+  - dice: 2d8
+    type: phy4
+    stat: cha
+  - dice: 1d6
+    type: mag4
+    stat: cha
+    factor: "1.0"
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - melee
+  hitStat: cha
+  save:
+    stat: cha
+    dc: 13
+    dcStat: cha
+  text: "有一定概率根据目标的{pink|悲叹}层数造成额外{mag4|心灵伤害}。"
+- name: 悲叹吞噬
+  slot: s1
+  bonus:
+  - stat: cha
+    amount: 1
+  damage:
+  - dice: 1d12
+    type: heal
+  attackTypes:
+  - AoE
+  text: "有人死亡时作为反应，根据死者的{pink|悲叹}层数对所有友军进行{heal|1d12 治疗}。"
+  action: passive
+- name: 共情之伤
+  slot: s2
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  dcStat: cha
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: "受到伤害时作为反应，有一定概率对攻击者赋予1层{pink|悲叹}。"
+  effects:
+  - name: 悲叹
+    text: "{attack}命中和{save}{orange|豁免检定加值}每层减少1。（持续时间：2.4秒 / 非战斗时4.8秒，最大层数：5）"
+  action: passive

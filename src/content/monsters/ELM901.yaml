@@ -1,0 +1,111 @@
+# 艾梅丽亚（ELM901）
+id: ELM901
+name: 艾梅丽亚
+race: 精灵
+level: 9
+dominance: 32
+stats:
+  str: 10
+  dex: 22
+  con: 24
+  int: 34
+  wis: 40
+  cha: 36
+statAdvantage: wis
+hp: 185
+ac: 8
+basic:
+  name: 闪电箭
+  action: main
+  damage:
+  - dice: 5d6
+    type: ele3
+    stat: wis
+  damageStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: wis
+  text: 射出闪电。
+parts:
+- name: 精灵界权能
+  slot: b
+  bonus:
+  - text: "免疫{ele1|火焰伤害}"
+  - text: "免疫{ele2|寒冷伤害}"
+  - text: "免疫{ele3|闪电伤害}"
+  attackTypes:
+  - AoE
+  text: "入侵开始时，为地下城内所有友军施加{pink|元素权能}，使{ele1|火焰伤害}、{ele2|寒冷伤害}与{ele3|闪电伤害}提高等同于感知调整值的数值。自身的火焰、寒冷与电击伤害无视目标的{lb|抗性}和{lb|免疫}。"
+  effects:
+  - name: 元素权能
+    text: "对敌人造成的{ele1|火焰伤害}、{ele2|寒冷伤害}与{ele3|闪电伤害}增加等同于施法者感知调整值的数值。"
+- name: 万物和谐
+  slot: m
+  action: main
+  bonus:
+  - stat: wis
+    amount: 5
+  damage:
+  - dice: 6d8
+    type: ele1
+    stat: int
+  - dice: 6d8
+    type: ele2
+    stat: cha
+  - dice: 6d8
+    type: ele3
+    stat: wis
+  damageStat: int
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: dex
+    dc: 12
+    dcStat: wis
+  text: "同时对目标及其后方的敌人造成{ele1|火焰伤害}、{ele2|寒冷伤害}与{ele3|闪电伤害}。"
+- name: 精灵统御
+  slot: s1
+  bonus:
+  - stat: cha
+    amount: 4
+  damage:
+  - dice: 2d8
+    type: ele1
+    stat: wis
+    factor: "0.25"
+  - dice: 2d8
+    type: ele2
+    stat: wis
+    factor: "0.25"
+  - dice: 2d8
+    type: ele3
+    stat: wis
+    factor: "0.25"
+  damageStat: wis
+  text: "获得对所有元素伤害的{lb|抗性}。受到敌人伤害时，立即对该敌人造成{ele1|2d8 额外 火焰伤害}{WIS}、{ele2|2d8 额外 寒冷伤害}{WIS}和{ele3|2d8 额外 闪电伤害}{WIS}。"
+  action: passive
+- name: 元素花冠
+  slot: s2
+  bonus:
+  - stat: int
+    amount: 4
+  dcStat: wis
+  attackTypes:
+  - AoE
+  save:
+    stat: wis
+    dc: 12
+    dcStat: wis
+  text: "交战开始时，对所有敌人施加{pink|火焰易伤}、{pink|寒冷易伤}与{pink|闪电易伤}。"
+  effects:
+  - name: 火焰易伤
+    text: "获得对{ele1|火焰伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  - name: 寒冷易伤
+    text: "获得对{ele2|寒冷伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  - name: 闪电易伤
+    text: "获得对{ele3|闪电伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive

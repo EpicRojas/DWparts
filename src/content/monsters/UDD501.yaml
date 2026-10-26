@@ -1,0 +1,78 @@
+# 骷髅领主（UDD501）
+id: UDD501
+name: 骷髅领主
+race: 亡灵
+level: 5
+dominance: 6
+stats:
+  str: 17
+  dex: 10
+  con: 15
+  int: 10
+  wis: 12
+  cha: 12
+statAdvantage: str
+hp: 64
+ac: 8
+basic:
+  name: 基础斩击
+  action: main
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 斩击敌人。
+parts:
+- name: 君主阵型
+  slot: b
+  bonus:
+  - text: "易受{phy4|物理伤害}"
+  text: "交战开始时若位于前排，则进入{pink|君主阵型}状态。"
+  effects:
+  - name: 君主阵型
+    text: 护甲等级增加2，且在交战开始时获得相当于最大生命值10%的临时生命值。
+- name: 处刑大剑
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 2
+  damage:
+  - dice: 3d8
+    type: phy4
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  - AoE
+  hitStat: str
+  save:
+    stat: cha
+    dc: 12
+    dcStat: str
+  text: 斩击所有前排敌人，并处决生命值不高于10%的敌人。
+- name: 君主威严
+  slot: s1
+  action: react
+  bonus:
+  - stat: ini
+    amount: 3
+  text: "行动结束时，对所有友军赋予{lgreen|所有检定加值}。"
+  effects:
+  - name: 所有检定加值
+    text: 所有检定加值增加1d4。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+- name: 骨甲
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 2
+  text: "攻击命中时获得{pink|骨甲}。受到伤害时消耗1层以减轻伤害。"
+  effects:
+  - name: 骨甲
+    text: "获得对{phy4|物理伤害}与{mag2|死灵伤害}的{lb|抗性}。（最大层数：5）"
+  action: passive

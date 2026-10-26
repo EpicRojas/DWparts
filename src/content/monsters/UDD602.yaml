@@ -1,0 +1,87 @@
+# 暗夜爬行者（UDD602）
+id: UDD602
+name: 暗夜爬行者
+race: 亡灵
+level: 6
+dominance: 9
+stats:
+  str: 14
+  dex: 18
+  con: 16
+  int: 10
+  wis: 11
+  cha: 9
+statAdvantage: dex
+hp: 80
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 4d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 深渊之雾
+  slot: b
+  bonus:
+  - text: 免疫盲目
+  - text: "易受{mag1|光耀伤害}"
+  text: "交战开始时，进入{pink|深渊之雾}状态。"
+  effects:
+  - name: 深渊之雾
+    text: "针对自身的{blue|命中检定}强制获得{blue|劣势}，并在交战开始时进入隐形状态。受到{mag1|光耀伤害}时解除。"
+- name: 暗影突袭
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: phy4
+    stat: dex
+  - dice: 3d8
+    type: mag2
+    stat: cha
+  damageStat: dex
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: dex
+  text: "袭击生命值最低的敌人。如果自身处于{pink|隐形}状态，则造成额外的{mag2|死灵伤害}。"
+- name: 梦魇之爪
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 2
+  dcStat: wis
+  save:
+    stat: wis
+    dc: 13
+    dcStat: wis
+  text: "攻击命中时，有一定概率对目标赋予{pink|恐慌}和持续1d6的{mag4|心灵伤害}。"
+  effects:
+  - name: 恐慌
+    text: "向入口撤退，且在{blue|命中检定}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  - name: 精神崩溃
+    text: "交战结束时，受到1d6{mag4|心灵伤害}，且{blue|感知 豁免}受到{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数，最大层数：5）"
+  action: passive
+- name: 遁入黑暗
+  slot: s2
+  action: react
+  bonus:
+  - stat: ac
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: heal
+  text: "生命值在35%以下时受到伤害作为反应，对自己进行{heal|3d10 治疗}并再次进入{pink|隐形}状态。"
+  effects:
+  - name: 隐形
+    text: "从视野中消失，对敌人的{blue|命中检定}获得{blue|优势}。（持续时间：2.4秒 / 非战斗时4.8秒）"

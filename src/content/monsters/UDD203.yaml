@@ -1,0 +1,79 @@
+# 骷髅战马（UDD203）
+id: UDD203
+name: 骷髅战马
+race: 亡灵
+level: 2
+dominance: 2
+stats:
+  str: 12
+  dex: 11
+  con: 10
+  int: 4
+  wis: 7
+  cha: 5
+statAdvantage: str
+hp: 25
+ac: 8
+basic:
+  name: 基础刺击
+  action: main
+  damage:
+  - dice: 1d12
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 刺击敌人的弱点。
+parts:
+- name: 幽灵冲刺
+  slot: b
+  bonus:
+  - text: 免疫倒地
+  text: "对{pink|束缚}和{pink|擒抱}状态获得{lb|免疫}。"
+- name: 死亡冲锋
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 1
+  damage:
+  - dice: 2d8
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 向目标冲锋。
+- name: 空洞之蹄
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 1
+  dcStat: cha
+  save:
+    stat: wis
+    dc: 10
+    dcStat: cha
+  text: "交战开始时，对前排敌人赋予{pink|恐慌}。"
+  effects:
+  - name: 恐慌
+    text: "向入口撤退，且在{blue|命中检定}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive
+- name: 亡者哀嚎
+  slot: s2
+  action: react
+  bonus:
+  - stat: wis
+    amount: 1
+  dcStat: wis
+  save:
+    stat: wis
+    dc: 12
+    dcStat: wis
+  text: "受到近战攻击时作为反应，有一定概率对攻击者赋予{pink|恐慌}。"
+  effects:
+  - name: 恐慌
+    text: "向入口撤退，且在{blue|命中检定}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"

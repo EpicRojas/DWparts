@@ -1,0 +1,94 @@
+# 沙虫（BST701）
+id: BST701
+name: 沙虫
+race: 野兽
+level: 7
+dominance: 12
+stats:
+  str: 12
+  dex: 8
+  con: 19
+  int: 6
+  wis: 23
+  cha: 13
+statAdvantage: wis
+hp: 100
+ac: 8
+basic:
+  name: 毒气喷洒
+  action: main
+  damage:
+  - dice: 4d6
+    type: ele7
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - melee
+  save:
+    stat: con
+    dc: 12
+    dcStat: wis
+  text: 喷吐毒气。
+parts:
+- name: 黄沙帷幕
+  slot: b
+  bonus:
+  - resist: phy4
+  - text: 免疫盲目
+  dcStat: wis
+  attackTypes:
+  - AoE
+  save:
+    stat: con
+    dc: 12
+    dcStat: wis
+  text: "交战开始时，在战场上掀起沙暴，使所有敌人陷入{pink|盲目}状态。"
+  effects:
+  - name: 盲目
+    text: "失去视野。在{blue|命中检定}上获得{blue|劣势}，且受击时攻击者的{blue|命中检定}获得{blue|优势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 沙漠之冠
+  slot: m
+  action: main
+  bonus:
+  - stat: wis
+    amount: 2
+  damage:
+  - dice: 4d10
+    type: phy4
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: dex
+    dc: 12
+    dcStat: wis
+  text: "向后排敌人释放沙尘暴，造成{phy4|物理伤害}。若目标处于{pink|盲目}状态，则使其窒息并陷入{pink|窒息}状态。"
+  effects:
+  - name: 窒息
+    text: "因窒息陷入沉默状态，无法使用{blue|法术}。（持续时间：4.8秒 / 非战斗时9.6秒）"
+- name: 女王之鳞
+  slot: s1
+  action: react
+  bonus:
+  - stat: cha
+    amount: 2
+  text: "受到远程攻击时作出反应，以沙风防御一半伤害，并为攻击者赋予{pink|盲目}。"
+  effects:
+  - name: 盲目
+    text: "失去视野。在{blue|命中检定}上获得{blue|劣势}，且受击时攻击者的{blue|命中检定}获得{blue|优势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 黄沙庇护
+  slot: s2
+  action: react
+  bonus:
+  - stat: con
+    amount: 2
+  text: "友军成为攻击目标时，用沙子包裹目标，使其陷入提供防御力和减伤加成的{pink|黄沙护盾}状态。"
+  effects:
+  - name: 黄沙护盾
+    text: 持续期间内护甲等级增加3，受到的伤害减少2d6。（持续时间：4.8秒 / 非战斗时9.6秒）

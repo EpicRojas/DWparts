@@ -1,0 +1,71 @@
+# 死亡士兵（UDD202）
+id: UDD202
+name: 死亡士兵
+race: 亡灵
+level: 2
+dominance: 2
+stats:
+  str: 12
+  dex: 8
+  con: 12
+  int: 4
+  wis: 5
+  cha: 4
+statAdvantage: str
+hp: 29
+ac: 8
+basic:
+  name: 基础斩击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 斩击敌人。
+parts:
+- name: 生命吸取
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  damage:
+  - dice: 1d4
+    type: heal
+    stat: cha
+  text: "每次攻击命中时，对自己进行{heal|1d4 治疗}{CHA}。"
+- name: 吸魂打击
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 1
+  damage:
+  - dice: 2d6
+    type: mag2
+    stat: str
+  - dice: 1d6
+    type: heal
+    stat: str
+  damageStat: str
+  attackTypes:
+  - spell
+  - melee
+  hitStat: str
+  text: "命中时，对自己进行{heal|1d6 治疗}。"
+- name: 不死韧性
+  slot: s1
+  bonus:
+  - stat: con
+    amount: 1
+  text: "获得对{mag2|死灵伤害}和{ele2|寒冷伤害}的{lb|抗性}。"
+  action: passive
+- name: 报复黑甲
+  slot: s2
+  action: react
+  bonus:
+  - stat: ac
+    amount: 1
+  text: "受到近战攻击时作为反应，立即恢复已消耗的{main}{green|动作}。"

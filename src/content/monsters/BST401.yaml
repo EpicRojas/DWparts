@@ -1,0 +1,75 @@
+# 米诺陶洛斯（BST401）
+id: BST401
+name: 米诺陶洛斯
+race: 野兽
+level: 4
+dominance: 4
+stats:
+  str: 16
+  dex: 9
+  con: 15
+  int: 6
+  wis: 8
+  cha: 5
+statAdvantage: str
+hp: 59
+ac: 8
+basic:
+  name: 基础斩击
+  action: main
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 斩击敌人。
+parts:
+- name: 迷宫之怒
+  slot: b
+  bonus:
+  - resist: phy4
+  text: "每次受到伤害或攻击命中时，获得1层{pink|狂怒}。"
+  effects:
+  - name: 狂怒
+    text: 近战伤害加值每层增加2，攻击后解除。（持续时间：2.4秒 / 非战斗时4.8秒，最大层数：10）
+- name: 屠杀之斧
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 2
+  damage:
+  - dice: 3d8
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  - AoE
+  hitStat: str
+  text: 攻击前排的所有敌人。
+- name: 猛牛之韧
+  slot: s1
+  bonus:
+  - stat: con
+    amount: 2
+  text: "在{blue|力量 豁免}上获得{blue|优势}。每次豁免成功时获得1层{pink|狂怒}。"
+  effects:
+  - name: 狂怒
+    text: 近战伤害加值每层增加2，攻击后解除。（持续时间：2.4秒 / 非战斗时4.8秒，最大层数：10）
+  action: passive
+- name: 贯穿之角
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 1
+  damage:
+  - dice: "0"
+    type: phy4
+    stat: str
+  damageStat: str
+  text: "每次基于{STR}力量的攻击命中时，对目标造成额外{phy4|0 额外 物理伤害}{STR}。"
+  action: passive

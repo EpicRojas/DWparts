@@ -1,0 +1,90 @@
+# 火元素（ELM503）
+id: ELM503
+name: 火元素
+race: 精灵
+level: 5
+dominance: 6
+stats:
+  str: 14
+  dex: 10
+  con: 14
+  int: 18
+  wis: 10
+  cha: 9
+statAdvantage: int
+hp: 62
+ac: 8
+basic:
+  name: 火焰箭
+  action: main
+  damage:
+  - dice: 3d6
+    type: ele1
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: 投掷火种。
+parts:
+- name: 热量吸收
+  slot: b
+  bonus:
+  - text: "免疫{ele1|火焰伤害}"
+  - text: "易受{ele2|寒冷伤害}"
+  text: "每次施放造成{ele1|火焰伤害}的法术时获得1层{pink|热气}。"
+  effects:
+  - name: 热气
+    text: "造成的{ele1|火焰伤害}增加等同于层数的数值。（持续时间：2.4秒 / 非战斗时4.8秒，最大层数：10）"
+- name: 超新星
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 2
+  damage:
+  - dice: 2d12
+    type: ele1
+    stat: int
+  damageStat: int
+  dcStat: int
+  attackTypes:
+  - spell
+  - melee
+  - AoE
+  save:
+    stat: dex
+    dc: 12
+    dcStat: int
+  text: "对前排的敌人造成{ele1|火焰伤害}。"
+- name: 灰烬烙印
+  slot: s1
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  dcStat: int
+  attackTypes:
+  - AoE
+  save:
+    stat: con
+    dc: 14
+    dcStat: int
+  text: "交战开始时，有一定概率使所有敌人陷入{pink|火焰易伤}状态。"
+  effects:
+  - name: 火焰易伤
+    text: "获得对{ele1|火焰伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive
+- name: 火焰斗篷
+  slot: s2
+  action: react
+  bonus:
+  - stat: ac
+    amount: 1
+  damage:
+  - dice: 1d10
+    type: ele1
+    stat: int
+  damageStat: int
+  text: "成为近战攻击目标时作为反应，使受到的伤害减少4d8并对攻击者造成{ele1|1d10 额外 火焰伤害}{INT}。"

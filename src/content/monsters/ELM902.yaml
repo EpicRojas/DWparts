@@ -1,0 +1,105 @@
+# 超越体（ELM902）
+id: ELM902
+name: 超越体
+race: 精灵
+level: 9
+dominance: 32
+stats:
+  str: 6
+  dex: 16
+  con: 20
+  int: 34
+  wis: 38
+  cha: 40
+statAdvantage: cha
+hp: 160
+ac: 8
+basic:
+  name: 精神压迫
+  action: main
+  damage:
+  - dice: 5d6
+    type: mag4
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: 压迫精神。
+parts:
+- name: 世界之精神
+  slot: b
+  bonus:
+  - text: 免疫魅惑
+  - text: "免疫{mag4|心灵伤害}"
+  dcStat: cha
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: "自身造成的{mag4|心灵伤害}无视敌人的{lb|抗性}和{lb|免疫}。地下城内受到{mag4|心灵伤害}的敌人若豁免检定失败，则会陷入{pink|超越连接}状态，使其受到的精神伤害永久增加。"
+  effects:
+  - name: 超越连接
+    text: "受到的{mag4|心灵伤害}增加，数值等同于施法者的魅力调整值。"
+- name: 超越法杖
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 5
+  damage:
+  - dice: 6d10
+    type: mag4
+    stat: cha
+  - dice: 3d8
+    type: mag4
+    stat: cha
+    factor: "0.5"
+  damageStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: cha
+  text: "对目标造成强力{mag4|心灵伤害}。随后对地下城内所有处于{pink|超越连接}状态的敌人造成额外{mag4|心灵伤害}。"
+- name: 万心洞察
+  slot: s1
+  action: react
+  bonus:
+  - stat: wis
+    amount: 4
+  damage:
+  - dice: 6d12
+    type: mag4
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: "受到攻击时作出反应，对后排敌人造成{mag4|6d12 额外 心灵伤害}{CHA}，随后强制其进行{blue|感知 豁免}。失败时，消耗1次尚未使用的{main}{green|动作}。"
+- name: 世界树之枝
+  slot: s2
+  bonus:
+  - stat: dc
+    amount: 2
+    text: 法术豁免难度+2
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: int
+    dc: 12
+    dcStat: cha
+  text: "交战开始时，为后排敌人赋予{pink|心灵易伤}和{pink|混乱}状态。"
+  effects:
+  - name: 心灵易伤
+    text: "获得对{mag4|心灵伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  - name: 混乱
+    text: 行动目标随机改变。（持续时间：2.4秒 / 非战斗时4.8秒）
+  action: passive

@@ -1,0 +1,108 @@
+# 灵魂收割者（UDD702）
+id: UDD702
+name: 灵魂收割者
+race: 亡灵
+level: 7
+dominance: 12
+stats:
+  str: 7
+  dex: 12
+  con: 13
+  int: 23
+  wis: 20
+  cha: 13
+statAdvantage: int
+hp: 91
+ac: 8
+basic:
+  name: 暗影箭
+  action: main
+  damage:
+  - dice: 4d6
+    type: mag2
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: 发射暗影能量。
+parts:
+- name: 灵魂帷幕
+  slot: b
+  bonus:
+  - text: 免疫魅惑
+  - text: 免疫恐慌
+  dcStat: wis
+  attackTypes:
+  - AoE
+  save:
+    stat: cha
+    dc: 12
+    dcStat: wis
+  text: "交战开始时，对所有敌人刻下{pink|灵魂烙印}。"
+  effects:
+  - name: 灵魂烙印
+    text: "每层使{blue|魅力 豁免}减少1，自身受到的{mag4|心灵伤害}增加等同于层数的数值。（最大层数：10）"
+- name: 死神宝珠
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 2
+  damage:
+  - dice: 5d8
+    type: mag2
+    stat: int
+  - dice: 2d8
+    type: mag4
+    stat: int
+  damageStat: int
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  save:
+    stat: cha
+    dc: 12
+    dcStat: wis
+  text: "对目标刻下{pink|灵魂烙印}。"
+  effects:
+  - name: 灵魂烙印
+    text: "每层使{blue|魅力 豁免}减少1，自身受到的{mag4|心灵伤害}增加等同于层数的数值。（最大层数：10）"
+- name: 亡灵法袍
+  slot: s1
+  action: react
+  bonus:
+  - stat: wis
+    amount: 2
+  dcStat: int
+  save:
+    stat: cha
+    dc: 13
+    dcStat: int
+  text: "成为法术攻击目标时产生反应，对攻击者刻下{pink|灵魂烙印}并使该法术无效。"
+  effects:
+  - name: 灵魂烙印
+    text: "每层使{blue|魅力 豁免}减少1，自身受到的{mag4|心灵伤害}增加等同于层数的数值。（最大层数：10）"
+- name: 魂灵灯笼
+  slot: s2
+  bonus:
+  - stat: dc
+    amount: 2
+    text: 法术豁免难度+2
+  dcStat: wis
+  attackTypes:
+  - AoE
+  save:
+    stat: cha
+    dc: 12
+    dcStat: wis
+  text: "敌人死亡时，对所有其他敌人刻下{pink|灵魂烙印}，自身获得{pink|灵魂}。"
+  effects:
+  - name: 灵魂
+    text: "造成的{mag2|死灵伤害}增加等同于层数的数值。（最大层数：10）"
+  - name: 灵魂烙印
+    text: "每层使{blue|魅力 豁免}减少1，自身受到的{mag4|心灵伤害}增加等同于层数的数值。（最大层数：10）"
+  action: passive

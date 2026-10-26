@@ -1,0 +1,82 @@
+# 蝎尾狮（BST403）
+id: BST403
+name: 蝎尾狮
+race: 野兽
+level: 4
+dominance: 4
+stats:
+  str: 12
+  dex: 14
+  con: 12
+  int: 8
+  wis: 10
+  cha: 7
+statAdvantage: dex
+hp: 48
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 锯齿之爪
+  slot: b
+  bonus:
+  - resist: ele7
+  text: "自身造成的{phy4|物理伤害}无视目标的{lb|抗性}。造成{phy4|物理伤害}时，对目标施加{pink|流血}。"
+  effects:
+  - name: 流血
+    text: "交战结束时，受到1d4{phy1|挥砍伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+- name: 鲜血连枷
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 2
+  damage:
+  - dice: 3d8
+    type: phy4
+    stat: str
+  - dice: 2d8
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: "若目标处于{pink|流血}状态，则造成额外伤害。"
+- name: 蝙蝠之翼
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 2
+  dcStat: str
+  save:
+    stat: wis
+    dc: 13
+    dcStat: str
+  text: "攻击目标固定为护甲最低的敌人。命中时，有一定概率使目标陷入{pink|恐慌}状态。"
+  effects:
+  - name: 恐慌
+    text: "向入口撤退，且在{blue|命中检定}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive
+- name: 黄金之角
+  slot: s2
+  action: react
+  bonus:
+  - stat: ac
+    amount: 1
+  damage:
+  - dice: "0"
+    type: mag1
+    stat: str
+  damageStat: str
+  text: "受到近战攻击时作为反应，对攻击者造成{mag1|0 额外 光耀伤害}{STR}。"

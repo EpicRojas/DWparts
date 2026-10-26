@@ -2,17 +2,18 @@
 import Icon from './Icon.astro';
 import type { Damage } from '../lib/derive';
 import { DAMAGE_LABEL, STAT_ICON, type Stat } from '../lib/taxonomy';
-import { iconExists } from '../lib/markup';
-interface Props { damage: Damage }
-const { damage } = Astro.props;
+import { iconExists, KNOWN_MISSING_ICONS } from '../lib/markup';
+interface Props { damage: Damage; first?: boolean }
+const { damage, first = true } = Astro.props;
 const label = (DAMAGE_LABEL as Record<string, string>)[damage.type] ?? damage.type;
 const hasIcon = iconExists(damage.type);
+const suffix = damage.factor !== undefined ? `(${damage.factor})` : damage.note ? `(${damage.note})` : '';
 ---
 <div class="dmg_grid">
   <div class="dice_img"><Icon file="dice" alt="" /></div>
   <div class="dmg_right">
     <div class={`${damage.type} dmg_show`}>
-      {damage.dice} {hasIcon ? <Icon file={damage.type} alt="" /> : <span class="mi-missing">◆</span>}{label}伤害<Icon file={STAT_ICON[damage.stat as Stat]} alt="" />
+      {first ? null : '+'} {damage.dice} {hasIcon ? <Icon file={damage.type} alt="" /> : KNOWN_MISSING_ICONS.has(damage.type) ? null : <span class="mi-missing">◆</span>}{damage.type === 'heal' ? label : `${label}伤害`}{damage.stat ? <Icon file={STAT_ICON[damage.stat as Stat]} alt="" /> : null}{suffix ? <span class="dmg_mult">{suffix}</span> : null}
     </div>
   </div>
 </div>

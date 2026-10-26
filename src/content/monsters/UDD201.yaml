@@ -1,0 +1,83 @@
+# 食尸鬼（UDD201）
+id: UDD201
+name: 食尸鬼
+race: 亡灵
+level: 2
+dominance: 2
+stats:
+  str: 10
+  dex: 12
+  con: 10
+  int: 5
+  wis: 6
+  cha: 4
+statAdvantage: dex
+hp: 23
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 麻痹之触
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  dcStat: cha
+  save:
+    stat: con
+    dc: 12
+    dcStat: cha
+  text: "攻击命中时，使目标陷入{pink|麻痹}状态。"
+  effects:
+  - name: 麻痹
+    text: "无法行动，{blue|力量 豁免}和{blue|敏捷 豁免}加值减少20，必定检定失败。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 神经毒爪
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 1
+  damage:
+  - dice: 1d8
+    type: phy4
+    stat: dex
+    factor: "0.75"
+  - dice: 1d8
+    type: phy4
+    stat: dex
+    factor: "0.5"
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 抓挠目标2次。
+- name: 伏击者之爪
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 2
+  text: "交战开始时，进入{pink|伏击}状态直到下一次行动结束。在此期间，对敌人的命中检定获得{blue|优势}，针对自身的命中检定则处于{blue|劣势}。"
+  effects:
+  - name: 伏击
+    text: "自身的{blue|命中检定}获得{blue|优势}，受击时强制赋予{blue|劣势}，行动后解除。"
+  action: passive
+- name: 贪食之胃
+  slot: s2
+  bonus:
+  - stat: con
+    amount: 1
+  damage:
+  - dice: 2d6
+    type: heal
+    stat: con
+  text: "每当有人死亡时作为反应，对自己进行{heal|2d6 治疗}{CON}。"
+  action: passive

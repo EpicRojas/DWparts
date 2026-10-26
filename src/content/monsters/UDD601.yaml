@@ -1,0 +1,107 @@
+# 吸血鬼领主（UDD601）
+id: UDD601
+name: 吸血鬼领主
+race: 亡灵
+level: 6
+dominance: 9
+stats:
+  str: 12
+  dex: 14
+  con: 14
+  int: 13
+  wis: 18
+  cha: 18
+statAdvantage: wis
+hp: 71
+ac: 8
+basic:
+  name: 冻寒之触
+  action: main
+  damage:
+  - dice: 3d6
+    type: mag2
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - melee
+  save:
+    stat: con
+    dc: 12
+    dcStat: wis
+  text: "目标暂时陷入{pink|禁疗}状态。"
+  effects:
+  - name: 禁疗
+    text: 无法恢复生命值。（持续时间：2.4秒 / 非战斗时4.8秒）
+parts:
+- name: 鲜血帝国
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  - text: 免疫魅惑
+  attackTypes:
+  - AoE
+  text: "开始交战时，为所有友军赋予{lgreen|吸血光环}。每当友军的生命值直接恢复时，自身获得{heal|10 {shield}临时生命值}。"
+  effects:
+  - name: 吸血光环
+    text: "攻击命中时，进行1d8的生命值{blue|治疗}。（持续时间：4.8秒 / 非战斗时9.6秒）"
+- name: 鲜血风暴
+  slot: m
+  action: main
+  bonus:
+  - stat: wis
+    amount: 2
+  damage:
+  - dice: 2d10
+    type: mag2
+    stat: wis
+  - dice: 2d10
+    type: mag2
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - melee
+  - AoE
+  save:
+    stat: con
+    dc: 12
+    dcStat: wis
+  text: "使前排敌人陷入{pink|流血}状态。对处于{pink|流血}状态的敌人造成额外伤害。"
+  effects:
+  - name: 流血
+    text: "交战结束时，受到1d4{phy1|挥砍伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+- name: 无情收割
+  slot: s1
+  action: react
+  bonus:
+  - stat: cha
+    amount: 2
+  damage:
+  - dice: 4d6
+    type: mag2
+    stat: wis
+  - dice: 3d10
+    type: heal
+    stat: cha
+  damageStat: wis
+  text: "受到生命值在35%以下的敌人伤害时作为反应，对攻击者造成{mag2|4d6 额外 死灵伤害}{WIS}。随后对自己进行{heal|3d10 治疗}{CHA}并获得{lgreen|所有检定加值}。"
+  effects:
+  - name: 所有检定加值
+    text: 所有检定加值增加1d4。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+- name: 鲜血征收
+  slot: s2
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  damage:
+  - dice: 3d8
+    type: heal
+  text: "友军陷入{pink|流血}状态时立即解除该状态，对自己进行{heal|3d8 治疗}并获得{lgreen|所有检定加值}。"
+  effects:
+  - name: 所有检定加值
+    text: 所有检定加值增加1d4。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+  action: passive

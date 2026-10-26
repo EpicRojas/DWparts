@@ -1,0 +1,82 @@
+# 斯莱普尼尔（BST802）
+id: BST802
+name: 斯莱普尼尔
+race: 野兽
+level: 8
+dominance: 16
+stats:
+  str: 18
+  dex: 25
+  con: 18
+  int: 12
+  wis: 20
+  cha: 14
+statAdvantage: dex
+hp: 115
+ac: 8
+basic:
+  name: 致命射击
+  action: main
+  damage:
+  - dice: 5d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - ranged
+  hitStat: dex
+  text: 用远程武器射击敌人。
+parts:
+- name: 疾风之蹄
+  slot: b
+  bonus:
+  - text: 免疫束缚
+  - text: 免疫倒地
+  attackTypes:
+  - AoE
+  text: "交战开始时，为所有友军赋予2层{pink|疾风之蹄}。"
+  effects:
+  - name: 疾风之蹄
+    text: "每层使{DEX}敏捷增加1，并使自身造成的{phy4|物理伤害}增加1。（最大层数：8）"
+- name: 流星长枪
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 3
+  damage:
+  - dice: 6d8
+    type: phy4
+    stat: dex
+    factor: "1.5"
+  damageStat: dex
+  attackTypes:
+  - ranged
+  - AoE
+  hitStat: dex
+  text: "造成沿直线贯穿目标及其后方敌人的{phy4|物理伤害}。"
+- name: 彗星箭
+  slot: s1
+  action: react
+  bonus:
+  - text: 远程命中+2
+  - stat: hit
+    amount: 0
+  damage:
+  - dice: 3d8
+    type: ele7
+    stat: wis
+  damageStat: wis
+  dcStat: dex
+  save:
+    stat: dex
+    dc: 16
+    dcStat: dex
+  text: "远程攻击命中敌人时作出反应，对所有敌人造成{ele7|3d8 额外 自然伤害}{WIS}。"
+- name: 反击机动
+  slot: s2
+  action: react
+  bonus:
+  - stat: ac
+    amount: 2
+  text: "成为远程攻击的目标时作为反应，躲避该攻击并立即恢复已消耗的{main}{green|动作}。"

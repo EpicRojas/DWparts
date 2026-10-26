@@ -1,0 +1,63 @@
+# 玛丽奥内特（UDD302）
+id: UDD302
+name: 玛丽奥内特
+race: 亡灵
+level: 3
+dominance: 3
+stats:
+  str: 7
+  dex: 14
+  con: 9
+  int: 9
+  wis: 8
+  cha: 13
+statAdvantage: dex
+hp: 29
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 狂乱移动
+  slot: b
+  bonus:
+  - text: 免疫魅惑
+  text: "击杀敌人时，立即恢复已消耗的{main}{green|动作}。"
+- name: 狂乱打击
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 1
+  damage:
+  - dice: 2d10
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 强力斩击目标。
+- name: 杂技演员之线
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 2
+  text: "在{blue|敏捷 豁免}上获得{blue|优势}。"
+  action: passive
+- name: 嘲弄之线
+  slot: s2
+  action: react
+  bonus:
+  - stat: cha
+    amount: 1
+  text: "躲避敌人攻击时作为反应，立即恢复已消耗的{main}{green|动作}。"

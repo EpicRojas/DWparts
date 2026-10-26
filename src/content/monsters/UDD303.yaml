@@ -1,0 +1,97 @@
+# 女妖（UDD303）
+id: UDD303
+name: 女妖
+race: 亡灵
+level: 3
+dominance: 3
+stats:
+  str: 5
+  dex: 10
+  con: 8
+  int: 10
+  wis: 13
+  cha: 15
+statAdvantage: cha
+hp: 28
+ac: 8
+basic:
+  name: 精神压迫
+  action: main
+  damage:
+  - dice: 2d6
+    type: mag4
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: 压迫精神。
+parts:
+- name: 尖叫灵魂
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: "交战开始时，使所有敌人陷入{pink|恐慌}状态。"
+  effects:
+  - name: 恐慌
+    text: "向入口撤退，且在{blue|命中检定}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 绝望悲鸣
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 1
+  damage:
+  - dice: 2d8
+    type: mag4
+  dcStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: "对前排的敌人赋予{pink|命中检定减值}。"
+  effects:
+  - name: 命中检定减值
+    text: "{attack}命中减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+- name: 灵体化
+  slot: s1
+  action: react
+  bonus:
+  - stat: dex
+    amount: 1
+  text: "受到攻击时作为反应，进入{pink|灵体化}状态。"
+  effects:
+  - name: 灵体化
+    text: "获得对非魔法物理伤害的{lb|抗性}，受到的伤害减半。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 死亡前兆
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  damage:
+  - dice: 1d10
+    type: mag4
+  dcStat: cha
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: "每当有人死亡时作为反应，有一定概率对所有敌人造成{mag4|1d10 额外 心灵伤害}。"

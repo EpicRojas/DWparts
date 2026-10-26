@@ -1,0 +1,89 @@
+# 特提斯（BST703）
+id: BST703
+name: 特提斯
+race: 野兽
+level: 7
+dominance: 12
+stats:
+  str: 13
+  dex: 13
+  con: 14
+  int: 18
+  wis: 14
+  cha: 21
+statAdvantage: cha
+hp: 99
+ac: 8
+basic:
+  name: 冰霜箭
+  action: main
+  damage:
+  - dice: 3d6
+    type: ele2
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: "降低目标的{lgreen|先攻}。"
+  effects:
+  - name: 先攻减值
+    text: 先攻减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+parts:
+- name: 海洋支配者
+  slot: b
+  bonus:
+  - text: "免疫{ele2|寒冷伤害}"
+  - text: 免疫束缚
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: str
+    dc: 12
+    dcStat: cha
+  text: "每次交战开始时，对所有敌人赋予1层{pink|深海重压}。"
+  effects:
+  - name: 深海重压
+    text: 每层使敏捷豁免和先攻值减少1。（持续时间：4.8秒 / 非战斗时9.6秒，最大层数：5）
+- name: 螺旋海螺枪
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 2
+  damage:
+  - dice: 5d10
+    type: phy4
+    stat: cha
+  - dice: 1d10
+    type: ele2
+    stat: cha
+    factor: 每层
+  damageStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: cha
+  text: "根据目标的{pink|深海重压}层数造成额外的{ele2|寒冷伤害}。"
+- name: 珍珠之冠
+  slot: s1
+  action: react
+  bonus:
+  - stat: str
+    amount: 2
+  text: "友军攻击前，对目标赋予{pink|深渊寒意}。"
+  effects:
+  - name: 深渊寒意
+    text: "攻击时额外造成1d6 {ele2|寒冷伤害}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 海啸斗篷
+  slot: s2
+  action: react
+  bonus:
+  - stat: ini
+    amount: 3
+  text: "当友军成为远程攻击的目标时，使该友军陷入{pink|漩涡帷幕}状态。"
+  effects:
+  - name: 漩涡帷幕
+    text: "交战结束前，受到的远程攻击伤害减半，并获得对{ele2|寒冷伤害}的{lb|抗性}。（持续时间：2.4秒 / 非战斗时4.8秒）"

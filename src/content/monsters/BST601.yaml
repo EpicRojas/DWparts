@@ -1,0 +1,83 @@
+# 天马（BST601）
+id: BST601
+name: 天马
+race: 野兽
+level: 6
+dominance: 9
+stats:
+  str: 15
+  dex: 18
+  con: 13
+  int: 10
+  wis: 14
+  cha: 13
+statAdvantage: dex
+hp: 84
+ac: 8
+basic:
+  name: 迅捷刺击
+  action: main
+  damage:
+  - dice: 2d10
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速刺击敌人。
+parts:
+- name: 神圣光辉
+  slot: b
+  action: react
+  bonus:
+  - resist: mag2
+  damage:
+  - dice: 4d12
+    type: mag1
+    stat: cha
+  damageStat: cha
+  dcStat: dex
+  save:
+    stat: con
+    dc: 14
+    dcStat: dex
+  text: "自身攻击以{lb|重击}命中时作出反应，有一定几率对所有敌人造成{mag1|4d12 额外 光耀伤害}{CHA}。"
+- name: 流星踢
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 2
+  damage:
+  - dice: 4d8
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  - AoE
+  hitStat: dex
+  text: 贯穿目标及目标后方的敌人。
+- name: 神秘之翼
+  slot: s1
+  action: react
+  bonus:
+  - stat: cha
+    amount: 2
+  dcStat: cha
+  save:
+    stat: cha
+    dc: 12
+    dcStat: cha
+  text: "成为法术攻击目标时作为反应，使该法术无效并对自己赋予{pink|魔法抗性}。"
+  effects:
+  - name: 魔法抗性
+    text: "对抗{blue|法术}效果的{blue|豁免}获得{blue|优势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 千里眼
+  slot: s2
+  bonus:
+  - stat: ini
+    amount: 3
+  text: "{lb|重击}触发要求值减少3。"
+  action: passive

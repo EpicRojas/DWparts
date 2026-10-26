@@ -1,0 +1,90 @@
+# 凯尔派（ELM301）
+id: ELM301
+name: 凯尔派
+race: 精灵
+level: 3
+dominance: 3
+stats:
+  str: 14
+  dex: 10
+  con: 14
+  int: 6
+  wis: 9
+  cha: 8
+statAdvantage: str
+hp: 41
+ac: 8
+basic:
+  name: 基础刺击
+  action: main
+  damage:
+  - dice: 1d12
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 刺击敌人的弱点。
+parts:
+- name: 深海重压
+  slot: b
+  bonus:
+  - resist: ele2
+  attackTypes:
+  - AoE
+  text: "对移动妨碍效果获得{lb|免疫}，并在交战开始时对前排敌人赋予{lgreen|护甲减值}。"
+  effects:
+  - name: 护甲减值
+    text: 护甲等级减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+- name: 水草之枪
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 1
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  save:
+    stat: str
+    dc: 12
+    dcStat: str
+  text: "命中时，有一定概率使目标陷入{pink|定身}状态。"
+  effects:
+  - name: 定身
+    text: 无法移动。（持续时间：2.4秒 / 非战斗时4.8秒）
+- name: 水草形态
+  slot: s1
+  bonus:
+  - stat: ac
+    amount: 1
+  text: "对{ele1|火焰伤害}获得{lb|易伤}，作为替代，当成为远程攻击目标时作为反应，对攻击者的命中检定赋予{blue|劣势}。"
+  action: passive
+- name: 溺亡漩涡
+  slot: s2
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  damage:
+  - dice: 1d10
+    type: mag4
+    stat: wis
+  damageStat: wis
+  dcStat: cha
+  save:
+    stat: con
+    dc: 12
+    dcStat: cha
+  text: "攻击命中移动受限的敌人时，造成额外{mag4|1d10 额外 心灵伤害}{WIS}并使其陷入{pink|窒息}状态。"
+  effects:
+  - name: 窒息
+    text: "因窒息陷入沉默状态，无法使用{blue|法术}。（持续时间：4.8秒 / 非战斗时9.6秒）"
+  action: passive

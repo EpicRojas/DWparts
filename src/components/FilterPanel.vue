@@ -1,38 +1,39 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from 'vue';
+import {
+  activeKeys, matchesCard, splitTags, stateToQuery, queryToState, type FilterState,
+} from '../lib/filterState';
 
-type State = Record<string, string | null>;
-
-const state = ref<State>({});
+const state = ref<FilterState>({});
 const visible = ref(0);
 const total = ref(0);
 const activeCount = ref(0);
 let root: HTMLElement | null = null;
 
+/**
+ * 筛选对象是「带 data-tags 的卡片」，而不是带某个 class 的卡片。
+ * data-tags 才是筛选语义的载体；class 会被布局改动影响。
+ */
 function cards(): HTMLElement[] {
-  return Array.from(document.querySelectorAll<HTMLElement>('.ft_list'));
+  return Array.from(document.querySelectorAll<HTMLElement>('[data-tags]'));
 }
 
 function apply() {
-  const keys = Object.values(state.value).filter((k): k is string => !!k);
+  const keys = activeKeys(state.value);
   activeCount.value = keys.length;
   const list = cards();
   total.value = list.length;
-  if (!keys.length) {
-    list.forEach((el) => el.removeAttribute('hidden'));
-    visible.value = list.length;
-  } else {
-    const sel = keys.map((k) => `[data-tags~="${CSS.escape(k)}"]`).join('');
-    let n = 0;
-    list.forEach((el) => {
-      const ok = el.matches(sel);
-      if (ok) { el.removeAttribute('hidden'); n++; } else { el.setAttribute('hidden', ''); }
-    });
-    visible.value = n;
+
+  let n = 0;
+  for (const el of list) {
+    const ok = matchesCard(splitTags(el.dataset.tags), keys);
+    if (ok) { el.removeAttribute('hidden'); n++; } else { el.setAttribute('hidden', ''); }
   }
+  visible.value = n;
+
   const url = new URL(location.href);
-  url.search = '';
-  for (const [g, k] of Object.entries(state.value)) if (k) url.searchParams.set(g, k);
+  const q = stateToQuery(state.value);
+  url.search = q ? `?${q}` : '';
   history.replaceState(null, '', url.pathname + url.search + url.hash);
 }
 
@@ -67,8 +68,10 @@ function clearAll() {
 onMounted(() => {
   root = document.querySelector('.btable');
   root?.addEventListener('click', onClick as EventListener);
-  const q = new URLSearchParams(location.search);
-  for (const [g, k] of q) state.value[g] = k;
+  const groups = Array.from(document.querySelectorAll<HTMLElement>('.ft_tag[data-group]'))
+    .map((t) => t.dataset.group!)
+    .filter(Boolean);
+  state.value = queryToState(location.search, Array.from(new Set(groups)));
   paint();
   apply();
 });

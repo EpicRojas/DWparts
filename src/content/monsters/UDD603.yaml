@@ -1,0 +1,90 @@
+# 死亡骑士（UDD603）
+id: UDD603
+name: 死亡骑士
+race: 亡灵
+level: 6
+dominance: 9
+stats:
+  str: 18
+  dex: 11
+  con: 18
+  int: 10
+  wis: 12
+  cha: 13
+statAdvantage: str
+hp: 92
+ac: 8
+basic:
+  name: 基础斩击
+  action: main
+  damage:
+  - dice: 4d6
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 斩击敌人。
+parts:
+- name: 灵魂指挥官
+  slot: b
+  bonus:
+  - text: 免疫恐慌
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: wis
+    dc: 15
+    dcStat: cha
+  text: 交战开始时增加所有友军的命中检定，并有一定概率降低所有敌人的护甲。
+  effects:
+  - name: 命中检定加值
+    text: "{attack}命中增加2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+  - name: 护甲减值
+    text: 护甲等级减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+- name: 灵魂斩剑
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: phy4
+    stat: str
+  - dice: 2d6
+    type: mag2
+    stat: cha
+  damageStat: str
+  dcStat: cha
+  attackTypes:
+  - spell
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 13
+    dcStat: cha
+  text: "使目标陷入{pink|禁疗}状态。"
+  effects:
+  - name: 禁疗
+    text: 无法恢复生命值。（持续时间：2.4秒 / 非战斗时4.8秒）
+- name: 黑曜石板甲
+  slot: s1
+  bonus:
+  - stat: con
+    amount: 2
+  text: "获得对{phy4|物理伤害}的抗性，并免疫{pink|震慑}状态。"
+  action: passive
+- name: 灵魂狂怒
+  slot: s2
+  action: react
+  bonus:
+  - stat: ac
+    amount: 2
+  text: "每次有人死亡时，做出反应为所有友军赋予{pink|灵魂狂怒}。"
+  effects:
+  - name: 灵魂狂怒
+    text: "在下一次攻击时消耗，额外造成1d8 {mag2|死灵伤害}。（独立层数）"

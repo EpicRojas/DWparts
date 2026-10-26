@@ -1,0 +1,95 @@
+# 水元素（ELM501）
+id: ELM501
+name: 水元素
+race: 精灵
+level: 5
+dominance: 6
+stats:
+  str: 10
+  dex: 12
+  con: 13
+  int: 11
+  wis: 16
+  cha: 17
+statAdvantage: cha
+hp: 59
+ac: 8
+basic:
+  name: 闪光
+  action: main
+  damage:
+  - dice: 3d6
+    type: mag3
+    stat: cha
+  damageStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: cha
+  text: 发射2次魔力光束。
+parts:
+- name: 鼓舞之歌
+  slot: b
+  bonus:
+  - resist: ele2
+  - text: "易受{ele1|火焰伤害}"
+  damage:
+  - dice: 1d6
+    type: heal
+    stat: cha
+  - dice: 1d6
+    type: heal
+    stat: cha
+  text: "每当友军触发{lb|重击}或抵抗敌人效果时，对该友军进行{heal|1d6 治疗}{CHA}。"
+- name: 不谐和音
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 2
+  damage:
+  - dice: 2d6
+    type: mag4
+    stat: cha
+  - dice: 2d6
+    type: ele2
+    stat: int
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: "攻击前排的敌人。有一定概率赋予{lgreen|攻击劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+- name: 激励旋律
+  slot: s1
+  bonus:
+  - stat: wis
+    amount: 2
+  text: "每当使用治疗能力直接恢复友军生命值时，为目标赋予检定加值({lgreen|所有检定加值})。"
+  effects:
+  - name: 所有检定加值
+    text: 所有检定加值增加1d4。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+  action: passive
+- name: 守护之歌
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  damage:
+  - dice: 3d10
+    type: heal
+    stat: wis
+  text: "友军受到{lb|重击}攻击时作为反应，对该友军进行{heal|3d10 治疗}{WIS}并赋予提高护甲的{lgreen|护甲加值}。"
+  effects:
+  - name: 护甲加值
+    text: 护甲等级增加2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）

@@ -1,0 +1,84 @@
+# 海豹精灵（BST102）
+id: BST102
+name: 海豹精灵
+race: 野兽
+level: 1
+dominance: 1
+stats:
+  str: 6
+  dex: 9
+  con: 8
+  int: 7
+  wis: 12
+  cha: 10
+statAdvantage: wis
+hp: 14
+ac: 8
+basic:
+  name: 精神分裂
+  action: main
+  damage:
+  - dice: 1d6
+    type: mag4
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  save:
+    stat: wis
+    dc: 12
+    dcStat: wis
+  text: "使目标的命中检定获得{blue|劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 水生适应
+  slot: b
+  bonus:
+  - resist: ele2
+  text: "获得对{ele2|寒冷伤害}的{lb|抗性}。"
+- name: 冬海之歌
+  slot: m
+  action: main
+  bonus:
+  - stat: wis
+    amount: 2
+  damage:
+  - dice: 1d6
+    type: ele2
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: wis
+    dc: 12
+    dcStat: wis
+  text: "唱歌，有一定概率使所有敌人陷入{pink|定身}状态。"
+  effects:
+  - name: 定身
+    text: 无法移动。（持续时间：2.4秒 / 非战斗时4.8秒）
+- name: 海浪之恩典
+  slot: s1
+  bonus:
+  - stat: dex
+    amount: 1
+  text: 获得护甲等级+1和敏捷豁免检定+2。
+  action: passive
+- name: 治愈水雾
+  slot: s2
+  action: react
+  bonus:
+  - stat: cha
+    amount: 1
+  damage:
+  - dice: 1d6
+    type: heal
+    stat: cha
+  text: "前排友军受到攻击时作为反应，对前排友军进行{heal|1d6 治疗}{CHA}。"

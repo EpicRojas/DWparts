@@ -10,20 +10,22 @@ export type BonusEntry =
   | { immune: string }
   | { text: string };
 
-export type Damage = { dice: string; type: string; stat: Stat };
+export type Damage = { dice: string; type: string; stat?: Stat; factor?: string; note?: string };
 
 export type Ability = {
   name: string;
   action?: Action;
   text: string;
-  damage?: Damage;
-  bonus: BonusEntry[];
+  /** 一张卡可能有 1~3 段伤害 */
+  damage?: Damage[];
+  bonus?: BonusEntry[];
   damageStat?: Stat;
   dcStat?: Stat;
-  attackTypes: AttackType[];
+  attackTypes?: AttackType[];
   hitStat?: Stat;
   save?: { stat: Stat; dc: number; dcStat?: Stat };
-  effects: { name: string; text: string }[];
+  effects?: { name: string; text: string }[];
+  extraTags?: string[];
 };
 
 /** 「命中/豁免」派生出 hit / save / hitnsave */
@@ -40,12 +42,13 @@ export function rollIds(a: Ability): string[] {
 export function abilityTagIds(a: Ability): string[] {
   const out: string[] = [];
   if (a.action) out.push(`act_${a.action}`);
-  for (const b of a.bonus) if ('stat' in b) out.push(`bon_${b.stat}`);
-  if (a.damage) out.push(`tag_${a.damage.type}`);
+  for (const b of a.bonus ?? []) if ('stat' in b) out.push(`bon_${b.stat}`);
+  for (const d of a.damage ?? []) out.push(`tag_${d.type}`);
   if (a.damageStat) out.push(`mult_${a.damageStat}`);
   if (a.save?.dcStat) out.push(`dc_${a.save.dcStat}`);
-  out.push(...a.attackTypes);
+  out.push(...(a.attackTypes ?? []));
   out.push(...rollIds(a));
+  out.push(...(a.extraTags ?? []));
   return [...new Set(out)];
 }
 
@@ -66,10 +69,11 @@ export function tagRows(a: Ability): TagRow[] {
       parts: [{ icon: STAT_LABEL[a.damageStat] && iconOfStat(a.damageStat), text: `基于${STAT_LABEL[a.damageStat]}` }],
     });
   }
-  if (a.attackTypes.length) {
+  if ((a.attackTypes ?? []).length) {
     rows.push({
       label: '攻击类型',
-      parts: a.attackTypes.map((t) => ({ icon: ATTACK_ICON[t], text: ATTACK_LABEL[t] })),
+      // 保持数据里的书写顺序（v1 的 DOM 顺序各有不同，重排会改变显示）
+      parts: (a.attackTypes ?? []).map((t) => ({ icon: ATTACK_ICON[t], text: ATTACK_LABEL[t] })),
     });
   }
   if (a.hitStat) {
@@ -111,8 +115,13 @@ export function dataTags(
 
 import { DAMAGE_LABEL, STAT_LABEL as SL, EXTRA_LABEL as EL } from './taxonomy';
 
-/** 加成条目 → 内联标记字符串 */
+/**
+ * 加成条目 → 内联标记字符串。
+ * amount 为 0 表示「只在 v1 的 class 里出现、正文没有数值」的纯筛选标记
+ * （迁移时补进来的），不渲染。
+ */
 export function bonusLine(b: BonusEntry): string {
+  if ('stat' in b && b.amount === 0) return '';
   if ('stat' in b) {
     const label = b.stat === 'dc' ? '法术豁免难度' : ((SL as any)[b.stat] ?? (EL as any)[b.stat] ?? b.stat);
     return `${label}+${b.amount}`;

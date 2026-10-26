@@ -1,0 +1,88 @@
+# 多头蛇（BST702）
+id: BST702
+name: 多头蛇
+race: 野兽
+level: 7
+dominance: 12
+stats:
+  str: 23
+  dex: 10
+  con: 21
+  int: 5
+  wis: 10
+  cha: 7
+statAdvantage: str
+hp: 121
+ac: 8
+basic:
+  name: 基础斩击
+  action: main
+  damage:
+  - dice: 4d6
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 斩击敌人。
+parts:
+- name: 多头再生
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  - text: "免疫{ele7|自然伤害}"
+  text: "交战开始时获得9层{pink|蛇头}。"
+  effects:
+  - name: 蛇头
+    text: "受到伤害时，使受到的伤害减少2d8，同时层数减少1。对敌人造成的{ele7|自然伤害}增加等同于当前层数的数值。（最大层数：9）"
+- name: 猛毒牙大剑
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 2
+  damage:
+  - dice: 4d10
+    type: phy4
+    stat: str
+  - dice: 2d12
+    type: ele7
+    stat: con
+  damageStat: str
+  attackTypes:
+  - melee
+  - AoE
+  hitStat: str
+  text: "用大剑横扫前排敌人，造成{phy4|物理伤害}与{ele7|自然伤害}。"
+- name: 九头蛇之鳞
+  slot: s1
+  action: react
+  bonus:
+  - stat: con
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: ele7
+    stat: con
+  damageStat: con
+  dcStat: con
+  save:
+    stat: dex
+    dc: 16
+    dcStat: con
+  text: "受到攻击时，向前排敌人飞溅酸性血液并造成{ele7|3d10 额外 自然伤害}{CON}。"
+- name: 再生之头
+  slot: s2
+  bonus:
+  - stat: mhp
+    amount: 20
+  damage:
+  - dice: 2d12
+    type: heal
+    stat: con
+  text: "交战结束时，获得1层{pink|蛇头}，并恢复{heal|2d12 治疗}{CON}生命值。"
+  effects:
+  - name: 蛇头
+    text: "受到伤害时，使受到的伤害减少2d8，同时层数减少1。对敌人造成的{ele7|自然伤害}增加等同于当前层数的数值。（最大层数：9）"
+  action: passive

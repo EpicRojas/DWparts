@@ -1,0 +1,74 @@
+# 老虎（BST202）
+id: BST202
+name: 老虎
+race: 野兽
+level: 2
+dominance: 2
+stats:
+  str: 13
+  dex: 12
+  con: 12
+  int: 3
+  wis: 6
+  cha: 4
+statAdvantage: str
+hp: 28
+ac: 8
+basic:
+  name: 基础斩击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 斩击敌人。
+parts:
+- name: 血之气息
+  slot: b
+  bonus:
+  - resist: ele7
+  text: "进入{pink|血之气息}状态，在攻击未受伤害的敌人时降低{lb|重击}触发要求值。"
+  effects:
+  - name: 血之气息
+    text: "攻击未受伤害的敌人时，{lb|重击}需求值减少3。"
+- name: 撕裂前爪
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 1
+  damage:
+  - dice: 1d10
+    type: phy4
+    stat: str
+    factor: "0.75"
+  - dice: 1d10
+    type: phy4
+    stat: str
+    factor: "0.5"
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 抓挠目标2次。
+- name: 野性本能
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 1
+  text: 暴击命中时，额外投掷1个伤害骰子。
+  action: passive
+- name: 老虎毛皮
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 1
+  text: "交战开始时，在第一次行动前处于{pink|条纹伪装}状态。"
+  effects:
+  - name: 条纹伪装
+    text: "强制针对自身的{blue|命中检定}获得{blue|劣势}，结束主动作后伪装解除。"
+  action: passive

@@ -1,0 +1,107 @@
+# 麒麟（ELM801）
+id: ELM801
+name: 麒麟
+race: 精灵
+level: 8
+dominance: 16
+stats:
+  str: 12
+  dex: 18
+  con: 16
+  int: 20
+  wis: 26
+  cha: 18
+statAdvantage: wis
+hp: 110
+ac: 8
+basic:
+  name: 闪电箭
+  action: main
+  damage:
+  - dice: 5d6
+    type: ele3
+    stat: wis
+  damageStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: wis
+  text: 射出闪电。
+parts:
+- name: 过载
+  slot: b
+  bonus:
+  - text: "免疫{ele3|闪电伤害}"
+  - resist: ele7
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: con
+    dc: 16
+    dcStat: cha
+  text: "自身造成的{ele3|闪电伤害}无视目标的抗性与免疫。任意角色使用电击能力时，对所有敌人施加{pink|静电}。"
+  effects:
+  - name: 静电
+    text: "每层使自身受到的{ele3|闪电伤害}增加1。（持续时间：2.4秒 / 非战斗时4.8秒，最大层数：10）"
+- name: 天罚落雷
+  slot: m
+  action: main
+  bonus:
+  - stat: wis
+    amount: 3
+  damage:
+  - dice: 6d10
+    type: ele3
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: dex
+    dc: 12
+    dcStat: wis
+  text: "对战场后排的敌人造成强力{ele3|闪电伤害}。"
+- name: 闪电跳跃
+  slot: s1
+  action: react
+  bonus:
+  - stat: ini
+    amount: 4
+  damage:
+  - dice: 2d8
+    type: ele3
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  save:
+    stat: con
+    dc: 14
+    dcStat: wis
+  text: "成为近战攻击的目标时，如闪光般闪避该攻击，并对所有敌人造成{ele3|2d8 额外 闪电伤害}{WIS}。"
+- name: 雷云帷幕
+  slot: s2
+  bonus:
+  - stat: dc
+    amount: 2
+    text: 法术豁免难度+2
+  damage:
+  - dice: 3d8
+    type: ele3
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - AoE
+  save:
+    stat: con
+    dc: 14
+    dcStat: wis
+  text: "交战开始时，对前排所有敌人造成{ele3|3d8 额外 闪电伤害}{WIS}，并使其陷入{pink|无法反应}状态。"
+  effects:
+  - name: 无法反应
+    text: 无法使用反应动作。（持续时间：2.4秒 / 非战斗时4.8秒）
+  action: passive

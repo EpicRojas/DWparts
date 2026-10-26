@@ -1,0 +1,89 @@
+# 蛇怪（BST502）
+id: BST502
+name: 蛇怪
+race: 野兽
+level: 5
+dominance: 6
+stats:
+  str: 12
+  dex: 10
+  con: 15
+  int: 10
+  wis: 17
+  cha: 10
+statAdvantage: wis
+hp: 62
+ac: 8
+basic:
+  name: 毒气喷洒
+  action: main
+  damage:
+  - dice: 3d6
+    type: ele7
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - melee
+  save:
+    stat: con
+    dc: 12
+    dcStat: wis
+  text: 喷吐毒气。
+parts:
+- name: 蛇怪猛毒
+  slot: b
+  bonus:
+  - text: "免疫{ele7|自然伤害}"
+  text: "自身造成的{ele7|自然伤害}无视目标的抗性与免疫。攻击处于{pink|中毒}状态的敌人时，命中掷骰获得{blue|优势}。"
+- name: 腐败吐息
+  slot: m
+  action: main
+  bonus:
+  - stat: wis
+    amount: 2
+  damage:
+  - dice: 3d8
+    type: ele7
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - melee
+  - AoE
+  save:
+    stat: con
+    dc: 12
+    dcStat: wis
+  text: "使目标及其身后的一名敌人陷入{pink|中毒}状态。"
+  effects:
+  - name: 中毒
+    text: "交战结束时，受到1d4{ele7|自然伤害}，且{blue|命中检定}获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒，独立层数）"
+- name: 虚弱妖术
+  slot: s1
+  bonus:
+  - stat: con
+    amount: 2
+  text: "对敌人造成{ele7|自然伤害}时，额外施加{pink|虚弱}状态。"
+  effects:
+  - name: 虚弱
+    text: "{attack}命中和{save}{orange|豁免检定加值}减少2。（持续时间：4.8秒 / 非战斗时9.6秒）"
+  action: passive
+- name: 毒气释放
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  dcStat: con
+  save:
+    stat: con
+    dc: 14
+    dcStat: con
+  text: "成为近战攻击目标时作为反应，对攻击者的命中检定赋予{blue|劣势}，并有一定概率使其陷入{pink|盲目}状态。"
+  effects:
+  - name: 盲目
+    text: "失去视野。在{blue|命中检定}上获得{blue|劣势}，且受击时攻击者的{blue|命中检定}获得{blue|优势}。（持续时间：2.4秒 / 非战斗时4.8秒）"

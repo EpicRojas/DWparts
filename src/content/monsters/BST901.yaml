@@ -1,0 +1,92 @@
+# 贝希摩斯（BST901）
+id: BST901
+name: 贝希摩斯
+race: 野兽
+level: 9
+dominance: 32
+stats:
+  str: 40
+  dex: 8
+  con: 38
+  int: 4
+  wis: 12
+  cha: 8
+statAdvantage: str
+hp: 275
+ac: 8
+basic:
+  name: 沉重打击
+  action: main
+  damage:
+  - dice: 4d6
+    type: phy4
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 15
+    dcStat: str
+  text: "猛击目标，赋予{blue|劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 巨兽甲壳
+  slot: b
+  bonus:
+  - resist: phy4
+  - text: 免疫倒地
+  dcStat: con
+  save:
+    stat: con
+    dc: 12
+    dcStat: con
+  text: "入侵开始时，获得20层{pink|魔晶石}。相邻狩猎场中的敌人施放法术时，强制其进行{blue|体质 豁免}。若失败，消耗1层{pink|魔晶石}，完全阻止该法术。"
+  effects:
+  - name: 魔晶石
+    text: "每层使{save}{orange|法术豁免加值}获得1点加值。受到钝击伤害时失去1层。（最大层数：20）"
+- name: 巨兽之拳
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 5
+  damage:
+  - dice: 8d12
+    type: phy4
+    stat: str
+  - dice: 4d10
+    type: ele7
+    stat: con
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  - AoE
+  hitStat: str
+  save:
+    stat: str
+    dc: 12
+    dcStat: str
+  text: "移除目标的临时生命值并造成巨额{phy4|物理伤害}。命中时，对所有敌人造成额外{ele7|自然伤害}，并使豁免检定失败的敌人陷入{pink|倒地}状态。"
+  effects:
+  - name: 倒地
+    text: "自身的{blue|命中检定}获得{blue|劣势}。受到的近战命中会被赋予{blue|优势}，而受到的远程命中则被赋予{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 不坏之躯
+  slot: s1
+  bonus:
+  - stat: con
+    amount: 4
+  text: "受到的所有物理伤害永久减少{lb|物理伤害减免}+20（+体质调整值），但获得对{mag3|力场伤害}的{lb|易伤}。"
+  action: passive
+- name: 巨兽生命力
+  slot: s2
+  bonus:
+  - stat: mhp
+    amount: 50
+  text: "最大生命值大幅提高（最大生命值+80{CON}(6.0)），自身造成的所有{phy4|物理伤害}额外增加等同于体质调整值的数值。"
+  action: passive

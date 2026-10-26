@@ -1,0 +1,89 @@
+# 凤凰（ELM603）
+id: ELM603
+name: 凤凰
+race: 精灵
+level: 6
+dominance: 9
+stats:
+  str: 11
+  dex: 16
+  con: 14
+  int: 19
+  wis: 13
+  cha: 12
+statAdvantage: int
+hp: 77
+ac: 8
+basic:
+  name: 火焰箭
+  action: main
+  damage:
+  - dice: 4d6
+    type: ele1
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: 投掷火种。
+parts:
+- name: 永恒之火
+  slot: b
+  bonus:
+  - text: "免疫{ele1|火焰伤害}"
+  - text: "易受{ele2|寒冷伤害}"
+  damage:
+  - dice: 4d10
+    type: ele1
+    stat: cha
+  damageStat: cha
+  attackTypes:
+  - AoE
+  text: "受到致命伤害导致生命值归零时作为反应，触发{lb|抵御死亡}并恢复50%最大生命值。触发时对所有敌人造成{ele1|4d10 额外 火焰伤害}{CHA}。"
+- name: 天界火焰
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: ele1
+    stat: int
+  damageStat: int
+  dcStat: int
+  attackTypes:
+  - spell
+  - melee
+  - AoE
+  save:
+    stat: dex
+    dc: 12
+    dcStat: int
+  text: "燃烧前排敌人，赋予其{pink|燃烧}。"
+  effects:
+  - name: 燃烧
+    text: "交战结束时，受到1d4{ele1|火焰伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+- name: 凤凰之翼
+  slot: s1
+  bonus:
+  - stat: dex
+    amount: 2
+  damage:
+  - dice: 1d8
+    type: ele1
+    stat: int
+  damageStat: int
+  attackTypes:
+  - AoE
+  hitStat: int
+  text: "交战开始时，对所有处于{pink|燃烧}状态的敌人造成{ele1|1d8 额外 火焰伤害}{INT}。"
+  action: passive
+- name: 炼狱形态
+  slot: s2
+  bonus:
+  - stat: wis
+    amount: 2
+  text: "自身造成的{ele1|火焰伤害}无视目标的火焰抗性与免疫。"
+  action: passive

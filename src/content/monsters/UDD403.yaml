@@ -1,0 +1,73 @@
+# 死亡游侠（UDD403）
+id: UDD403
+name: 死亡游侠
+race: 亡灵
+level: 4
+dominance: 4
+stats:
+  str: 10
+  dex: 15
+  con: 12
+  int: 8
+  wis: 13
+  cha: 8
+statAdvantage: dex
+hp: 41
+ac: 8
+basic:
+  name: 强化射击
+  action: main
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - ranged
+  hitStat: dex
+  text: 用远程武器射击敌人。
+parts:
+- name: 灵魂追踪者
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  text: "远程攻击命中时，对目标造成额外{mag2|死灵伤害}。"
+  effects:
+  - name: 灵魂追踪者
+    text: "进行{blue|远程}攻击时，额外造成等同于感知调整值的{mag2|死灵伤害}。"
+- name: 灵魂穿透箭
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 2
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: dex
+  - dice: 1d10
+    type: mag2
+    stat: wis
+  damageStat: dex
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: dex
+  text: "进行远程武器攻击。对后排敌人造成额外{mag2|死灵伤害}。"
+- name: 猎人伏击
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 2
+  text: "交战开始时获得{pink|猎人伏击}。此效果在受到伤害时解除。"
+  effects:
+  - name: 猎人伏击
+    text: 远程命中增加2，远程伤害加值增加5。（持续时间：2.4秒 / 非战斗时4.8秒）
+  action: passive
+- name: 幽灵漫步
+  slot: s2
+  action: react
+  bonus:
+  - stat: dex
+    amount: 1
+  text: 成为近战攻击目标时作为反应，使该攻击未命中。

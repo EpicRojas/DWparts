@@ -59,11 +59,53 @@ v1 全量数据的实测值，P1 完成后新站的产出必须逐项对上：
 | 图片引用 | 123 个（其中 2 个缺失：phy1/ele5） |
 | `<div>` 开闭 | 9063 / 9063 |
 
-## P0 已完成 / 未完成
+## 进度
 
-已完成：Astro 骨架、zod schema、推导式 `data-tags`、Vue 筛选岛（URL 同步 / 计数 / 空态）、
+### P0 骨架 —— 完成
+
+Astro + Vue island、zod schema、推导式 `data-tags`、Vue 筛选岛（URL 同步 / 计数 / 空态）、
 无损 WebP 管线（与 v1 产物 **125/125 字节一致**）、`scripts/check.ts`、CI workflow。
-3 只样本：BST101 / ELM101 / UDD101（覆盖野兽/精灵/亡灵，含治疗、反应、被动、豁免各类型）。
 
-未完成：76 只怪的数据迁移（P1）、删除 `legacy/` 与 CC BY-NC-SA 依赖（P2 之后）、
-搜索框、sitemap、补 lv8/lv9 缺失角色。
+### P1 数据迁移 —— 完成
+
+`python3 scripts/migrate/extract.py` 把 18184 行 HTML 切成 76 个 YAML。
+提取器只做确定性转换，不做猜测；`scripts/migrate/verify.ts` 与 `textdiff.py` 是验收标准。
+
+三条验收全部通过：
+
+| 验收项 | 结果 |
+| --- | --- |
+| 筛选键与 v1 逐卡对比 | **完全一致**（304 张部件卡，v1 有的键 v2 全部保留） |
+| 可见文本与 v1 逐字段对比 | **0 处丢失**（名称 / 加成 / 正文 / 效果 / 标签） |
+| 卡片数量 | 76 char_row + 304 部件 = 380 个 `data-tags`，与 v1 的 `ft_list` 数量相等 |
+
+### P1 过程中发现并修掉的 v1 数据缺陷
+
+迁移的意义不只是搬家——下面这些是 v1 真实存在、用户能看见的问题：
+
+1. **`b` 卡（种族特性）普遍漏写筛选 class**：36 张卡在页面上显示了「攻击类型 / 加值 / 豁免」，
+   但 class 里没有对应标记，导致这些特性无法被筛选到。v2 从可见标签补齐，
+   共补出 103 个键。
+2. **`s1`/`s2` 普遍漏显示「总是生效」标签**：90 张卡的 class 里有 `act_passive`，
+   但页面不显示该标签，用户无从得知。v2 补上了标签显示。
+3. **`ELM901` 的 m 部件文本与图标矛盾**：文本写「基于魅力」，图标和 class 都是 INT。
+   v2 以图标为准（与 class 同源），渲染为「基于智力」。
+4. **`BST902` 等 3 张卡的攻击类型显示不全**：class 里有 `AoE`，页面只写「法术远程」，
+   导致筛「范围」能筛到、但用户看不出为什么。v2 统一按数据渲染。
+5. **`phy1`（挥砍）图标从缺**：7 处引用、`assets/raw` 里没有源 PNG，v1 一直静默破图。
+   v2 降级为着色文字，并在 `pnpm check` 里作为已知警告列出。
+
+### 未完成
+
+删除 `legacy/` 与 CC BY-NC-SA 依赖、搜索框、sitemap、补 lv8/lv9 缺失角色。
+
+## 迁移工具
+
+| 命令 | 作用 |
+| --- | --- |
+| `pnpm migrate` | 由 `legacy/index.html` 重新生成 76 个 YAML |
+| `pnpm verify:migration` | 筛选键对比 + 文本保真对比 |
+
+`scripts/migrate/` 下的 Python 工具依赖 `minidom.py`（内置的小型 DOM）与 `yamlio.py`
+（内置的 YAML 输出），不是通用库，只为本项目的数据形态服务。
+`legacy-tags.json` 是 v1 筛选类的快照，`verify.ts` 的比对基准，删 `legacy/` 时一并删除。

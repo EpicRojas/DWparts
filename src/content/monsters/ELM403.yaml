@@ -1,0 +1,79 @@
+# 花蕾骑士（ELM403）
+id: ELM403
+name: 花蕾骑士
+race: 精灵
+level: 4
+dominance: 4
+stats:
+  str: 15
+  dex: 8
+  con: 15
+  int: 5
+  wis: 10
+  cha: 7
+statAdvantage: str
+hp: 56
+ac: 8
+basic:
+  name: 基础刺击
+  action: main
+  damage:
+  - dice: 2d8
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 刺击敌人的弱点。
+parts:
+- name: 花瓣架势
+  slot: b
+  bonus:
+  - text: "易受{ele1|火焰伤害}"
+  text: "行动结束时，获得{pink|花瓣架势}。"
+  effects:
+  - name: 花瓣架势
+    text: "护甲等级增加2，且在{blue|敏捷 豁免}上获得{blue|优势}。（持续时间：4.8秒 / 非战斗时9.6秒）"
+- name: 盛放之刃
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 2
+  damage:
+  - dice: 2d10
+    type: phy4
+    stat: dex
+  - dice: 2d10
+    type: mag1
+    stat: cha
+  damageStat: dex
+  attackTypes:
+  - spell
+  - melee
+  hitStat: dex
+  text: "{lb|重击}命中时造成{mag1|光耀伤害}。"
+- name: 守护誓约
+  slot: s1
+  action: react
+  bonus:
+  - stat: con
+    amount: 2
+  text: "后排友军成为攻击目标时作为反应，将目标更改为自身并获得{heal|0 {shield}临时生命值}。"
+  extraTags:
+  - tag_shield
+- name: 飞舞花瓣
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 2
+  damage:
+  - dice: 1d4
+    type: heal
+    stat: con
+  text: "交战开始时获得3层{pink|花瓣}。受到伤害时作为反应，消耗1层对自身进行{heal|1d4 治疗}{CON}。"
+  effects:
+  - name: 花瓣
+    text: "护甲等级和{CON}体质加值每层增加1。（持续时间：2.4秒 / 非战斗时4.8秒，最大层数：5）"
+  action: passive

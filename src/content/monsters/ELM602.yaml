@@ -1,0 +1,74 @@
+# 阿剌克涅（ELM602）
+id: ELM602
+name: 阿剌克涅
+race: 精灵
+level: 6
+dominance: 9
+stats:
+  str: 18
+  dex: 14
+  con: 17
+  int: 11
+  wis: 11
+  cha: 9
+statAdvantage: str
+hp: 88
+ac: 8
+basic:
+  name: 基础刺击
+  action: main
+  damage:
+  - dice: 2d10
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 刺击敌人的弱点。
+parts:
+- name: 编织蛛网
+  slot: b
+  bonus:
+  - text: 免疫束缚
+  - text: 免疫中毒
+  damage:
+  - dice: "6"
+    type: phy4
+    factor: 每层
+  text: "攻击命中时，根据目标的{pink|蛛网}层数造成额外{phy4|6 额外 物理伤害}(每层)。命中后赋予1层{pink|蛛网}。"
+  effects:
+  - name: 蛛网
+    text: "{blue|敏捷 豁免}每层减少1，达到最大层数时陷入{pink|束缚}状态。（持续时间：7.2秒 / 非战斗时14.4秒，最大层数：3）"
+- name: 泰坦践踏
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 2
+  damage:
+  - dice: 4d12
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: "若目标处于{pink|束缚}状态，则必定以{lb|重击}命中，并使目标陷入{pink|倒地}状态。"
+  effects:
+  - name: 倒地
+    text: "自身的{blue|命中检定}获得{blue|劣势}。受到的近战命中会被赋予{blue|优势}，而受到的远程命中则被赋予{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 钢铁甲壳
+  slot: s1
+  bonus:
+  - stat: con
+    amount: 2
+  text: "获得对{phy4|物理伤害}的抗性，并免疫{lb|重击}攻击。"
+  action: passive
+- name: 蛛网穹顶
+  slot: s2
+  action: react
+  bonus:
+  - stat: dex
+    amount: 2
+  text: 敌人施放群体法术时作为反应，将目标集中于自身，并使受到的伤害减少5d8。

@@ -1,0 +1,104 @@
+# 死神（UDD901）
+id: UDD901
+name: 死神
+race: 亡灵
+level: 9
+dominance: 32
+stats:
+  str: 24
+  dex: 36
+  con: 22
+  int: 14
+  wis: 20
+  cha: 26
+statAdvantage: dex
+hp: 170
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 5d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 亡者魂瓮
+  slot: b
+  bonus:
+  - text: 免疫恐慌
+  - text: "免疫{mag2|死灵伤害}"
+  damage:
+  - dice: 8d10
+    type: mag2
+    stat: dex
+  damageStat: dex
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: cha
+    dc: 12
+    dcStat: cha
+  text: "自身的{phy4|物理伤害}与{mag2|死灵伤害}无视敌人的{lb|抗性}和{lb|免疫}。地下城内敌人死亡时，{pink|亡者魂瓮}获得1层充能。达到20层时全部消耗，对地下城内所有敌人造成{mag2|6d10 额外 死灵伤害}{DEX}并施加{pink|死灵易伤}。"
+  effects:
+  - name: 亡者魂瓮
+    text: 达到最大层数时，魂瓮中积蓄的灵魂爆炸，对地下城内所有敌人造成伤害。（最大层数：20）
+  - name: 死灵易伤
+    text: "获得对{mag2|死灵伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 灵魂收割之镰
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 5
+  damage:
+  - dice: 6d10
+    type: phy4
+    stat: dex
+  - dice: 3d10
+    type: mag2
+    stat: cha
+  damageStat: dex
+  dcStat: cha
+  attackTypes:
+  - spell
+  - melee
+  - AoE
+  hitStat: dex
+  save:
+    stat: cha
+    dc: 16
+    dcStat: cha
+  text: "斩击前排敌人。目标若未通过{blue|魅力 豁免}，则受到额外{mag2|死灵伤害}，并获得1层{pink|亡者魂瓮}。"
+  effects:
+  - name: 亡者魂瓮
+    text: 达到最大层数时，魂瓮中积蓄的灵魂爆炸，对地下城内所有敌人造成伤害。（最大层数：20）
+- name: 死神长袍
+  slot: s1
+  bonus:
+  - stat: cha
+    amount: 4
+  damage:
+  - dice: 4d8
+    type: mag2
+    stat: int
+  damageStat: int
+  text: "获得对{mag2|死灵伤害}的{lb|免疫}和对{phy4|物理伤害}的{lb|抗性}。受到攻击时，立即对攻击者造成{mag2|4d8 额外 死灵伤害}{INT}。"
+  action: passive
+- name: 死亡回响
+  slot: s2
+  bonus:
+  - stat: ini
+    amount: 5
+  attackTypes:
+  - AoE
+  text: "击败敌人时，为地下城内所有友军赋予1层{pink|死亡回响}。"
+  effects:
+  - name: 死亡回响
+    text: "每层使{mag2|死灵伤害}获得1d8加值。（最大层数：20）"
+  action: passive

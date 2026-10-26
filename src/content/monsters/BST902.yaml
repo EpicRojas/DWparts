@@ -1,0 +1,95 @@
+# 涅墨亚（BST902）
+id: BST902
+name: 涅墨亚
+race: 野兽
+level: 9
+dominance: 32
+stats:
+  str: 18
+  dex: 20
+  con: 26
+  int: 38
+  wis: 34
+  cha: 28
+statAdvantage: int
+hp: 190
+ac: 8
+basic:
+  name: 魔力箭
+  action: main
+  damage:
+  - dice: 5d6
+    type: mag3
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: 发射魔力箭。
+parts:
+- name: 狮王之心
+  slot: b
+  bonus:
+  - text: 免疫恐慌
+  - text: 免疫沉默
+  text: "自身造成的{mag3|力场伤害}无视敌人的{lb|抗性}和{lb|免疫}。对入侵地下城的敌人赋予{pink|被碾碎的心脏}。"
+  effects:
+  - name: 被碾碎的心脏
+    text: "自身受到的{mag3|力场伤害}会加上涅墨亚的力量调整值，受到的{phy4|物理伤害}会加上涅墨亚的智力调整值。"
+- name: 真理权杖
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 5
+  damage:
+  - dice: 8d10
+    type: mag3
+    stat: int
+  - dice: 4d8
+    type: phy4
+    stat: cha
+  damageStat: int
+  dcStat: int
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: dex
+    dc: 12
+    dcStat: int
+  text: "对目标造成强力{mag3|力场伤害}并将其击飞至空中，随后砸落，对所有敌人造成{phy4|物理伤害}。"
+- name: 万象洞察
+  slot: s1
+  action: react
+  bonus:
+  - stat: str
+    amount: 4
+  damage:
+  - dice: 10d10
+    type: mag3
+    stat: int
+  damageStat: int
+  text: "受到暴击攻击时作出反应，进入{pink|物理伤害免疫}状态，并对前排敌人造成{mag3|10d10 额外 力场伤害}{INT}。"
+  effects:
+  - name: 物理伤害免疫
+    text: "获得对{phy4|物理伤害}的{lb|免疫}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 超越斗篷
+  slot: s2
+  bonus:
+  - stat: dc
+    amount: 2
+    text: 法术豁免难度+2
+  attackTypes:
+  - AoE
+  text: "交战开始时，对前排敌人同时施加{pink|力场易伤}与{pink|物理伤害易伤}，自身获得{heal|6d8 {shield}临时生命值}{INT}。"
+  effects:
+  - name: 力场易伤
+    text: "获得对{mag3|力场伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  - name: 物理伤害易伤
+    text: "获得对{phy4|物理伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive
+  extraTags:
+  - tag_shield

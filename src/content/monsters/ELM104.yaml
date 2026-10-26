@@ -1,0 +1,80 @@
+# 史莱姆（ELM104）
+id: ELM104
+name: 史莱姆
+race: 精灵
+level: 1
+dominance: 1
+stats:
+  str: 6
+  dex: 4
+  con: 13
+  int: 3
+  wis: 4
+  cha: 3
+statAdvantage: con
+hp: 26
+ac: 8
+basic:
+  name: 酸液飞溅
+  action: main
+  damage:
+  - dice: 1d6
+    type: ele7
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: "发射酸液，降低目标的{org|护甲等级（AC）}。"
+  effects:
+  - name: 护甲减值
+    text: 护甲等级减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+parts:
+- name: 不定形身体
+  slot: b
+  bonus:
+  - text: "免疫{ele7|自然伤害}"
+  text: "对{lb|重击}和{pink|倒地}状态获得{lb|免疫}。"
+- name: 腐蚀喷出口
+  slot: m
+  action: main
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  damage:
+  - dice: 1d10
+    type: ele7
+    stat: con
+  damageStat: con
+  dcStat: con
+  attackTypes:
+  - ranged
+  save:
+    stat: dex
+    dc: 12
+    dcStat: con
+  text: "对目标喷吐腐蚀液，赋予{lgreen|护甲减值}。"
+  effects:
+  - name: 护甲减值
+    text: 护甲等级减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+- name: 粘性表皮
+  slot: s1
+  bonus:
+  - stat: ac
+    amount: 1
+  text: "获得对{ele7|自然伤害}的{lb|抗性}。"
+  action: passive
+- name: 不稳定核心
+  slot: s2
+  action: react
+  bonus:
+  - stat: mhp
+    amount: 10
+  damage:
+  - dice: 1d10
+    type: ele7
+    stat: con
+  damageStat: con
+  text: "受到{lb|重击}伤害时作为反应，对攻击者造成{ele7|1d10 额外 自然伤害}{CON}。"

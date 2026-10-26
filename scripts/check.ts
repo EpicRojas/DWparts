@@ -11,6 +11,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import { ALL_FILTER_KEYS, cardKeys } from '../src/lib/filterKeys';
+import { isIconKey, iconFile, KNOWN_MISSING_ICONS, usedIconKeys } from '../src/lib/markup';
+import { TEXT_COLORS } from '../src/lib/taxonomy';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const RAW_COMMON = path.join(ROOT, 'assets/raw/common');
@@ -27,18 +29,8 @@ const charFiles = new Set(
   fs.readdirSync(RAW_CHARS).filter((f) => f.endsWith('.png')).map((f) => path.basename(f, '.png')),
 );
 
-// ── 图标键 → 文件名的映射（与 src/lib/markup.ts 保持一致）
-const ICONS: Record<string, string> = {
-  str: 'STR', dex: 'DEX', con: 'CON', int: 'INT', wis: 'WIS', cha: 'CHA',
-  mhp: 'MHP', ac: 'AC', ini: 'INI', hit: 'attack', dc: 'save',
-  phy1: 'phy1', phy2: 'phy2', phy3: 'phy3', phy4: 'phy4',
-  ele1: 'ele1', ele2: 'ele2', ele3: 'ele3', ele4: 'ele4', ele5: 'ele5', ele6: 'ele6', ele7: 'ele7',
-  mag1: 'mag1', mag2: 'mag2', mag3: 'mag3', mag4: 'mag4',
-  heal: 'heal', shield: 'shield',
-  attack: 'attack', save: 'save', main: 'main', reactive: 'reactive',
-  melee: 'melee', ranged: 'ranged', spell: 'spell', AoE: 'AoE', dice: 'dice', Dom: 'Dom',
-};
-const TEXT_COLORS = new Set(['pink', 'blue', 'lb', 'lgreen', 'orange', 'green', 'red']);
+/** v1 遗留缺图：已知且已优雅降级，只警告不失败 */
+const KNOWN_MISSING = KNOWN_MISSING_ICONS;
 
 const files = fs.readdirSync(CONTENT).filter((f) => f.endsWith('.yaml')).sort();
 const usedIcons = new Map<string, Set<string>>(); // key → 出现在哪些文件
@@ -46,12 +38,14 @@ const dataKeys = new Set<string>();
 
 function scanStrings(obj: unknown, file: string) {
   if (typeof obj === 'string') {
-    for (const m of obj.matchAll(/\{([a-zA-Z0-9_]+)(?:\|[^}]*)?\}/g)) {
+    for (const key of usedIconKeys(obj)) {
+      if (!usedIcons.has(key)) usedIcons.set(key, new Set());
+      usedIcons.get(key)!.add(file);
+    }
+    // 未知键：{key} 或 {key|...}，key 既不是图标也不是文字色
+    for (const m of obj.matchAll(/\{([a-zA-Z0-9_]+)(?:\||\})/g)) {
       const key = m[1]!;
-      if (key in ICONS) {
-        if (!usedIcons.has(key)) usedIcons.set(key, new Set());
-        usedIcons.get(key)!.add(file);
-      } else if (!TEXT_COLORS.has(key)) {
+      if (!isIconKey(key) && !TEXT_COLORS.has(key)) {
         errors.push(`${file}: 未知的内联标记 {${key}}`);
       }
     }
@@ -74,9 +68,11 @@ for (const f of files) {
 
 // 1. 图标缺失
 for (const [key, where] of usedIcons) {
-  const file = ICONS[key];
+  const file = iconFile(key);
   if (!file || !iconFiles.has(file)) {
-    errors.push(`图标缺失：{${key}} 需要 assets/raw/common/${file}.png，被引用于 ${[...where].join(', ')}`);
+    const msg = `图标缺失：{${key}} 需要 assets/raw/common/${file}.png，被引用于 ${[...where].join(', ')}`;
+    if (KNOWN_MISSING.has(key)) warnings.push(msg + '（已知，降级为着色文字）');
+    else errors.push(msg);
   }
 }
 

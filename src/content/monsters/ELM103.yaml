@@ -1,0 +1,80 @@
+# 下级风元素（ELM103）
+id: ELM103
+name: 下级风元素
+race: 精灵
+level: 1
+dominance: 1
+stats:
+  str: 5
+  dex: 12
+  con: 8
+  int: 7
+  wis: 9
+  cha: 6
+statAdvantage: dex
+hp: 12
+ac: 8
+basic:
+  name: 基础射击
+  action: main
+  damage:
+  - dice: 1d10
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - ranged
+  hitStat: dex
+  text: 用远程武器射击敌人。
+parts:
+- name: 空气形态
+  slot: b
+  bonus:
+  - resist: ele3
+  - resist: ele7
+  text: "获得对{ele3|闪电伤害}的{lb|抗性}，并获得对{pink|倒地}状态的{lb|免疫}。"
+- name: 狂风核心
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 1
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  dcStat: dex
+  attackTypes:
+  - ranged
+  save:
+    stat: str
+    dc: 12
+    dcStat: dex
+  text: "使目标陷入{pink|震慑}状态。"
+  effects:
+  - name: 震慑
+    text: "无法行动或移动。受到的{blue|命中检定}会被赋予{blue|优势}，在{blue|力量 豁免}和{blue|敏捷 豁免}上获得{blue|劣势}，且护甲等级减少2。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 模糊身形
+  slot: s1
+  bonus:
+  - stat: ac
+    amount: 1
+  text: 减少受到的远程攻击伤害。（远程伤害减免+2）
+  action: passive
+- name: 电击器
+  slot: s2
+  action: react
+  bonus:
+  - text: 法术命中+1
+  - stat: hit
+    amount: 0
+  damage:
+  - dice: 1d4
+    type: ele3
+    stat: int
+  damageStat: int
+  text: "受到近战攻击时作为反应，对攻击者造成{ele3|1d4 额外 闪电伤害}{INT}并使其陷入{pink|无法反应}状态。"
+  effects:
+  - name: 无法反应
+    text: 无法使用反应动作。（持续时间：2.4秒 / 非战斗时4.8秒）

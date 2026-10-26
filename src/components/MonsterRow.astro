@@ -54,7 +54,7 @@ const portrait = charUrl(monster.id);
       <div class="comp_name">{monster.basic.name}</div>
     </div>
     <div class="comp_cont">
-      {monster.basic.damage ? <DamageGrid damage={monster.basic.damage} /> : null}
+      {(monster.basic.damage ?? []).map((d, i) => <DamageGrid damage={d} first={i === 0} />)}
       {monster.basic.text ? <Markup src={monster.basic.text} /> : null}
       <TagRow ability={monster.basic} />
     </div>

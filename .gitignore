@@ -8,3 +8,5 @@ dist/
 public/img/
 *.log
 .DS_Store
+# Python 迁移脚本的字节码
+__pycache__/

@@ -1,62 +1,87 @@
+# 丧尸（UDD101）
 id: UDD101
 name: 丧尸
 race: 亡灵
 level: 1
 dominance: 1
-stats: { str: 12, dex: 4, con: 12, int: 4, wis: 4, cha: 3 }
+stats:
+  str: 12
+  dex: 4
+  con: 12
+  int: 4
+  wis: 4
+  cha: 3
 statAdvantage: con
 hp: 22
 ac: 8
-
 basic:
   name: 沉重打击
   action: main
-  damage: { dice: 1d8, type: phy4, stat: str }
-  attackTypes: [melee]
+  damage:
+  - dice: 1d8
+    type: phy4
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
   hitStat: str
-  save: { stat: con, dc: 11, dcStat: str }
+  save:
+    stat: con
+    dc: 11
+    dcStat: str
   text: "猛击目标，赋予{blue|劣势}。"
   effects:
-    - name: 攻击劣势
-      text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
-
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
 parts:
-  - slot: b
-    name: 亡灵坚韧
-    bonus:
-      - { immune: ele6 }
-    text: "进入{pink|亡灵坚韧}状态。受到{lb|重击}伤害或{mag1|光耀伤害}时不会触发。"
-    effects:
-      - name: 亡灵坚韧
-        text: "受到致命伤害时，若非{mag1|光耀伤害}或{lb|重击}，则进行{blue|体质 豁免}（DC 10 + 生存次数 * 2），成功则保留1点生命值存活。"
-
-  - slot: m
-    name: 腐败之握
-    action: main
-    bonus:
-      - { stat: str, amount: 1 }
-    damage: { dice: 1d12, type: phy4, stat: str }
-    damageStat: str
-    attackTypes: [melee]
-    hitStat: str
-    text: "命中时，使目标陷入{pink|擒抱}状态。"
-    effects:
-      - name: 擒抱
-        text: "无法移动，且在{blue|敏捷 豁免}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
-
-  - slot: s1
-    name: 疫病囊
-    action: react
-    bonus:
-      - { stat: con, amount: 1 }
-    damage: { dice: 1d6, type: ele7, stat: con }
-    damageStat: con
-    save: { stat: dex, dc: 11, dcStat: con }
-    text: "受到近战攻击时作为反应，有一定概率对攻击者造成{ele7|1d6 额外 自然伤害}{con}。"
-
-  - slot: s2
-    name: 迟钝神经
-    action: passive
-    bonus:
-      - { stat: mhp, amount: 5 }
-    text: "对{pink|恐慌}状态获得{lb|免疫}。"
+- name: 亡灵坚韧
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  text: "进入{pink|亡灵坚韧}状态。受到{lb|重击}伤害或{mag1|光耀伤害}时不会触发。"
+  effects:
+  - name: 亡灵坚韧
+    text: "受到致命伤害时，若非{mag1|光耀伤害}或{lb|重击}，则进行{blue|体质 豁免}（DC 10 + 生存次数 * 2），成功则保留1点生命值存活。"
+- name: 腐败之握
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 1
+  damage:
+  - dice: 1d12
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: "命中时，使目标陷入{pink|擒抱}状态。"
+  effects:
+  - name: 擒抱
+    text: "无法移动，且在{blue|敏捷 豁免}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 疫病囊
+  slot: s1
+  action: react
+  bonus:
+  - stat: con
+    amount: 1
+  damage:
+  - dice: 1d6
+    type: ele7
+    stat: con
+  damageStat: con
+  dcStat: con
+  save:
+    stat: dex
+    dc: 11
+    dcStat: con
+  text: "受到近战攻击时作为反应，有一定概率对攻击者造成{ele7|1d6 额外 自然伤害}{CON}。"
+- name: 迟钝神经
+  slot: s2
+  bonus:
+  - stat: mhp
+    amount: 5
+  text: "对{pink|恐慌}状态获得{lb|免疫}。"
+  action: passive

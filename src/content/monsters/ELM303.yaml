@@ -1,0 +1,80 @@
+# 希尔芙（ELM303）
+id: ELM303
+name: 希尔芙
+race: 精灵
+level: 3
+dominance: 3
+stats:
+  str: 5
+  dex: 15
+  con: 8
+  int: 8
+  wis: 10
+  cha: 13
+statAdvantage: dex
+hp: 28
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 气流
+  slot: b
+  bonus:
+  - resist: ele3
+  text: "进入无视战斗阵型站位限制的{pink|空气形态}状态。"
+  effects:
+  - name: 空气形态
+    text: 搜索目标时射程增加，可对后排进行打击。
+- name: 狂风打击
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 1
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: "造成{lb|重击}命中时，进入{pink|隐形}状态。"
+  effects:
+  - name: 隐形
+    text: "从视野中消失，对敌人的{blue|命中检定}获得{blue|优势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 气流捕捉
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 2
+  text: "始终处于{pink|气流捕捉}状态。"
+  effects:
+  - name: 气流捕捉
+    text: "攻击先攻值低于自身的敌人时，在{blue|命中检定}上获得{blue|优势}。"
+  action: passive
+- name: 刺客之刃
+  slot: s2
+  bonus:
+  - stat: cha
+    amount: 1
+  damage:
+  - dice: 2d6
+    type: mag4
+    stat: cha
+  - dice: 2d6
+    type: mag4
+    stat: cha
+  damageStat: cha
+  text: "攻击命中后排或生命值在50%以下的敌人时，造成额外{mag4|2d6 额外 心灵伤害}{CHA}。"
+  action: passive

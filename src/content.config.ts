@@ -17,10 +17,16 @@ const bonusEntry = z.union([
   z.object({ text: z.string() }),
 ]);
 
-const damage = z.object({
-  dice: z.string().regex(/^\d+d\d+([+-]\d+)?$/, '骰子写法应为 1d8 / 2d6+1'),
+/** 一段伤害。dice 允许 "1d10" 或纯数字（v1 里有 "0 物理伤害" / "6 物理伤害(每层)"）。 */
+const damageEntry = z.object({
+  dice: z.string().regex(/^\d+(d\d+)?([+-]\d+)?$/, '骰子写法应为 1d8 / 2d6+1 / 0 / 6'),
   type: damageType,
-  stat: stat,
+  /** 加值属性。v1 里有若干伤害段没有标注属性（治疗、按层数递增的伤害），故可选。 */
+  stat: stat.optional(),
+  /** 伤害系数原文，如 "0.75"。用字符串是为了保留 v1 的 (1.0) 写法，避免渲染成 (1)。 */
+  factor: z.string().optional(),
+  /** 备注，如 "每层" */
+  note: z.string().optional(),
 });
 
 const save = z.object({
@@ -39,7 +45,8 @@ const ability = z.object({
   action: z.enum(ACTIONS).optional(),
   /** 触发条件 / 用途说明，如「友军受到攻击时作为反应」 */
   text: z.string().default(''),
-  damage: damage.optional(),
+  /** 一张卡可能有 1~3 段伤害（v1 最多 3 段） */
+  damage: z.array(damageEntry).default([]),
   bonus: z.array(bonusEntry).default([]),
   damageStat: stat.optional(),
   dcStat: stat.optional(),
@@ -47,6 +54,11 @@ const ability = z.object({
   hitStat: stat.optional(),
   save: save.optional(),
   effects: z.array(effect).default([]),
+  /**
+   * v1 的筛选标记里有少量无法用结构化字段表达（例如「提供临时生命值」只在 class 里
+   * 标了 tag_shield，正文并无伤害段）。这些键存在这里，只参与筛选，不参与展示。
+   */
+  extraTags: z.array(z.string()).default([]),
 });
 
 const part = ability.extend({

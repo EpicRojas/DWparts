@@ -1,0 +1,87 @@
+# 吸血鬼衍体（UDD204）
+id: UDD204
+name: 吸血鬼衍体
+race: 亡灵
+level: 2
+dominance: 2
+stats:
+  str: 6
+  dex: 11
+  con: 8
+  int: 8
+  wis: 9
+  cha: 13
+statAdvantage: cha
+hp: 22
+ac: 8
+basic:
+  name: 血液提取
+  action: main
+  damage:
+  - dice: 2d6
+    type: mag2
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - melee
+  save:
+    stat: con
+    dc: 12
+    dcStat: cha
+  text: "抽取目标的血液，并使其陷入{pink|流血}状态。"
+  effects:
+  - name: 流血
+    text: "交战结束时，受到1d4{phy1|挥砍伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 吸血鬼再生
+  slot: b
+  bonus:
+  - resist: mag2
+  damage:
+  - dice: 1d8
+    type: heal
+    stat: con
+  text: "交战开始时，对自身进行{heal|1d8 治疗}{CON}。"
+- name: 魅惑撕咬
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 1
+  damage:
+  - dice: 2d8
+    type: mag4
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - melee
+  hitStat: cha
+  save:
+    stat: wis
+    dc: 11
+    dcStat: cha
+  text: "撕咬目标，使其陷入{pink|魅惑}状态。"
+  effects:
+  - name: 魅惑
+    text: "在{blue|命中检定}上获得{blue|劣势}，造成的所有伤害加值减少2。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 隐秘接近
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 1
+  text: "交战开始时，进入{pink|隐秘接近}状态，第一次命中检定获得{blue|优势}。"
+  effects:
+  - name: 隐秘接近
+    text: "在{blue|命中检定}上获得{blue|优势}，行动结束后解除。（持续时间：2.4秒 / 非战斗时4.8秒，独立层数）"
+  action: passive
+- name: 看破弱点
+  slot: s2
+  bonus:
+  - stat: dex
+    amount: 1
+  text: "攻击处于{pink|魅惑}或{pink|恐慌}状态的目标时，命中检定获得{blue|优势}。"
+  action: passive

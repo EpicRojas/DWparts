@@ -1,0 +1,112 @@
+# 水之君主（ELM703）
+id: ELM703
+name: 水之君主
+race: 精灵
+level: 7
+dominance: 12
+stats:
+  str: 19
+  dex: 12
+  con: 18
+  int: 20
+  wis: 14
+  cha: 11
+statAdvantage: int
+hp: 107
+ac: 8
+basic:
+  name: 冰霜箭
+  action: main
+  damage:
+  - dice: 3d6
+    type: ele2
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: "降低目标的{lgreen|先攻}。"
+  effects:
+  - name: 先攻减值
+    text: 先攻减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+parts:
+- name: 海神之威
+  slot: b
+  bonus:
+  - text: "免疫{ele2|寒冷伤害}"
+  - resist: ele5
+  dcStat: int
+  attackTypes:
+  - AoE
+  save:
+    stat: con
+    dc: 12
+    dcStat: int
+  text: "交战开始时深海寒气笼罩战场，在交战期间对所有敌人赋予{pink|极寒}。"
+  effects:
+  - name: 极寒
+    text: "交战期间获得对{ele2|寒冷伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 深海之枪
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 2
+  damage:
+  - dice: 4d10
+    type: ele2
+    stat: int
+  - dice: 2d10
+    type: phy4
+    stat: cha
+  damageStat: int
+  dcStat: int
+  attackTypes:
+  - spell
+  - melee
+  hitStat: int
+  save:
+    stat: str
+    dc: 12
+    dcStat: int
+  text: "在目标处掀起激流，若其无法承受则赋予1层{pink|深海重压}。"
+  effects:
+  - name: 深海重压
+    text: 每层使敏捷豁免和先攻值减少1。（持续时间：4.8秒 / 非战斗时9.6秒，最大层数：5）
+- name: 漩涡核心
+  slot: s1
+  bonus:
+  - stat: cha
+    amount: 2
+  dcStat: int
+  save:
+    stat: con
+    dc: 14
+    dcStat: int
+  text: "对被自身攻击的敌人赋予1层{pink|冻伤}。"
+  effects:
+  - name: 冻伤
+    text: "交战结束时，每层受到1d8{ele2|寒冷伤害}。（持续时间：2.4秒 / 非战斗时4.8秒，最大层数：10）"
+  action: passive
+- name: 海啸之鳞
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 2
+  damage:
+  - dice: 1d8
+    type: ele2
+    stat: int
+    factor: "0.5"
+  damageStat: int
+  dcStat: int
+  save:
+    stat: con
+    dc: 12
+    dcStat: int
+  text: "向攻击自身的敌人反弹{ele2|1d8 额外 寒冷伤害}{INT}( 0.5 )，并赋予1层{pink|深海重压}。"
+  effects:
+  - name: 深海重压
+    text: 每层使敏捷豁免和先攻值减少1。（持续时间：4.8秒 / 非战斗时9.6秒，最大层数：5）
+  action: passive

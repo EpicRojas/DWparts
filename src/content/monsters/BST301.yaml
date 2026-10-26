@@ -1,0 +1,89 @@
+# 温迪戈（BST301）
+id: BST301
+name: 温迪戈
+race: 野兽
+level: 3
+dominance: 3
+stats:
+  str: 15
+  dex: 10
+  con: 14
+  int: 5
+  wis: 10
+  cha: 4
+statAdvantage: str
+hp: 44
+ac: 8
+basic:
+  name: 沉重打击
+  action: main
+  damage:
+  - dice: 2d4
+    type: phy4
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 12
+    dcStat: str
+  text: "猛击目标，赋予{blue|劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 无尽饥饿
+  slot: b
+  bonus:
+  - text: "免疫{ele2|寒冷伤害}"
+  damage:
+  - dice: 1d6
+    type: heal
+    stat: con
+  text: "每次命中生命值在半数以下的目标时，对自己进行{heal|1d6 治疗}{CON}。"
+- name: 无情猛击
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 1
+  damage:
+  - dice: 3d8
+    type: phy4
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 12
+    dcStat: str
+  text: "使目标陷入{pink|震慑}状态。"
+  effects:
+  - name: 震慑
+    text: "无法行动或移动。受到的{blue|命中检定}会被赋予{blue|优势}，在{blue|力量 豁免}和{blue|敏捷 豁免}上获得{blue|劣势}，且护甲等级减少2。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 冰河守卫者
+  slot: s1
+  action: react
+  bonus:
+  - stat: con
+    amount: 1
+  text: "友军受到攻击时作为反应，代替其成为目标，使受到的伤害减少2d8并获得{pink|护甲加值}。"
+  effects:
+  - name: 护甲加值
+    text: 护甲等级增加2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+- name: 厚实表皮
+  slot: s2
+  action: react
+  bonus:
+  - stat: mhp
+    amount: 15
+  text: "受到伤害时作出反应，获得对{phy4|物理伤害}的{lb|抗性}。"
+  effects:
+  - name: 物理伤害抗性
+    text: "获得对{phy4|物理伤害}的{lb|抗性}。（持续时间：2.4秒 / 非战斗时4.8秒）"

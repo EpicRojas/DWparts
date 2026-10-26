@@ -14,8 +14,9 @@ interface Props {
   extraClass?: string;
 }
 const { monster, ability, slot, extraClass = '' } = Astro.props;
-const cls = `col-3 ${extraClass}`.trim();
-const bonus = ability.bonus.map(bonusLine);
+// ft_list 是筛选器的标记：v1 里每张部件卡都带，这里必须保留，否则筛选不到部件卡
+const cls = `col-3 ft_list ${extraClass}`.trim();
+const bonus = (ability.bonus ?? []).map(bonusLine).filter(Boolean);
 ---
 <div class={cls} data-tags={dataTags(monster, ability, slot)}>
   <div class="comp_title">
@@ -24,7 +25,7 @@ const bonus = ability.bonus.map(bonusLine);
     {bonus.length ? <div class="comp_bonus">{bonus.map((b) => <div><Markup src={b} /></div>)}</div> : null}
   </div>
   <div class="comp_cont">
-    {ability.damage ? <DamageGrid damage={ability.damage} /> : null}
+    {(ability.damage ?? []).map((d, i) => <DamageGrid damage={d} first={i === 0} />)}
     {ability.text ? <Markup src={ability.text} /> : null}
     {ability.effects.length ? (
       <div class="effects">

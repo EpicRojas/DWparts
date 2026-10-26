@@ -108,9 +108,9 @@ export function cardKeys(
   m: { level: number; race: string },
   parts: {
     slot: string; action?: string;
-    bonus?: unknown[]; damage?: { type: string };
+    bonus?: unknown[]; damage?: { type: string }[];
     damageStat?: string; save?: { dcStat?: string };
-    attackTypes?: string[]; hitStat?: string;
+    attackTypes?: string[]; hitStat?: string; extraTags?: string[];
   }[],
 ): string[] {
   const out = new Set<string>([`lv${m.level}`, m.race]);
@@ -120,10 +120,11 @@ export function cardKeys(
     for (const b of p.bonus ?? []) {
       if (b && typeof b === 'object' && 'stat' in b) out.add(`bon_${(b as { stat: string }).stat}`);
     }
-    if (p.damage) out.add(`tag_${p.damage.type}`);
+    for (const d of p.damage ?? []) out.add(`tag_${d.type}`);
     if (p.damageStat) out.add(`mult_${p.damageStat}`);
     if (p.save?.dcStat) out.add(`dc_${p.save.dcStat}`);
     for (const t of p.attackTypes ?? []) out.add(t);
+    for (const t of p.extraTags ?? []) out.add(t);
     const hit = !!p.hitStat, save = !!p.save;
     if (hit && save) out.add('hitnsave');
     else if (hit) out.add('hit');

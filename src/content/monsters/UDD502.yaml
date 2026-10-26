@@ -1,0 +1,84 @@
+# 吸血鬼（UDD502）
+id: UDD502
+name: 吸血鬼
+race: 亡灵
+level: 5
+dominance: 6
+stats:
+  str: 11
+  dex: 17
+  con: 13
+  int: 12
+  wis: 12
+  cha: 16
+statAdvantage: dex
+hp: 54
+ac: 8
+basic:
+  name: 迅捷刺击
+  action: main
+  damage:
+  - dice: 2d8
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速刺击敌人。
+parts:
+- name: 猩红之渴
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  damage:
+  - dice: 1d4
+    type: mag2
+    stat: cha
+    factor: "0.5"
+  - dice: "0"
+    type: heal
+    stat: cha
+  damageStat: cha
+  text: "攻击命中时，对目标造成额外{mag2|1d4 额外 死灵伤害}{CHA}( 0.5 )并对自己进行{heal|0 治疗}{CHA}。"
+- name: 猩红打击
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 2
+  damage:
+  - dice: 3d8
+    type: phy4
+    stat: dex
+  - dice: 2d8
+    type: mag2
+    stat: cha
+  - dice: 2d8
+    type: heal
+    stat: cha
+  damageStat: dex
+  attackTypes:
+  - spell
+  - melee
+  hitStat: dex
+  text: "造成{lb|重击}命中时，造成额外{mag2|死灵伤害}并恢复生命值。此攻击拥有{lb|重击}触发加成。"
+- name: 滴血之刃
+  slot: s1
+  action: react
+  bonus:
+  - stat: cha
+    amount: 2
+  text: 成为近战攻击目标时作为反应，使受到的伤害减少3d10。
+- name: 鲜血贡品
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 1
+  attackTypes:
+  - AoE
+  text: "交战开始时，消耗15%的当前生命值，为所有友军赋予{pink|鲜血贡品}。"
+  effects:
+  - name: 鲜血贡品
+    text: "在下一次攻击时消耗，额外造成1d8 {mag2|死灵伤害}（+魅力调整值））。（持续时间：2.4秒 / 非战斗时4.8秒，独立层数）"
+  action: passive

@@ -1,0 +1,100 @@
+# 鸡蛇（BST503）
+id: BST503
+name: 鸡蛇
+race: 野兽
+level: 5
+dominance: 6
+stats:
+  str: 10
+  dex: 14
+  con: 12
+  int: 10
+  wis: 12
+  cha: 17
+statAdvantage: cha
+hp: 52
+ac: 8
+basic:
+  name: 闪光
+  action: main
+  damage:
+  - dice: 3d6
+    type: mag3
+    stat: cha
+  damageStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: cha
+  text: 发射2次魔力光束。
+parts:
+- name: 石化凝视
+  slot: b
+  action: react
+  bonus:
+  - text: 免疫石化
+  - text: 免疫中毒
+  dcStat: cha
+  save:
+    stat: con
+    dc: 14
+    dcStat: cha
+  text: "交战开始时，有一定概率对前排敌人施加{pink|石化进行}。"
+  effects:
+  - name: 石化进行
+    text: "每层使{blue|敏捷 豁免}减少1，达到最大层数时陷入{pink|石化}状态。（持续时间：7.2秒 / 非战斗时14.4秒，最大层数：10）"
+- name: 死亡射线
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 2
+  damage:
+  - dice: 2d8
+    type: mag2
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  hitStat: cha
+  save:
+    stat: con
+    dc: 14
+    dcStat: cha
+  text: "向前排敌人发射死亡射线。命中时，有一定概率施加3层{pink|石化进行}。"
+  effects:
+  - name: 石化进行
+    text: "每层使{blue|敏捷 豁免}减少1，达到最大层数时陷入{pink|石化}状态。（持续时间：7.2秒 / 非战斗时14.4秒，最大层数：10）"
+- name: 粉碎
+  slot: s1
+  action: react
+  bonus:
+  - stat: wis
+    amount: 2
+  damage:
+  - dice: 6d10
+    type: mag3
+    stat: cha
+  damageStat: cha
+  text: "目标陷入{pink|石化}状态时作为反应，对目标造成{mag3|6d10 额外 力场伤害}{CHA}并解除{pink|石化}状态。"
+- name: 石化皮肤
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  dcStat: cha
+  save:
+    stat: con
+    dc: 14
+    dcStat: cha
+  text: "受到伤害时作为反应，有一定概率降低攻击者的护甲，并将1层{pink|石化进行}转移给目标。"
+  effects:
+  - name: 石化进行
+    text: "每层使{blue|敏捷 豁免}减少1，达到最大层数时陷入{pink|石化}状态。（持续时间：7.2秒 / 非战斗时14.4秒，最大层数：10）"
+  - name: 护甲减值
+    text: 护甲等级减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）

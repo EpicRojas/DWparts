@@ -1,0 +1,88 @@
+# 拉弥亚（BST302）
+id: BST302
+name: 拉弥亚
+race: 野兽
+level: 3
+dominance: 3
+stats:
+  str: 7
+  dex: 14
+  con: 9
+  int: 11
+  wis: 10
+  cha: 13
+statAdvantage: dex
+hp: 32
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 毒蛇之舞
+  slot: b
+  bonus:
+  - resist: ele7
+  text: "行动结束时获得{pink|舞蹈}。闪避攻击时效果消失。"
+  effects:
+  - name: 舞蹈
+    text: 护甲等级每层增加2。（最大层数：99）
+- name: 弹射环刃
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 1
+  damage:
+  - dice: 2d8
+    type: phy4
+    stat: dex
+  - dice: 1d8
+    type: phy4
+    stat: dex
+    factor: "0.5"
+  damageStat: dex
+  attackTypes:
+  - ranged
+  hitStat: dex
+  text: 命中时，对1名随机敌人造成额外伤害。
+- name: 剧毒环刃
+  slot: s1
+  bonus:
+  - text: 远程命中+1
+  - stat: hit
+    amount: 0
+  dcStat: con
+  save:
+    stat: con
+    dc: 11
+    dcStat: con
+  text: "攻击命中时，有一定概率使目标陷入{pink|中毒}状态。"
+  effects:
+  - name: 中毒
+    text: "交战结束时，受到1d4{ele7|自然伤害}，且{blue|命中检定}获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒，独立层数）"
+  action: passive
+- name: 缠绕之尾
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  dcStat: cha
+  save:
+    stat: dex
+    dc: 12
+    dcStat: cha
+  text: "受到近战攻击时作为反应，使攻击者陷入{pink|定身}状态。"
+  effects:
+  - name: 定身
+    text: 无法移动。（持续时间：2.4秒 / 非战斗时4.8秒）

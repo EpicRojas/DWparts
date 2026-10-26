@@ -1,0 +1,95 @@
+# 妖鬼（UDD301）
+id: UDD301
+name: 妖鬼
+race: 亡灵
+level: 3
+dominance: 3
+stats:
+  str: 10
+  dex: 14
+  con: 12
+  int: 6
+  wis: 7
+  cha: 6
+statAdvantage: dex
+hp: 34
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 败血之爪
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  damage:
+  - dice: 1d6
+    type: ele7
+    stat: con
+  damageStat: con
+  dcStat: cha
+  save:
+    stat: con
+    dc: 12
+    dcStat: cha
+  text: "攻击命中时，对目标造成{ele7|1d6 额外 自然伤害}{CON}，并有一定概率使其陷入{pink|中毒}状态。"
+  effects:
+  - name: 中毒
+    text: "交战结束时，受到1d4{ele7|自然伤害}，且{blue|命中检定}获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒，独立层数）"
+- name: 狂乱猛攻
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 1
+  damage:
+  - dice: 1d6
+    type: phy4
+    stat: dex
+    factor: "0.75"
+  - dice: 1d6
+    type: phy4
+    stat: dex
+    factor: "0.5"
+  - dice: 1d6
+    type: phy4
+    stat: dex
+    factor: "0.25"
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 连续攻击目标3次。
+- name: 野蛮捕食者
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 2
+  text: "攻击处于{pink|中毒}或{pink|流血}状态的敌人时，获得{pink|近战伤害提升}。"
+  effects:
+  - name: 近战伤害提升
+    text: 近战伤害加值增加2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+  action: passive
+- name: 贪食内脏
+  slot: s2
+  action: react
+  bonus:
+  - stat: con
+    amount: 1
+  damage:
+  - dice: 3d6
+    type: heal
+    stat: con
+  text: "每当有人死亡时作为反应，对自己进行{heal|3d6 治疗}{CON}并获得提高近战伤害的{lgreen|近战伤害提升}。"
+  effects:
+  - name: 近战伤害提升
+    text: 近战伤害加值增加2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）

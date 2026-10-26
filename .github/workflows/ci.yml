@@ -16,10 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: 安装 cwebp（无损 WebP 编码器）
+      - name: 安装系统依赖（cwebp + python3）
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends webp
+          sudo apt-get install -y --no-install-recommends webp python3
 
       - uses: pnpm/action-setup@v4
 
@@ -44,14 +44,23 @@ jobs:
       - name: 构建静态站点
         run: pnpm build
 
+      - name: 筛选逻辑测试
+        run: pnpm test:filter
+
+      - name: 产物冒烟测试
+        run: pnpm smoke
+
       - name: 产物自检
         run: |
           set -e
           test -f dist/index.html
           test -f dist/CNAME
+          test -f dist/robots.txt
           test -d dist/img/common
           test -d dist/img/characters
+          test -d dist/m
           echo "pages: $(find dist -name '*.html' | wc -l)"
+          echo "monster pages: $(find dist/m -name index.html | wc -l)"
           echo "images: $(find dist/img -name '*.webp' | wc -l)"
 
       - uses: actions/upload-artifact@v4

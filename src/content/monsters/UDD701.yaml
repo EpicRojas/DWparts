@@ -1,0 +1,114 @@
+# 肉体收割者（UDD701）
+id: UDD701
+name: 肉体收割者
+race: 亡灵
+level: 7
+dominance: 12
+stats:
+  str: 21
+  dex: 10
+  con: 19
+  int: 8
+  wis: 12
+  cha: 10
+statAdvantage: str
+hp: 107
+ac: 8
+basic:
+  name: 沉重打击
+  action: main
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 14
+    dcStat: str
+  text: "猛击目标，赋予{blue|劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 血肉核心
+  slot: b
+  bonus:
+  - text: 免疫倒地
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: con
+    dc: 17
+    dcStat: cha
+  text: "交战开始时，强制所有敌人进行体质豁免检定。失败则获得1层{pink|崩坏}。"
+  effects:
+  - name: 崩坏
+    text: 每层使最大生命值减少6。交战开始时，如果当前生命值低于因该效果减少的生命值，则立即死亡。（最大层数：20）
+- name: 巨兽骨拳
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 3
+  damage:
+  - dice: 5d12
+    type: phy4
+    stat: str
+  - dice: 3d12
+    type: mag3
+    stat: cha
+  damageStat: str
+  dcStat: cha
+  attackTypes:
+  - spell
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 17
+    dcStat: cha
+  text: "对目标赋予{pink|崩坏}。若目标生命值在25%以下，则造成额外伤害。"
+  effects:
+  - name: 崩坏
+    text: 每层使最大生命值减少6。交战开始时，如果当前生命值低于因该效果减少的生命值，则立即死亡。（最大层数：20）
+- name: 完美骨骼
+  slot: s1
+  bonus:
+  - stat: con
+    amount: 3
+  dcStat: cha
+  save:
+    stat: con
+    dc: 17
+    dcStat: cha
+  text: "受到近战攻击时产生反应，强制攻击者进行体质豁免检定。失败则赋予1层{pink|崩坏}。"
+  effects:
+  - name: 崩坏
+    text: 每层使最大生命值减少6。交战开始时，如果当前生命值低于因该效果减少的生命值，则立即死亡。（最大层数：20）
+  action: passive
+- name: 拘束锁链
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 2
+  damage:
+  - dice: 1d12
+    type: mag2
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  save:
+    stat: con
+    dc: 17
+    dcStat: cha
+  text: "攻击敌人时造成{mag2|1d12 额外 死灵伤害}{CHA}。若目标处于{pink|崩坏}状态，则施加{pink|物理伤害易伤}。"
+  effects:
+  - name: 物理伤害易伤
+    text: "获得对{phy4|物理伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive

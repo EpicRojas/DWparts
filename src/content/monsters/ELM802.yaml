@@ -1,0 +1,98 @@
+# 以太（ELM802）
+id: ELM802
+name: 以太
+race: 精灵
+level: 8
+dominance: 16
+stats:
+  str: 6
+  dex: 16
+  con: 14
+  int: 24
+  wis: 18
+  cha: 27
+statAdvantage: cha
+hp: 100
+ac: 8
+basic:
+  name: 射线
+  action: main
+  damage:
+  - dice: 5d6
+    type: mag1
+    stat: cha
+  damageStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: cha
+  text: 射出强光。
+parts:
+- name: 太阳之泪
+  slot: b
+  bonus:
+  - text: 免疫盲目
+  - text: "免疫{mag1|光耀伤害}"
+  damage:
+  - dice: 10d10
+    type: mag1
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: dex
+    dc: 18
+    dcStat: cha
+  text: "自身的{mag1|光耀伤害}无视目标的抗性与免疫。交战开始时获得1层{pink|超新星}，达到10层时消耗所有层数，对地下城全区域的所有敌人造成{mag1|10d10 额外 光耀伤害}{CHA}。"
+  effects:
+  - name: 超新星
+    text: "每层使自身造成的{mag1|光耀伤害}增加1d4。（最大层数：10）"
+- name: 审判射线
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 3
+  damage:
+  - dice: 6d8
+    type: mag1
+    stat: cha
+    factor: "1.5"
+  damageStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  hitStat: cha
+  text: "造成贯穿目标及目标身后敌人的强大{mag1|光耀伤害}。"
+- name: 惩戒之镜
+  slot: s1
+  action: react
+  bonus:
+  - stat: wis
+    amount: 3
+  damage:
+  - dice: 4d6
+    type: mag1
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  save:
+    stat: cha
+    dc: 16
+    dcStat: cha
+  text: "成为法术目标时作出反应，使该法术无效化，并向攻击者反射{mag1|4d6 额外 光耀伤害}{CHA}。"
+- name: 以太护盾
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 3
+  attackTypes:
+  - AoE
+  text: "交战开始时，为所有友军赋予{pink|以太护盾}。"
+  effects:
+  - name: 以太护盾
+    text: "获得对{phy4|物理伤害}与{mag1|光耀伤害}的{lb|抗性}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive

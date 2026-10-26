@@ -1,0 +1,75 @@
+# 狮鹫（BST402）
+id: BST402
+name: 狮鹫
+race: 野兽
+level: 4
+dominance: 4
+stats:
+  str: 12
+  dex: 16
+  con: 12
+  int: 7
+  wis: 10
+  cha: 7
+statAdvantage: dex
+hp: 52
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 骑士战术
+  slot: b
+  bonus:
+  - stat: dex
+    amount: 1
+  text: "位于前排时获得{org|护甲等级（AC）}加值(护甲等级+2)，位于后排时获得{lgreen|先攻}和命中检定加值（先攻+5，{attack}命中+1）。"
+- name: 守护狂风
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 2
+  damage:
+  - dice: 3d8
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  - AoE
+  hitStat: dex
+  text: "命中时，为所有友军赋予{lgreen|护甲加值}。"
+  effects:
+  - name: 护甲加值
+    text: 护甲等级增加2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+- name: 护卫之翼
+  slot: s1
+  action: react
+  bonus:
+  - stat: ini
+    amount: 2
+  text: 友军成为远程攻击目标时作为反应，将目标更改为自身，并使受到的伤害减少3d8。
+- name: 黄金鬃毛
+  slot: s2
+  action: react
+  bonus:
+  - stat: ac
+    amount: 1
+  dcStat: int
+  save:
+    stat: cha
+    dc: 10
+    dcStat: int
+  text: "成为法术攻击目标时作为反应，有一定概率使该法术无效并获得{heal|15 {shield}临时生命值}。"
+  extraTags:
+  - tag_shield

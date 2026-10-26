@@ -1,0 +1,80 @@
+# 独角兽（BST404）
+id: BST404
+name: 独角兽
+race: 野兽
+level: 4
+dominance: 4
+stats:
+  str: 8
+  dex: 16
+  con: 11
+  int: 9
+  wis: 13
+  cha: 14
+statAdvantage: dex
+hp: 44
+ac: 8
+basic:
+  name: 迅捷刺击
+  action: main
+  damage:
+  - dice: 2d8
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速刺击敌人。
+parts:
+- name: 天界优雅
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  text: "入侵开始时，进入{pink|天界优雅}状态。"
+  effects:
+  - name: 天界优雅
+    text: "{attack}命中增加魅力调整值的数值，攻击命中时造成魅力调整值的{mag1|光耀伤害}。"
+- name: 天界长枪
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: "无视目标5点{org|护甲等级（AC）}。"
+- name: 威严存在
+  slot: s1
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: wis
+    dc: 13
+    dcStat: cha
+  text: "交战开始时，有一定概率使所有敌人陷入{pink|魅惑}状态。"
+  effects:
+  - name: 魅惑
+    text: "在{blue|命中检定}上获得{blue|劣势}，造成的所有伤害加值减少2。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive
+- name: 纯洁之盾
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 1
+  text: "交战开始时，获得{pink|纯洁之盾}。"
+  effects:
+  - name: 纯洁之盾
+    text: "受到{blue|法术}伤害时，将伤害减少2d10后解除。"
+  action: passive

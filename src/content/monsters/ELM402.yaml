@@ -1,0 +1,113 @@
+# 梦魇（ELM402）
+id: ELM402
+name: 梦魇
+race: 精灵
+level: 4
+dominance: 4
+stats:
+  str: 10
+  dex: 10
+  con: 12
+  int: 12
+  wis: 16
+  cha: 9
+statAdvantage: wis
+hp: 41
+ac: 8
+basic:
+  name: 精神分裂
+  action: main
+  damage:
+  - dice: 2d6
+    type: mag4
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  save:
+    stat: wis
+    dc: 12
+    dcStat: wis
+  text: "使目标的命中检定获得{blue|劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 恐惧吞噬者
+  slot: b
+  action: react
+  bonus:
+  - text: 免疫恐慌
+  damage:
+  - dice: 2d8
+    type: mag4
+    stat: wis
+  - dice: 1d8
+    type: heal
+    stat: cha
+  damageStat: wis
+  dcStat: wis
+  save:
+    stat: wis
+    dc: 12
+    dcStat: wis
+  text: "对处于{pink|恐慌}状态的目标造成伤害时作为反应，对前排敌人造成{mag4|2d8 额外 心灵伤害}{WIS}，并对自身进行{heal|1d8 治疗}{CHA}。"
+- name: 梦魇之箭
+  slot: m
+  action: main
+  bonus:
+  - stat: wis
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: mag4
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: wis
+  save:
+    stat: wis
+    dc: 13
+    dcStat: wis
+  text: "有一定概率对目标赋予{pink|恐慌}。"
+  effects:
+  - name: 恐慌
+    text: "向入口撤退，且在{blue|命中检定}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 恐惧光环
+  slot: s1
+  bonus:
+  - stat: cha
+    amount: 1
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: "开始交战时，展开{pink|恐惧光环}。"
+  effects:
+  - name: 恐惧光环
+    text: "对抗{pink|恐慌}的豁免获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive
+- name: 恐惧收割
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  dcStat: int
+  save:
+    stat: wis
+    dc: 13
+    dcStat: int
+  text: "有人死亡时作为反应，有一定概率对所有敌人赋予{pink|恐慌}。"
+  effects:
+  - name: 恐慌
+    text: "向入口撤退，且在{blue|命中检定}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"

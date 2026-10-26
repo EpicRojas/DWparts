@@ -1,0 +1,99 @@
+# 巫妖（UDD503）
+id: UDD503
+name: 巫妖
+race: 亡灵
+level: 5
+dominance: 6
+stats:
+  str: 7
+  dex: 10
+  con: 12
+  int: 16
+  wis: 18
+  cha: 11
+statAdvantage: wis
+hp: 47
+ac: 8
+basic:
+  name: 冻寒之触
+  action: main
+  damage:
+  - dice: 2d6
+    type: mag2
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - melee
+  save:
+    stat: con
+    dc: 12
+    dcStat: wis
+  text: "目标暂时陷入{pink|禁疗}状态。"
+  effects:
+  - name: 禁疗
+    text: 无法恢复生命值。（持续时间：2.4秒 / 非战斗时4.8秒）
+parts:
+- name: 灵魂收集者
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  - text: 免疫魅惑
+  text: "交战开始时，获得{pink|灵魂}。"
+  effects:
+  - name: 灵魂
+    text: "造成的{mag2|死灵伤害}增加等同于层数的数值。（最大层数：10）"
+- name: 灵魂爆发
+  slot: m
+  action: main
+  bonus:
+  - stat: wis
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: mag2
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: wis
+  save:
+    stat: cha
+    dc: 14
+    dcStat: wis
+  text: "对随机1名敌人进行远程法术攻击。命中时，有一定概率夺取目标的{pink|灵魂}。"
+  effects:
+  - name: 灵魂
+    text: "造成的{mag2|死灵伤害}增加等同于层数的数值。（最大层数：10）"
+- name: 灵魂诅咒
+  slot: s1
+  bonus:
+  - stat: cha
+    amount: 2
+  dcStat: wis
+  attackTypes:
+  - AoE
+  save:
+    stat: wis
+    dc: 14
+    dcStat: wis
+  text: "交战开始时，有一定概率使所有敌人陷入{pink|死灵易伤}状态。"
+  effects:
+  - name: 死灵易伤
+    text: "获得对{mag2|死灵伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive
+- name: 灵魂屏障
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  damage:
+  - dice: 3d8
+    type: heal
+    stat: wis
+  text: "受到伤害时作为反应，消耗1层{pink|灵魂}并对自己进行{heal|3d8 治疗}{WIS}。"

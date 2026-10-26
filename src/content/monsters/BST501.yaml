@@ -1,0 +1,107 @@
+# 斯芬克斯（BST501）
+id: BST501
+name: 斯芬克斯
+race: 野兽
+level: 5
+dominance: 6
+stats:
+  str: 14
+  dex: 10
+  con: 14
+  int: 17
+  wis: 16
+  cha: 11
+statAdvantage: int
+hp: 65
+ac: 8
+basic:
+  name: 沉重打击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 13
+    dcStat: str
+  text: "猛击目标，赋予{blue|劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 斯芬克斯之谜
+  slot: b
+  action: react
+  bonus:
+  - text: 免疫沉默
+  dcStat: int
+  save:
+    stat: int
+    dc: 12
+    dcStat: int
+  text: "交战开始时作为反应，有一定几率使前排敌人陷入{pink|沉默}和{pink|有罪}状态。"
+  effects:
+  - name: 沉默
+    text: "陷入沉默状态，无法使用{blue|法术}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  - name: 有罪
+    text: "在{blue|感知 豁免}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒）"
+- name: 审判之锤
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 2
+  damage:
+  - dice: 3d8
+    type: phy4
+    stat: str
+  - dice: 2d8
+    type: mag4
+    stat: int
+  damageStat: str
+  dcStat: cha
+  attackTypes:
+  - spell
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 12
+    dcStat: cha
+  text: "如果目标处于{pink|有罪}状态，则造成{mag4|心灵伤害}，并使其陷入{pink|震慑}状态。"
+  effects:
+  - name: 震慑
+    text: "无法行动或移动。受到的{blue|命中检定}会被赋予{blue|优势}，在{blue|力量 豁免}和{blue|敏捷 豁免}上获得{blue|劣势}，且护甲等级减少2。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 真实卷轴
+  slot: s1
+  bonus:
+  - stat: int
+    amount: 2
+  text: "对{pink|盲目}状态免疫，并获得对{mag4|心灵伤害}的抗性。"
+  action: passive
+- name: 最终判决
+  slot: s2
+  action: react
+  bonus:
+  - stat: ac
+    amount: 1
+  damage:
+  - dice: 3d10
+    type: mag4
+    stat: int
+  damageStat: int
+  dcStat: int
+  save:
+    stat: wis
+    dc: 15
+    dcStat: int
+  text: "敌人击杀友军时作为反应，有一定概率对该敌人造成{mag4|3d10 额外 心灵伤害}{INT}并使其陷入{pink|有罪}状态。"
+  effects:
+  - name: 有罪
+    text: "在{blue|感知 豁免}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒）"

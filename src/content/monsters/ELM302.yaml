@@ -1,0 +1,88 @@
+# 火蜥蜴（ELM302）
+id: ELM302
+name: 火蜥蜴
+race: 精灵
+level: 3
+dominance: 3
+stats:
+  str: 14
+  dex: 8
+  con: 12
+  int: 12
+  wis: 7
+  cha: 6
+statAdvantage: str
+hp: 37
+ac: 8
+basic:
+  name: 火焰刺击
+  action: main
+  damage:
+  - dice: 1d10
+    type: phy4
+    stat: str
+  - dice: 1d6
+    type: ele1
+    stat: int
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 用缠绕着火焰的武器刺击敌人。
+parts:
+- name: 燃烧皮肤
+  slot: b
+  bonus:
+  - text: "免疫{ele1|火焰伤害}"
+  text: "受到近战攻击时作为反应，对攻击者赋予{pink|燃烧}。"
+  effects:
+  - name: 燃烧
+    text: "交战结束时，受到1d4{ele1|火焰伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+- name: 熔岩之枪
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 1
+  damage:
+  - dice: 3d6
+    type: ele1
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 12
+    dcStat: str
+  text: "命中时，对目标赋予{pink|护甲减值}。"
+  effects:
+  - name: 护甲减值
+    text: 护甲等级减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）
+- name: 炽热光环
+  slot: s1
+  bonus:
+  - stat: con
+    amount: 1
+  damage:
+  - dice: 1d6
+    type: ele1
+    stat: cha
+    factor: "0.5"
+  damageStat: cha
+  attackTypes:
+  - AoE
+  text: "交战开始时，对前排敌人造成{ele1|1d6 额外 火焰伤害}{CHA}( 0.5 )。"
+  action: passive
+- name: 沸腾之心
+  slot: s2
+  action: react
+  bonus:
+  - stat: mhp
+    amount: 10
+  text: "受到伤害时作为反应，获得{pink|沸腾之心}。"
+  effects:
+  - name: 沸腾之心
+    text: "在下一次攻击时消耗，额外造成2d10 {ele1|火焰伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"

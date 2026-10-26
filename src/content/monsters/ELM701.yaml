@@ -1,0 +1,88 @@
+# 火焰君主（ELM701）
+id: ELM701
+name: 火焰君主
+race: 精灵
+level: 7
+dominance: 12
+stats:
+  str: 19
+  dex: 10
+  con: 18
+  int: 23
+  wis: 12
+  cha: 11
+statAdvantage: int
+hp: 114
+ac: 8
+basic:
+  name: 火焰猛击
+  action: main
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: str
+  - dice: 1d8
+    type: ele1
+    stat: int
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 用燃烧的武器猛击敌人。
+parts:
+- name: 熔岩化身
+  slot: b
+  bonus:
+  - text: "免疫{ele1|火焰伤害}"
+  - text: "易受{ele2|寒冷伤害}"
+  text: "每次攻击敌人或受到敌人的近战攻击时，赋予1层{pink|熔解}。"
+  effects:
+  - name: 熔解
+    text: 每层使护甲等级减少1，受到的火焰伤害增加等同于层数的数值。（最大层数：5）
+- name: 巨大熔岩锤
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 2
+  damage:
+  - dice: 3d12
+    type: phy4
+    stat: str
+  - dice: 3d8
+    type: ele1
+    stat: int
+  - dice: 3d12
+    type: ele1
+    stat: int
+  damageStat: str
+  attackTypes:
+  - melee
+  - AoE
+  hitStat: str
+  text: "用熔岩战锤对目标造成{phy4|物理伤害}与{ele1|火焰伤害}。暴击时，对所有敌人造成{ele1|3d12 火焰伤害}{INT}。"
+- name: 燃烧领主核心
+  slot: s1
+  bonus:
+  - stat: str
+    amount: 2
+  damage:
+  - dice: 1d8
+    type: ele1
+    stat: cha
+    factor: "0.5"
+  damageStat: cha
+  attackTypes:
+  - AoE
+  text: "自身的{ele1|火焰伤害}无视目标的火焰抗性。交战开始时，所有角色受到{ele1|1d8 额外 火焰伤害}{CHA}( 0.5 )。"
+  action: passive
+- name: 火山岩装甲
+  slot: s2
+  bonus:
+  - stat: con
+    amount: 2
+  text: "入侵开始时，获得3层可大幅减少物理和魔法伤害的{pink|火山甲胄}。受到冰霜伤害时失去层数。"
+  effects:
+  - name: 火山甲胄
+    text: "每层使受到的非魔法物理伤害与法术伤害各减少1d8。受到{ele2|寒冷伤害}时减少1层。（持续时间：7.2秒 / 非战斗时14.4秒，最大层数：3）"
+  action: passive

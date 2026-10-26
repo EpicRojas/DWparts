@@ -1,0 +1,80 @@
+# 鹰身女妖（BST201）
+id: BST201
+name: 鹰身女妖
+race: 野兽
+level: 2
+dominance: 2
+stats:
+  str: 6
+  dex: 12
+  con: 8
+  int: 5
+  wis: 7
+  cha: 12
+statAdvantage: dex
+hp: 20
+ac: 8
+basic:
+  name: 基础射击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - ranged
+  hitStat: dex
+  text: 用远程武器射击敌人。
+parts:
+- name: 鹰身女妖之翼
+  slot: b
+  bonus:
+  - resist: ele7
+  save:
+    stat: dex
+    dc: 10
+  text: "进入{pink|飞行}状态，使针对自身的近战命中检定获得{blue|劣势}。受到伤害时会失去平衡并陷入{pink|倒地}状态。"
+  effects:
+  - name: 飞行
+    text: "漂浮在空中，强制针对自身的{blue|近战}获得{blue|劣势}。"
+  - name: 倒地
+    text: "自身的{blue|命中检定}获得{blue|劣势}。受到的近战命中会被赋予{blue|优势}，而受到的远程命中则被赋予{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 钢羽狂风
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 1
+  damage:
+  - dice: 1d12
+    type: phy4
+    stat: dex
+  damageStat: dex
+  dcStat: cha
+  attackTypes:
+  - melee
+  - AoE
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: 攻击前排的敌人以妨碍其攻击。
+  effects:
+  - name: 命中检定减值
+    text: "{attack}命中减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+- name: 锋利刃羽
+  slot: s1
+  bonus:
+  - text: 近战命中+1
+  - stat: hit
+    amount: 0
+  text: "带有{phy4|物理伤害}的攻击会追加等同于{DEX}敏捷调整值的{phy4|物理伤害}。"
+  action: passive
+- name: 回避机动
+  slot: s2
+  action: react
+  bonus:
+  - stat: ini
+    amount: 1
+  text: 成为远程攻击目标时作为反应，使该攻击未命中。

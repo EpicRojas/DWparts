@@ -73,5 +73,6 @@ export const AVAILABLE_ICONS = new Set([
 ]);
 
 export const TEXT_COLORS = new Set([
-  'pink', 'blue', 'lb', 'lgreen', 'orange', 'green', 'red', 'cur', 'comm', 'rare', 'epic', 'lege',
+  'pink', 'blue', 'b', 'lb', 'lblue', 'lgreen', 'lg', 'orange', 'o', 'org', 'green', 'g',
+  'red', 'r', 'add', 'cur', 'comm', 'rare', 'epic', 'lege', 'buff', 'debuff', 'eff', 'c',
 ]);

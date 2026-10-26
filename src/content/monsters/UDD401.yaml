@@ -1,0 +1,82 @@
+# 诺斯费拉图（UDD401）
+id: UDD401
+name: 诺斯费拉图
+race: 亡灵
+level: 4
+dominance: 4
+stats:
+  str: 9
+  dex: 15
+  con: 12
+  int: 10
+  wis: 10
+  cha: 14
+statAdvantage: dex
+hp: 38
+ac: 8
+basic:
+  name: 迅捷刺击
+  action: main
+  damage:
+  - dice: 2d8
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速刺击敌人。
+parts:
+- name: 鲜血之爪
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  damage:
+  - dice: "0"
+    type: heal
+    stat: cha
+  text: "造成{phy4|物理伤害}时，恢复自身{heal|0 治疗}{CHA}生命值。"
+  effects:
+  - name: 鲜血之爪
+    text: "造成{phy4|物理伤害}时，恢复等同于魅力调整值的生命值。"
+- name: 鲜血之雨
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 2
+  damage:
+  - dice: 3d8
+    type: phy4
+    stat: dex
+  damageStat: dex
+  dcStat: cha
+  attackTypes:
+  - melee
+  hitStat: dex
+  save:
+    stat: con
+    dc: 13
+    dcStat: cha
+  text: "有一定概率使目标陷入{pink|禁疗}状态。此攻击拥有{lb|重击}触发加成。"
+  effects:
+  - name: 禁疗
+    text: 无法恢复生命值。（持续时间：2.4秒 / 非战斗时4.8秒）
+- name: 暗影披风
+  slot: s1
+  bonus:
+  - stat: ini
+    amount: 2
+  text: "每次恢复生命值时获得1层{pink|鲜血收割}，在下次攻击中造成额外伤害。"
+  effects:
+  - name: 鲜血收割
+    text: "下一次攻击命中时，额外造成1d6 {mag2|死灵伤害}。（最大层数：5）"
+  action: passive
+- name: 迷踪步
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  text: 成为法术攻击目标时作为反应，使受到的伤害减少2d10。

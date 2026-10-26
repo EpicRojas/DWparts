@@ -1,0 +1,99 @@
+# 暗夜漫步者（UDD802）
+id: UDD802
+name: 暗夜漫步者
+race: 亡灵
+level: 8
+dominance: 16
+stats:
+  str: 22
+  dex: 26
+  con: 18
+  int: 10
+  wis: 12
+  cha: 14
+statAdvantage: dex
+hp: 120
+ac: 8
+basic:
+  name: 迅捷斩击
+  action: main
+  damage:
+  - dice: 5d6
+    type: phy4
+    stat: dex
+  damageStat: dex
+  attackTypes:
+  - melee
+  hitStat: dex
+  text: 快速斩击敌人。
+parts:
+- name: 深渊帷幕
+  slot: b
+  bonus:
+  - text: 免疫盲目
+  - text: "易受{mag1|光耀伤害}"
+  attackTypes:
+  - AoE
+  text: "交战开始时，使自身与后排友军进入{pink|隐形}状态，并为所有处于{pink|隐形}状态的友军赋予{pink|暗影加护}。"
+  effects:
+  - name: 隐形
+    text: "从视野中消失，对敌人的{blue|命中检定}获得{blue|优势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  - name: 暗影加护
+    text: "护甲等级增加2，并获得对{mag2|死灵伤害}和{mag4|心灵伤害}的抗性。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 形体切断
+  slot: m
+  action: main
+  bonus:
+  - stat: dex
+    amount: 3
+  damage:
+  - dice: 6d10
+    type: mag2
+    stat: dex
+    factor: "1.5"
+  - dice: 4d8
+    type: mag4
+    stat: wis
+  damageStat: dex
+  attackTypes:
+  - spell
+  - melee
+  - AoE
+  hitStat: dex
+  text: "挥砍前排敌人，造成{mag2|死灵伤害}。若自身处于{pink|隐形}状态，则额外造成{mag4|心灵伤害}。"
+- name: 吞噬暗影
+  slot: s1
+  bonus:
+  - stat: cha
+    amount: 3
+  dcStat: cha
+  save:
+    stat: cha
+    dc: 16
+    dcStat: cha
+  text: "攻击时目标获得{pink|暗影吞噬}层数。"
+  effects:
+  - name: 暗影吞噬
+    text: "交战开始时，受到1d10{mag2|死灵伤害}，且该效果的伤害量增加2。此效果持续至敌人死亡。"
+  action: passive
+- name: 恐惧打击
+  slot: s2
+  bonus:
+  - text: 近战命中+2
+  - stat: hit
+    amount: 0
+  damage:
+  - dice: 4d8
+    type: mag4
+    stat: wis
+  damageStat: wis
+  dcStat: cha
+  save:
+    stat: wis
+    dc: 16
+    dcStat: cha
+  text: "造成重击时，对目标造成额外{mag4|4d8 额外 心灵伤害}{WIS}并使其陷入{pink|恐慌}状态。"
+  effects:
+  - name: 恐慌
+    text: "向入口撤退，且在{blue|命中检定}上获得{blue|劣势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive

@@ -1,0 +1,99 @@
+# 巫妖女王（UDD801）
+id: UDD801
+name: 巫妖女王
+race: 亡灵
+level: 8
+dominance: 16
+stats:
+  str: 8
+  dex: 12
+  con: 14
+  int: 26
+  wis: 22
+  cha: 20
+statAdvantage: int
+hp: 105
+ac: 8
+basic:
+  name: 暗影箭
+  action: main
+  damage:
+  - dice: 5d6
+    type: mag2
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: 发射暗影能量。
+parts:
+- name: 律令：死亡
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  - text: "免疫{mag2|死灵伤害}"
+  damage:
+  - dice: 6d6
+    type: heal
+    stat: cha
+  dcStat: int
+  attackTypes:
+  - AoE
+  save:
+    stat: cha
+    dc: 15
+    dcStat: int
+  text: "交战开始时，对生命值在20%以下的敌人尝试即死。若成功，则恢复自身生命值，且地下城全区域的所有友军获得{pink|灵魂}。"
+  effects:
+  - name: 灵魂
+    text: "造成的{mag2|死灵伤害}增加等同于层数的数值。（最大层数：10）"
+- name: 死亡一指
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 3
+  damage:
+  - dice: 6d10
+    type: mag2
+    stat: int
+    factor: "2"
+  damageStat: int
+  dcStat: int
+  attackTypes:
+  - spell
+  - ranged
+  save:
+    stat: cha
+    dc: 12
+    dcStat: int
+  text: "对目标造成{mag2|死灵伤害}并获得3层{pink|灵魂}。"
+  effects:
+  - name: 灵魂
+    text: "造成的{mag2|死灵伤害}增加等同于层数的数值。（最大层数：10）"
+- name: 死灵波动
+  slot: s1
+  bonus:
+  - stat: dc
+    amount: 2
+    text: 法术豁免难度+2
+  damage:
+  - dice: 2d8
+    type: mag4
+    stat: wis
+  damageStat: wis
+  text: "在自身的法术中附加{mag4|2d8 额外 心灵伤害}{WIS}，且自身的{mag2|死灵伤害}无视目标的抗性与免疫。"
+  action: passive
+- name: 灵魂回响
+  slot: s2
+  bonus:
+  - stat: wis
+    amount: 3
+  attackTypes:
+  - AoE
+  text: "交战中若有角色死亡，为全区域所有友军赋予{pink|灵魂}，且自身的下一次攻击必定造成重击。"
+  effects:
+  - name: 灵魂
+    text: "造成的{mag2|死灵伤害}增加等同于层数的数值。（最大层数：10）"
+  action: passive

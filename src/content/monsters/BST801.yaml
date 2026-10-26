@@ -1,0 +1,83 @@
+# 芬里尔（BST801）
+id: BST801
+name: 芬里尔
+race: 野兽
+level: 8
+dominance: 16
+stats:
+  str: 27
+  dex: 20
+  con: 24
+  int: 6
+  wis: 14
+  cha: 10
+statAdvantage: str
+hp: 135
+ac: 8
+basic:
+  name: 基础斩击
+  action: main
+  damage:
+  - dice: 5d6
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 斩击敌人。
+parts:
+- name: 末日狂嗥
+  slot: b
+  bonus:
+  - text: 免疫恐慌
+  - text: "免疫{ele2|寒冷伤害}"
+  attackTypes:
+  - AoE
+  text: "交战开始时，所有友军获得{pink|末日咆哮}层数。"
+  effects:
+  - name: 末日咆哮
+    text: "每层使重击所需的掷骰值减少1。层数达到5层及以上时，所有攻击额外造成2d8点{ele2|寒冷伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，最大层数：5）"
+- name: 霜牙巨剑
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 3
+  damage:
+  - dice: 4d10
+    type: phy4
+    stat: str
+  - dice: 3d8
+    type: ele2
+    stat: wis
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  - AoE
+  hitStat: str
+  save:
+    stat: dex
+    dc: 12
+    dcStat: str
+  text: "挥砍目标，对所有敌人造成{ele2|寒冷伤害}。"
+- name: 粉碎
+  slot: s1
+  bonus:
+  - stat: wis
+    amount: 3
+  text: "造成暴击时，使目标获得对{phy4|物理伤害}与{ele2|寒冷伤害}的易伤状态。"
+  effects:
+  - name: 物理伤害易伤
+    text: "获得对{phy4|物理伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  - name: 寒冷易伤
+    text: "获得对{ele2|寒冷伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive
+- name: 捕食者本能
+  slot: s2
+  bonus:
+  - stat: ini
+    amount: 4
+  text: "攻击生命值在35%及以下的敌人时，必定触发重击。战场上每当有人死亡时，恢复已消耗的{main}{green|动作}。"
+  action: passive

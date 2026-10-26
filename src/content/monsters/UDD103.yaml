@@ -1,0 +1,79 @@
+# 骷髅法师（UDD103）
+id: UDD103
+name: 骷髅法师
+race: 亡灵
+level: 1
+dominance: 1
+stats:
+  str: 4
+  dex: 8
+  con: 6
+  int: 12
+  wis: 10
+  cha: 6
+statAdvantage: int
+hp: 10
+ac: 8
+basic:
+  name: 火焰箭
+  action: main
+  damage:
+  - dice: 1d10
+    type: ele1
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: 投掷火种。
+parts:
+- name: 魔法抗性
+  slot: b
+  bonus:
+  - text: 免疫中毒
+  text: "进入{pink|魔法抗性}状态。"
+  effects:
+  - name: 魔法抗性
+    text: "对抗{blue|法术}效果的{blue|豁免}获得{blue|优势}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 阴寒之触臂
+  slot: m
+  action: main
+  bonus:
+  - stat: int
+    amount: 1
+  damage:
+  - dice: 1d12
+    type: mag2
+    stat: int
+  damageStat: int
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: int
+  text: "命中时，使目标陷入{pink|禁疗}状态。"
+  effects:
+  - name: 禁疗
+    text: 无法恢复生命值。（持续时间：2.4秒 / 非战斗时4.8秒）
+- name: 暗影长袍
+  slot: s1
+  bonus:
+  - stat: ac
+    amount: 1
+  text: "交战开始时，获得{heal|1d10 {shield}临时生命值}。"
+  action: passive
+  extraTags:
+  - tag_shield
+- name: 魔力排斥之骨
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  damage:
+  - dice: 1d6
+    type: mag3
+    stat: cha
+  damageStat: cha
+  text: "受到法术攻击时作为反应，对施法者造成{mag3|1d6 额外 力场伤害}{CHA}。"

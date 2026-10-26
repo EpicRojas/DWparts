@@ -1,0 +1,91 @@
+# 乌伽鲁（BST603）
+id: BST603
+name: 乌伽鲁
+race: 野兽
+level: 6
+dominance: 9
+stats:
+  str: 19
+  dex: 13
+  con: 17
+  int: 12
+  wis: 12
+  cha: 10
+statAdvantage: str
+hp: 95
+ac: 8
+basic:
+  name: 沉重打击
+  action: main
+  damage:
+  - dice: 3d6
+    type: phy4
+    stat: str
+  damageStat: str
+  dcStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  save:
+    stat: con
+    dc: 14
+    dcStat: str
+  text: "猛击目标，赋予{blue|劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 风暴先兆
+  slot: b
+  bonus:
+  - text: "免疫{ele3|闪电伤害}"
+  - resist: ele7
+  text: "带有{phy4|物理伤害}的攻击会追加等同于{DEX}敏捷调整值的{phy4|物理伤害}，带有{ele7|自然伤害}的攻击会追加等同于{INT}智力调整值的{ele7|自然伤害}。"
+- name: 雷鸣碎击
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: phy4
+    stat: str
+  - dice: 1d10
+    type: ele7
+    stat: wis
+  damageStat: str
+  attackTypes:
+  - melee
+  - AoE
+  hitStat: str
+  text: "用雷电战锤猛击敌人，命中时对所有敌人造成额外{ele7|自然伤害}。"
+- name: 风之刃
+  slot: s1
+  action: react
+  bonus:
+  - stat: int
+    amount: 2
+  damage:
+  - dice: "0"
+    type: phy4
+    stat: int
+  damageStat: int
+  text: "攻击命中时作为反应，对目标造成额外{phy4|0 额外 物理伤害}{INT}。"
+- name: 风暴之眼
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 2
+  dcStat: int
+  attackTypes:
+  - AoE
+  save:
+    stat: con
+    dc: 15
+    dcStat: int
+  text: "交战开始时，对所有敌人施加{lgreen|风暴之眼}。"
+  effects:
+  - name: 风暴之眼
+    text: "获得对{ele7|自然伤害}与{phy4|物理伤害}的{lb|易伤}。（持续时间：2.4秒 / 非战斗时4.8秒）"
+  action: passive

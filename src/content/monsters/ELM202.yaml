@@ -1,0 +1,87 @@
+# 宁芙（ELM202）
+id: ELM202
+name: 宁芙
+race: 精灵
+level: 2
+dominance: 2
+stats:
+  str: 4
+  dex: 10
+  con: 6
+  int: 8
+  wis: 12
+  cha: 14
+statAdvantage: cha
+hp: 16
+ac: 8
+basic:
+  name: 精神压迫
+  action: main
+  damage:
+  - dice: 2d6
+    type: mag4
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: 压迫精神。
+parts:
+- name: 妖精魅惑
+  slot: b
+  bonus:
+  - resist: mag4
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: wis
+    dc: 11
+    dcStat: cha
+  text: "交战开始时，使所有敌人陷入{pink|魅惑}状态。"
+  effects:
+  - name: 魅惑
+    text: "在{blue|命中检定}上获得{blue|劣势}，造成的所有伤害加值减少2。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 自然之赐
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 1
+  attackTypes:
+  - ranged
+  - AoE
+  text: "对所有友军赋予{pink|自然之赐}，提供豁免检定加值和持续恢复效果。"
+  effects:
+  - name: 自然之赐
+    text: "交战结束时，{blue|治疗}1d4生命值，且{save}{orange|豁免检定加值}增加1。（持续时间：4.8秒 / 非战斗时9.6秒）"
+- name: 生命光环
+  slot: s1
+  bonus:
+  - stat: wis
+    amount: 1
+  damage:
+  - dice: 1d8
+    type: heal
+    stat: cha
+  text: "交战开始时，对生命值最低的友军进行{heal|1d8 治疗}{CHA}。"
+  action: passive
+- name: 守护之触
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  damage:
+  - dice: 1d8
+    type: heal
+    stat: cha
+  text: "友军受到攻击时作为反应，对该友军进行{heal|1d8 治疗}{CHA}并赋予{heal|5 {shield}临时生命值}。"
+  extraTags:
+  - tag_shield

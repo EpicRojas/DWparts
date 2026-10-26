@@ -3,7 +3,9 @@
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "pnpm images && astro dev",
     "check": "tsx scripts/check.ts",
@@ -11,8 +13,12 @@
     "images": "tsx scripts/build-images.ts",
     "images:force": "tsx scripts/build-images.ts --force",
     "images:prune": "tsx scripts/build-images.ts --prune",
-    "build": "pnpm check && pnpm images && astro build",
-    "preview": "astro preview"
+    "build": "pnpm check && pnpm images && astro build && pnpm smoke && pnpm test:filter",
+    "preview": "astro preview",
+    "migrate": "python3 scripts/migrate/extract.py",
+    "verify:migration": "tsx scripts/migrate/verify.ts && python3 scripts/migrate/textdiff.py",
+    "test:filter": "tsx scripts/test-filter.ts",
+    "smoke": "tsx scripts/smoke.ts"
   },
   "dependencies": {
     "@astrojs/vue": "^7.1.2",
@@ -25,6 +31,9 @@
     "yaml": "^2.9.1"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }

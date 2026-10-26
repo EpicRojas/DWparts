@@ -1,0 +1,95 @@
+# 梦境元素（ELM201）
+id: ELM201
+name: 梦境元素
+race: 精灵
+level: 2
+dominance: 2
+stats:
+  str: 4
+  dex: 8
+  con: 8
+  int: 9
+  wis: 13
+  cha: 12
+statAdvantage: wis
+hp: 18
+ac: 8
+basic:
+  name: 精神分裂
+  action: main
+  damage:
+  - dice: 2d4
+    type: mag4
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  save:
+    stat: wis
+    dc: 12
+    dcStat: wis
+  text: "使目标的命中检定获得{blue|劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 梦境漫步
+  slot: b
+  bonus:
+  - resist: mag4
+  text: "对{pink|震慑}免疫。"
+- name: 梦境吞噬
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 1
+  damage:
+  - dice: 2d8
+    type: mag4
+    stat: cha
+  damageStat: cha
+  dcStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: cha
+  save:
+    stat: wis
+    dc: 11
+    dcStat: cha
+  text: "使目标陷入{pink|睡眠}状态。"
+  effects:
+  - name: 睡眠
+    text: 无法行动，受到伤害时解除。（持续时间：2.4秒 / 非战斗时4.8秒）
+- name: 催眠之眼
+  slot: s1
+  bonus:
+  - stat: wis
+    amount: 1
+  dcStat: cha
+  attackTypes:
+  - AoE
+  save:
+    stat: wis
+    dc: 11
+    dcStat: cha
+  text: "交战开始时，对所有敌人赋予{lgreen|豁免检定减值}。"
+  effects:
+  - name: 豁免检定减值
+    text: "{save}{orange|豁免检定加值}减少2。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+  action: passive
+- name: 精神加护
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  damage:
+  - dice: 1d8
+    type: heal
+    stat: cha
+  text: "友军受到精神系状态异常时作为反应，立即解除该状态并对该友军进行{heal|1d8 治疗}{CHA}。"

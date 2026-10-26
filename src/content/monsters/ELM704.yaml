@@ -1,0 +1,87 @@
+# 泰坦妮亚（ELM704）
+id: ELM704
+name: 泰坦妮亚
+race: 精灵
+level: 7
+dominance: 12
+stats:
+  str: 8
+  dex: 13
+  con: 13
+  int: 14
+  wis: 20
+  cha: 23
+statAdvantage: cha
+hp: 89
+ac: 8
+basic:
+  name: 射线
+  action: main
+  damage:
+  - dice: 4d6
+    type: mag1
+    stat: cha
+  damageStat: cha
+  attackTypes:
+  - spell
+  - ranged
+  hitStat: cha
+  text: 射出强光。
+parts:
+- name: 妖精女王的庇护
+  slot: b
+  bonus:
+  - text: 免疫魅惑
+  - text: 免疫睡眠
+  attackTypes:
+  - AoE
+  text: "交战开始时，对所有友军赋予{pink|妖精祝福}。"
+  effects:
+  - name: 妖精祝福
+    text: "交战期间受到的法术伤害减少6，且{blue|感知 豁免}增加4。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 世界树之杖
+  slot: m
+  action: main
+  bonus:
+  - stat: cha
+    amount: 2
+  damage:
+  - dice: 3d8
+    type: heal
+    stat: cha
+  attackTypes:
+  - ranged
+  - AoE
+  text: "降下{pink|世界树祝福}于前排友军。"
+  effects:
+  - name: 世界树祝福
+    text: "交战期间{save}{orange|豁免检定加值}增加1d8，并在所有检定加值上获得1d4的加值。（持续时间：2.4秒 / 非战斗时4.8秒）"
+- name: 女王花冠
+  slot: s1
+  bonus:
+  - stat: wis
+    amount: 2
+  damage:
+  - dice: 2d6
+    type: heal
+    stat: cha
+  attackTypes:
+  - AoE
+  text: "每次交战开始时，对后排的所有友军进行{heal|2d6 治疗}{CHA}。"
+  action: passive
+- name: 精灵之翼
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 2
+    text: 法术豁免难度+2
+  dcStat: cha
+  save:
+    stat: wis
+    dc: 12
+    dcStat: cha
+  text: "受到近战攻击时产生反应，使攻击者陷入{pink|魅惑}状态。"
+  effects:
+  - name: 魅惑
+    text: "在{blue|命中检定}上获得{blue|劣势}，造成的所有伤害加值减少2。（持续时间：2.4秒 / 非战斗时4.8秒）"

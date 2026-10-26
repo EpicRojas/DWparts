@@ -1,0 +1,69 @@
+# 花蕾士兵（ELM203）
+id: ELM203
+name: 花蕾士兵
+race: 精灵
+level: 2
+dominance: 2
+stats:
+  str: 12
+  dex: 6
+  con: 12
+  int: 4
+  wis: 8
+  cha: 5
+statAdvantage: str
+hp: 32
+ac: 8
+basic:
+  name: 基础斩击
+  action: main
+  damage:
+  - dice: 2d6
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: 斩击敌人。
+parts:
+- name: 荆棘树皮
+  slot: b
+  bonus:
+  - text: "易受{ele1|火焰伤害}"
+  text: "获得对{ele7|自然伤害}的{lb|抗性}，但获得对{ele1|火焰伤害}的{lb|易伤}。"
+- name: 荆棘之枪
+  slot: m
+  action: main
+  bonus:
+  - stat: str
+    amount: 1
+  damage:
+  - dice: 2d10
+    type: phy4
+    stat: str
+  damageStat: str
+  attackTypes:
+  - melee
+  hitStat: str
+  text: "对目标赋予{pink|流血}。"
+  effects:
+  - name: 流血
+    text: "交战结束时，受到1d4{phy1|挥砍伤害}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+- name: 坚固根茎
+  slot: s1
+  bonus:
+  - stat: con
+    amount: 1
+  text: "在{blue|体质 豁免}上获得{blue|优势}。"
+  action: passive
+- name: 层叠花瓣
+  slot: s2
+  bonus:
+  - stat: ac
+    amount: 1
+  text: "交战开始时，获得3层可减轻受到伤害的{pink|花瓣守卫}。"
+  effects:
+  - name: 花瓣守卫
+    text: "受到{phy4|物理伤害}或{ele7|自然伤害}时，消耗1层使该伤害减半。（最大层数：5）"
+  action: passive

@@ -1,0 +1,2006 @@
+{
+ "BST101": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dc",
+    "dc_cha",
+    "hitnsave",
+    "mult_dex",
+    "ranged",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_wis"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dex"
+   ]
+  }
+ },
+ "BST102": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_wis",
+    "dc_wis",
+    "mult_wis",
+    "ranged",
+    "save",
+    "spell",
+    "tag_ele2"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_dex"
+   ],
+   "s2": [
+    "act_react",
+    "bon_cha",
+    "tag_heal"
+   ]
+  }
+ },
+ "BST201": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_dex",
+    "dc_cha",
+    "melee",
+    "mult_dex",
+    "save",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_hit"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ini"
+   ]
+  }
+ },
+ "BST202": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ac"
+   ]
+  }
+ },
+ "BST301": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "dc_str",
+    "hitnsave",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_con"
+   ],
+   "s2": [
+    "act_react",
+    "bon_mhp"
+   ]
+  }
+ },
+ "BST302": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "mult_dex",
+    "ranged",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_hit",
+    "dc_con",
+    "save"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "dc_cha",
+    "save"
+   ]
+  }
+ },
+ "BST401": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_con"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ac",
+    "mult_str",
+    "tag_phy4"
+   ]
+  }
+ },
+ "BST402": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac",
+    "dc_int",
+    "save",
+    "tag_shield"
+   ]
+  }
+ },
+ "BST403": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini",
+    "dc_str",
+    "save"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac",
+    "mult_str",
+    "tag_mag1"
+   ]
+  }
+ },
+ "BST404": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_dc",
+    "dc_cha",
+    "save"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ac"
+   ]
+  }
+ },
+ "BST501": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "dc_cha",
+    "hitnsave",
+    "melee",
+    "mult_str",
+    "spell",
+    "tag_mag4",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_int"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac",
+    "dc_int",
+    "mult_int",
+    "save",
+    "tag_mag4"
+   ]
+  }
+ },
+ "BST502": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_wis",
+    "dc_wis",
+    "melee",
+    "mult_wis",
+    "save",
+    "spell",
+    "tag_ele7"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_con"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "dc_con",
+    "save"
+   ]
+  }
+ },
+ "BST503": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_cha",
+    "dc_cha",
+    "hitnsave",
+    "mult_cha",
+    "ranged",
+    "spell",
+    "tag_mag2"
+   ],
+   "s1": [
+    "act_react",
+    "bon_wis",
+    "mult_cha",
+    "tag_mag3"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "dc_cha",
+    "save"
+   ]
+  }
+ },
+ "BST601": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_cha",
+    "dc_cha",
+    "save"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ini"
+   ]
+  }
+ },
+ "BST602": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_int",
+    "dc_int",
+    "mult_int",
+    "ranged",
+    "save",
+    "spell",
+    "tag_mag3"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_cha"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "dc_cha",
+    "save"
+   ]
+  }
+ },
+ "BST603": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_ele7",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_int",
+    "mult_int",
+    "tag_phy4"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_ac",
+    "dc_int",
+    "save"
+   ]
+  }
+ },
+ "BST701": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_wis",
+    "dc_wis",
+    "mult_wis",
+    "ranged",
+    "save",
+    "spell",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_cha"
+   ],
+   "s2": [
+    "act_react",
+    "bon_con"
+   ]
+  }
+ },
+ "BST702": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_ele7",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_con",
+    "dc_con",
+    "mult_con",
+    "save",
+    "tag_ele7"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_mhp",
+    "tag_heal"
+   ]
+  }
+ },
+ "BST703": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_cha",
+    "hit",
+    "mult_cha",
+    "ranged",
+    "spell",
+    "tag_ele2",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_str"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ini"
+   ]
+  }
+ },
+ "BST801": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_str",
+    "dc_str",
+    "hitnsave",
+    "melee",
+    "mult_str",
+    "tag_ele2",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_wis"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ini"
+   ]
+  }
+ },
+ "BST802": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_dex",
+    "hit",
+    "mult_dex",
+    "ranged",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_hit",
+    "dc_dex",
+    "mult_wis",
+    "save",
+    "tag_ele7"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac"
+   ]
+  }
+ },
+ "BST901": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_str",
+    "dc_str",
+    "hitnsave",
+    "melee",
+    "mult_str",
+    "tag_ele7",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_con"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_mhp"
+   ]
+  }
+ },
+ "BST902": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_int",
+    "dc_int",
+    "mult_int",
+    "ranged",
+    "save",
+    "spell",
+    "tag_mag3",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_str",
+    "mult_int",
+    "tag_mag3"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_dc",
+    "tag_shield"
+   ]
+  }
+ },
+ "ELM101": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_int",
+    "dc_int",
+    "melee",
+    "mult_int",
+    "save",
+    "spell",
+    "tag_ele2"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ac"
+   ],
+   "s2": [
+    "act_react",
+    "bon_mhp",
+    "tag_heal"
+   ]
+  }
+ },
+ "ELM102": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_mhp"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac",
+    "mult_int",
+    "tag_ele1"
+   ]
+  }
+ },
+ "ELM103": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "dc_dex",
+    "mult_dex",
+    "ranged",
+    "save",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ac"
+   ],
+   "s2": [
+    "act_react",
+    "bon_hit",
+    "mult_int",
+    "tag_ele3"
+   ]
+  }
+ },
+ "ELM104": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dc",
+    "dc_con",
+    "mult_con",
+    "ranged",
+    "save",
+    "tag_ele7"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ac"
+   ],
+   "s2": [
+    "act_react",
+    "bon_mhp",
+    "mult_con",
+    "tag_ele7"
+   ]
+  }
+ },
+ "ELM201": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_cha",
+    "dc_cha",
+    "hitnsave",
+    "mult_cha",
+    "ranged",
+    "spell",
+    "tag_mag4"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_wis",
+    "dc_cha",
+    "save"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "tag_heal"
+   ]
+  }
+ },
+ "ELM202": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_cha",
+    "ranged"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_wis",
+    "tag_heal"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "tag_heal",
+    "tag_shield"
+   ]
+  }
+ },
+ "ELM203": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_con"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ac"
+   ]
+  }
+ },
+ "ELM301": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "dc_str",
+    "hitnsave",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ac"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_dc",
+    "dc_cha",
+    "mult_wis",
+    "save",
+    "tag_mag4"
+   ]
+  }
+ },
+ "ELM302": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "dc_str",
+    "hitnsave",
+    "melee",
+    "mult_str",
+    "tag_ele1"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_con",
+    "mult_cha",
+    "tag_ele1"
+   ],
+   "s2": [
+    "act_react",
+    "bon_mhp"
+   ]
+  }
+ },
+ "ELM303": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_cha",
+    "mult_cha",
+    "tag_mag4"
+   ]
+  }
+ },
+ "ELM401": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_cha",
+    "dc_cha",
+    "hitnsave",
+    "melee",
+    "mult_cha",
+    "spell",
+    "tag_mag4",
+    "tag_phy4"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_cha",
+    "tag_heal"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_dc",
+    "dc_cha",
+    "save"
+   ]
+  }
+ },
+ "ELM402": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_wis",
+    "dc_wis",
+    "hitnsave",
+    "mult_wis",
+    "ranged",
+    "spell",
+    "tag_mag4"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_cha",
+    "dc_cha",
+    "save"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "dc_int",
+    "save"
+   ]
+  }
+ },
+ "ELM403": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "spell",
+    "tag_mag1",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_con",
+    "tag_shield"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ac",
+    "tag_heal"
+   ]
+  }
+ },
+ "ELM501": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_cha",
+    "dc_cha",
+    "mult_cha",
+    "ranged",
+    "save",
+    "spell",
+    "tag_ele2",
+    "tag_mag4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_wis"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "tag_heal"
+   ]
+  }
+ },
+ "ELM502": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "dc_dex",
+    "hitnsave",
+    "melee",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini",
+    "dc_dex",
+    "save"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ac"
+   ]
+  }
+ },
+ "ELM503": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_int",
+    "dc_int",
+    "melee",
+    "mult_int",
+    "save",
+    "spell",
+    "tag_ele1"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_dc",
+    "dc_int",
+    "save"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac",
+    "mult_int",
+    "tag_ele1"
+   ]
+  }
+ },
+ "ELM601": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_wis",
+    "dc_wis",
+    "mult_wis",
+    "ranged",
+    "save",
+    "spell",
+    "tag_mag4"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_ac",
+    "dc_wis",
+    "save"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "dc_wis",
+    "save"
+   ]
+  }
+ },
+ "ELM602": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_con"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dex"
+   ]
+  }
+ },
+ "ELM603": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_int",
+    "dc_int",
+    "melee",
+    "mult_int",
+    "save",
+    "spell",
+    "tag_ele1"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_dex",
+    "hit",
+    "mult_int",
+    "tag_ele1"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_wis"
+   ]
+  }
+ },
+ "ELM701": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_int",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_ele1",
+    "tag_phy4"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_str",
+    "mult_cha",
+    "tag_ele1"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_con"
+   ]
+  }
+ },
+ "ELM702": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_dex",
+    "hit",
+    "mult_dex",
+    "ranged",
+    "tag_ele3",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_ini",
+    "mult_dex",
+    "tag_ele3"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_hit",
+    "mult_int",
+    "tag_ele3"
+   ]
+  }
+ },
+ "ELM703": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_int",
+    "dc_int",
+    "hitnsave",
+    "melee",
+    "mult_int",
+    "spell",
+    "tag_ele2",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_cha",
+    "dc_int",
+    "save"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ac",
+    "dc_int",
+    "mult_int",
+    "save",
+    "tag_ele2"
+   ]
+  }
+ },
+ "ELM704": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_cha",
+    "ranged",
+    "tag_heal"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_wis",
+    "tag_heal"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "dc_cha",
+    "save"
+   ]
+  }
+ },
+ "ELM801": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_wis",
+    "dc_wis",
+    "mult_wis",
+    "ranged",
+    "save",
+    "spell",
+    "tag_ele3"
+   ],
+   "s1": [
+    "act_react",
+    "bon_ini",
+    "dc_wis",
+    "mult_wis",
+    "save",
+    "tag_ele3"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_dc",
+    "dc_wis",
+    "mult_wis",
+    "save",
+    "tag_ele3"
+   ]
+  }
+ },
+ "ELM802": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_cha",
+    "hit",
+    "mult_cha",
+    "ranged",
+    "spell",
+    "tag_mag1"
+   ],
+   "s1": [
+    "act_react",
+    "bon_wis",
+    "dc_cha",
+    "mult_cha",
+    "save",
+    "tag_mag1"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_ac"
+   ]
+  }
+ },
+ "ELM901": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_wis",
+    "dc_wis",
+    "mult_int",
+    "ranged",
+    "save",
+    "spell",
+    "tag_ele1",
+    "tag_ele2",
+    "tag_ele3"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_cha",
+    "mult_wis",
+    "tag_ele1",
+    "tag_ele2",
+    "tag_ele3"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_int",
+    "dc_wis",
+    "save"
+   ]
+  }
+ },
+ "ELM902": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_cha",
+    "hit",
+    "mult_cha",
+    "ranged",
+    "spell",
+    "tag_mag4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_wis",
+    "dc_cha",
+    "mult_cha",
+    "save",
+    "tag_mag4"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_dc",
+    "dc_cha",
+    "save"
+   ]
+  }
+ },
+ "UDD101": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_con",
+    "dc_con",
+    "mult_con",
+    "save",
+    "tag_ele7"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_mhp"
+   ]
+  }
+ },
+ "UDD102": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_ac",
+    "hit",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_dex"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ini"
+   ]
+  }
+ },
+ "UDD103": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_int",
+    "hit",
+    "mult_int",
+    "ranged",
+    "spell",
+    "tag_mag2"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ac",
+    "tag_shield"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "mult_cha",
+    "tag_mag3"
+   ]
+  }
+ },
+ "UDD201": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_con",
+    "tag_heal"
+   ]
+  }
+ },
+ "UDD202": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "spell",
+    "tag_heal",
+    "tag_mag2"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_con"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac"
+   ]
+  }
+ },
+ "UDD203": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini",
+    "dc_cha",
+    "save"
+   ],
+   "s2": [
+    "act_react",
+    "bon_wis",
+    "dc_wis",
+    "save"
+   ]
+  }
+ },
+ "UDD204": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_cha",
+    "dc_cha",
+    "hitnsave",
+    "melee",
+    "mult_cha",
+    "spell",
+    "tag_mag4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_dex"
+   ]
+  }
+ },
+ "UDD301": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_react",
+    "bon_con",
+    "tag_heal"
+   ]
+  }
+ },
+ "UDD302": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_react",
+    "bon_cha"
+   ]
+  }
+ },
+ "UDD303": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_cha",
+    "dc_cha",
+    "ranged",
+    "save",
+    "spell",
+    "tag_mag4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_dex"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "dc_cha",
+    "save",
+    "tag_mag4"
+   ]
+  }
+ },
+ "UDD401": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "dc_cha",
+    "hitnsave",
+    "melee",
+    "mult_dex",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc"
+   ]
+  }
+ },
+ "UDD402": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_int",
+    "hit",
+    "mult_int",
+    "ranged",
+    "spell",
+    "tag_mag1",
+    "tag_mag2"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_wis"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_dc"
+   ]
+  }
+ },
+ "UDD403": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "mult_dex",
+    "ranged",
+    "spell",
+    "tag_mag2",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dex"
+   ]
+  }
+ },
+ "UDD501": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_str",
+    "dc_str",
+    "hitnsave",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_ini"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ac"
+   ]
+  }
+ },
+ "UDD502": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "spell",
+    "tag_heal",
+    "tag_mag2",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_cha"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_ac"
+   ]
+  }
+ },
+ "UDD503": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_wis",
+    "dc_wis",
+    "hitnsave",
+    "mult_wis",
+    "ranged",
+    "spell",
+    "tag_mag2"
+   ],
+   "s1": [
+    "AoE",
+    "act_passive",
+    "bon_cha",
+    "dc_wis",
+    "save"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "tag_heal"
+   ]
+  }
+ },
+ "UDD601": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_wis",
+    "dc_wis",
+    "melee",
+    "mult_wis",
+    "save",
+    "spell",
+    "tag_mag2"
+   ],
+   "s1": [
+    "act_react",
+    "bon_cha",
+    "mult_wis",
+    "tag_heal",
+    "tag_mag2"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_dc",
+    "tag_heal"
+   ]
+  }
+ },
+ "UDD602": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_dex",
+    "hit",
+    "mult_dex",
+    "ranged",
+    "spell",
+    "tag_mag2",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_ini",
+    "dc_wis",
+    "save"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac",
+    "tag_heal"
+   ]
+  }
+ },
+ "UDD603": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "dc_cha",
+    "hitnsave",
+    "melee",
+    "mult_str",
+    "spell",
+    "tag_mag2",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_con"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac"
+   ]
+  }
+ },
+ "UDD701": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_str",
+    "dc_cha",
+    "hitnsave",
+    "melee",
+    "mult_str",
+    "spell",
+    "tag_mag3",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_con",
+    "dc_cha",
+    "save"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_ac",
+    "dc_cha",
+    "mult_cha",
+    "save",
+    "tag_mag2"
+   ]
+  }
+ },
+ "UDD702": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_int",
+    "dc_wis",
+    "hitnsave",
+    "mult_int",
+    "ranged",
+    "spell",
+    "tag_mag2",
+    "tag_mag4"
+   ],
+   "s1": [
+    "act_react",
+    "bon_wis",
+    "dc_int",
+    "save"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_dc",
+    "dc_wis",
+    "save"
+   ]
+  }
+ },
+ "UDD703": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_str",
+    "hit",
+    "melee",
+    "mult_str",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_con"
+   ],
+   "s2": [
+    "act_react",
+    "bon_ac"
+   ]
+  }
+ },
+ "UDD801": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "act_main",
+    "bon_int",
+    "dc_int",
+    "mult_int",
+    "ranged",
+    "save",
+    "spell",
+    "tag_mag2"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_dc",
+    "mult_wis",
+    "tag_mag4"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_wis"
+   ]
+  }
+ },
+ "UDD802": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_dex",
+    "hit",
+    "melee",
+    "mult_dex",
+    "spell",
+    "tag_mag2",
+    "tag_mag4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_cha",
+    "dc_cha",
+    "save"
+   ],
+   "s2": [
+    "act_passive",
+    "bon_hit",
+    "dc_cha",
+    "mult_wis",
+    "save",
+    "tag_mag4"
+   ]
+  }
+ },
+ "UDD901": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_dex",
+    "dc_cha",
+    "hitnsave",
+    "melee",
+    "mult_dex",
+    "spell",
+    "tag_mag2",
+    "tag_phy4"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_cha",
+    "mult_int",
+    "tag_mag2"
+   ],
+   "s2": [
+    "AoE",
+    "act_passive",
+    "bon_ini"
+   ]
+  }
+ },
+ "UDD902": {
+  "basic": [],
+  "parts": {
+   "b": [],
+   "m": [
+    "AoE",
+    "act_main",
+    "bon_cha",
+    "dc_cha",
+    "mult_cha",
+    "ranged",
+    "save",
+    "spell",
+    "tag_mag2"
+   ],
+   "s1": [
+    "act_passive",
+    "bon_wis"
+   ],
+   "s2": [
+    "act_react",
+    "bon_dc",
+    "mult_cha",
+    "tag_heal",
+    "tag_mag2"
+   ]
+  }
+ }
+}

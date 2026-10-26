@@ -1,0 +1,100 @@
+# 心灵元素（ELM601）
+id: ELM601
+name: 心灵元素
+race: 精灵
+level: 6
+dominance: 9
+stats:
+  str: 8
+  dex: 11
+  con: 12
+  int: 14
+  wis: 19
+  cha: 16
+statAdvantage: wis
+hp: 72
+ac: 8
+basic:
+  name: 精神分裂
+  action: main
+  damage:
+  - dice: 3d6
+    type: mag4
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  save:
+    stat: wis
+    dc: 12
+    dcStat: wis
+  text: "使目标的命中检定获得{blue|劣势}。"
+  effects:
+  - name: 攻击劣势
+    text: "在{blue|命中检定}上获得{blue|劣势}。（持续时间：4.8秒 / 非战斗时9.6秒，独立层数）"
+parts:
+- name: 梦境提灯
+  slot: b
+  bonus:
+  - text: 免疫睡眠
+  - text: 免疫魅惑
+  text: "每次敌人受到精神系效果影响时，获得1层{pink|梦境}。"
+  effects:
+  - name: 梦境
+    text: "每层使{mag4|心灵伤害}及生命恢复量增加2。（持续时间：2.4秒 / 非战斗时4.8秒，最大层数：10）"
+- name: 梦魇之雾
+  slot: m
+  action: main
+  bonus:
+  - stat: wis
+    amount: 2
+  damage:
+  - dice: 3d10
+    type: mag4
+    stat: wis
+  damageStat: wis
+  dcStat: wis
+  attackTypes:
+  - spell
+  - ranged
+  - AoE
+  save:
+    stat: wis
+    dc: 12
+    dcStat: wis
+  text: "用雾气笼罩后排敌人，使其陷入{pink|睡眠}状态。"
+  effects:
+  - name: 睡眠
+    text: 无法行动，受到伤害时解除。（持续时间：2.4秒 / 非战斗时4.8秒）
+- name: 梦幻帷幕
+  slot: s1
+  bonus:
+  - stat: ac
+    amount: 2
+  dcStat: wis
+  attackTypes:
+  - AoE
+  save:
+    stat: int
+    dc: 14
+    dcStat: wis
+  text: "交战开始时，使前排敌人陷入{pink|混乱}状态。"
+  effects:
+  - name: 混乱
+    text: 行动目标随机改变。（持续时间：2.4秒 / 非战斗时4.8秒）
+  action: passive
+- name: 幻影转移
+  slot: s2
+  action: react
+  bonus:
+  - stat: dc
+    amount: 1
+    text: 法术豁免难度+1
+  dcStat: wis
+  save:
+    stat: wis
+    dc: 15
+    dcStat: wis
+  text: 友军成为攻击目标时作为反应，将攻击目标更改为随机的其他敌人。
