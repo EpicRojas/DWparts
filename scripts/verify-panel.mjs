@@ -49,7 +49,8 @@ for (const [w, h, label] of [[1440, 900, '桌面'], [390, 844, '手机']]) {
 
   /* 3. 每组都有「全部」，且默认按下 */
   const alls = await p.evaluate(() => {
-    const groups = [...document.querySelectorAll('.filter-row')].map((row) => {
+    // 只统计标签组行；「显示模式」行使用 data-view 而非 chip--all
+    const groups = [...document.querySelectorAll('.filter-row:not(.filter-row--view)')].map((row) => {
       const all = row.querySelector('.chip--all');
       return {
         label: row.querySelector('.filter-row__label')?.textContent,

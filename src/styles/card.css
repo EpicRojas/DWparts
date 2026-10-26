@@ -350,6 +350,31 @@
 /* ── 筛选态 ── */
 :root[data-filter-mode='part'] .part[hidden] { display: none !important; }
 
+/* ═══ 仅部件模式：部件脱离魔物卡，排成连续列表 ═══
+   卡片外壳与 .parts 容器均改为 display: contents，使 .part 直接成为
+   .content 网格项，从而跨魔物连成一片，不再各自成块。 */
+:root[data-view='part'] .content {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-2) var(--s-4);
+  align-content: start;
+}
+:root[data-view='part'] .monster:not([hidden]),
+:root[data-view='part'] .monster .parts:not([hidden]) {
+  display: contents;
+}
+:root[data-view='part'] .part {
+  padding-block: var(--s-3);
+  border-block-start: 1px solid var(--line-1);
+}
+
+@media (max-width: 1279px) {
+  :root[data-view='part'] .content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 899px), (orientation: portrait) and (max-width: 1100px) {
+  :root[data-view='part'] .content { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* 仅魔物模式：头部之下没有部件区，去掉其底部分隔线与留白 */
 :root[data-view='monster'] .monster__head {
   border-bottom: none;

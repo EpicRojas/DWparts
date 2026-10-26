@@ -30,6 +30,7 @@ interface Boot {
 }
 
 const REASON_NO_PART_FILTER = '当前只选了魔物级标签（种族/等级），所有部件都同等命中，无法细分为部件视图。先选动作、伤害类型等部件级标签。';
+const REASON_PART_VIEW = '仅部件模式下始终只显示命中的部件，该开关不可切换。切回「全部」或「仅魔物」显示模式后可调整。';
 
 const root = document.documentElement;
 const state = {
@@ -37,8 +38,52 @@ const state = {
   picked: new Map<string, Set<string>>(),
   mode: 'card' as Mode,
   view: 'all' as View,
+  /** 用户显式选择的筛选粒度，仅部件模式结束后据此恢复 */
+  modePref: 'card' as Mode,
+  /** 用户显式选择的显示模式，部件筛选清空后据此恢复 */
+  viewPref: 'all' as View,
+  /** 显示模式当前是否由部件筛选自动触发 */
+  viewAuto: false,
+  /** 用户在部件筛选存在期间手动改过显示模式，清空前一概不自动切换 */
+  viewPinned: false,
   query: '',
 };
+
+/* 「部件专属区」= scope 为 part 的全部标签组，即筛选面板中「部件」一行及其后各行。
+   只要其中任意一组有选中值，即视为处于部件筛选状态。 */
+function hasPartFilter(groups: GroupDef[]): boolean {
+  return groups.some((g) => g.scope === 'part' && state.picked.get(g.id)?.size);
+}
+
+/**
+ * 依据部件筛选状态调整显示模式。
+ *
+ *   出现部件筛选   → 切到「仅部件」，原显示模式记入 viewPref
+ *   部件筛选增多   → 保持「仅部件」
+ *   部件筛选清空   → 恢复 viewPref
+ *   期间用户手动改过 → 尊重手动选择，直到部件筛选清空后才重新生效
+ *
+ * 自动切换只是「伪选中」：viewPref 始终保留用户的选择，便于恢复。
+ */
+function reconcileView(groups: GroupDef[]): void {
+  const has = hasPartFilter(groups);
+
+  if (has) {
+    if (!state.viewAuto && !state.viewPinned) {
+      if (state.view !== 'part') state.viewPref = state.view;
+      state.viewAuto = true;
+      state.view = 'part';
+    }
+    return;
+  }
+
+  // 部件筛选已清空：结束自动状态，恢复用户偏好
+  if (state.viewAuto) {
+    state.viewAuto = false;
+    state.view = state.viewPref;
+  }
+  state.viewPinned = false;
+}
 
 /* ────────── URL <-> 状态 ────────── */
 const PARAM_MODE = 'mode';
@@ -56,6 +101,7 @@ function readUrl(groups: GroupDef[]) {
     if (valid.length) state.picked.set(g.id, new Set(valid));
   }
   state.mode = params.get(PARAM_MODE) === 'part' ? 'part' : 'card';
+  state.modePref = state.mode;
   const v = params.get(PARAM_VIEW);
   state.view = v === 'monster' || v === 'part' ? v : 'all';
   state.query = (params.get(PARAM_Q) ?? '').trim();
@@ -67,7 +113,7 @@ function writeUrl(groups: GroupDef[], { replace = false } = {}) {
     const vals = state.picked.get(g.id);
     if (vals?.size) params.set(g.id, [...vals].join(','));
   }
-  if (state.mode === 'part') params.set(PARAM_MODE, 'part');
+  if (state.modePref === 'part') params.set(PARAM_MODE, 'part');
   if (state.view !== 'all') params.set(PARAM_VIEW, state.view);
   if (state.query) params.set(PARAM_Q, state.query);
   const qs = params.toString();
@@ -215,18 +261,33 @@ function syncChips(groups: GroupDef[]) {
   }
   const btn = els.modeBtn();
   if (btn) {
-    // 只有"部件级"标签能切出差异；只选种族/等级时该模式无意义，禁用而非假装有效
-    const partLevel = groups.some((g) => g.scope === 'part' && state.picked.get(g.id)?.size);
-    const usable = partLevel;
-    btn.disabled = !usable;
-    btn.dataset.disabled = String(!usable);
-    if (!usable && state.mode === 'part') state.mode = 'card';
-    btn.setAttribute('aria-pressed', String(state.mode === 'part'));
-    btn.title = !usable
-      ? REASON_NO_PART_FILTER
-      : state.mode === 'part'
-        ? '当前：只显示命中的部件（点击切回整卡）'
-        : '当前：命中即显示整个魔物（点击切换为只看部件）';
+    const partLevel = hasPartFilter(groups);
+    const inPartView = state.view === 'part';
+
+    if (inPartView) {
+      /* 仅部件模式下该开关恒为开启且不可操作。
+         若允许关闭，命中卡会展开全部部件，等同于未筛选，
+         与「按部件筛选」的目的相悖。 */
+      state.mode = 'part';
+      btn.disabled = true;
+      btn.dataset.disabled = 'true';
+      btn.setAttribute('aria-pressed', 'true');
+      btn.title = REASON_PART_VIEW;
+    } else {
+      /* 退出仅部件模式后回到用户先前选择的粒度；
+         只选种族、等级等魔物级标签时该开关无意义，禁用而非假装有效。 */
+      if (!partLevel) state.mode = 'card';
+      else state.mode = state.modePref;
+
+      btn.disabled = !partLevel;
+      btn.dataset.disabled = String(!partLevel);
+      btn.setAttribute('aria-pressed', String(state.mode === 'part'));
+      btn.title = !partLevel
+        ? REASON_NO_PART_FILTER
+        : state.mode === 'part'
+          ? '当前：只显示命中的部件（点击切回整卡）'
+          : '当前：命中即显示整个魔物（点击切换为只看部件）';
+    }
   }
   for (const v of ['all', 'monster', 'part'] as const) {
     els.viewChip(v)?.setAttribute('aria-pressed', String(state.view === v));
@@ -237,6 +298,7 @@ function syncChips(groups: GroupDef[]) {
 }
 
 function update(groups: GroupDef[], opts?: { url?: boolean; replace?: boolean }) {
+  reconcileView(groups);
   syncChips(groups);
   apply(groups);
   if (opts?.url !== false) writeUrl(groups, { replace: opts?.replace });
@@ -274,6 +336,11 @@ function init() {
       const v = btn.dataset.view;
       if (v !== 'all' && v !== 'monster' && v !== 'part') return;
       state.view = v;
+      state.viewPref = v === 'part' ? 'all' : v;
+      /* 部件筛选存在时手动改显示模式：视为明确意图，直到部件筛选清空
+         之前不再自动切换，避免与用户操作相互覆盖。 */
+      state.viewPinned = hasPartFilter(groups);
+      state.viewAuto = false;
       update(groups);
     });
   }
@@ -282,7 +349,8 @@ function init() {
   els.modeBtn()?.addEventListener('click', (e) => {
     const btn = e.currentTarget as HTMLButtonElement;
     if (btn.disabled) return;
-    state.mode = state.mode === 'card' ? 'part' : 'card';
+    state.modePref = state.modePref === 'card' ? 'part' : 'card';
+    state.mode = state.modePref;
     update(groups);
   });
 

@@ -70,9 +70,19 @@ both tag filtering and granularity:
 | --- | --- |
 | 全部 | Show monster header and part cards |
 | 仅魔物 | Show headers only, hide the part area |
-| 仅部件 | Show part cards only, render no monster information |
+| 仅部件 | Show part cards only; no monster information is rendered, and parts flow as one continuous list across monsters |
 
 The mode is stored in the `view` URL parameter and survives sharing.
+
+Two rules follow from it:
+
+- In 仅部件 mode the 只看命中部件 switch is always on and cannot be toggled. Were it
+  off, matching cards would expand to all four parts, which is equivalent to no filtering
+  and defeats the purpose of browsing by part.
+- Selecting any value in the 部件 row or any row below it switches to 仅部件 and turns
+  that switch on. Further selections keep it; the previous display mode returns only
+  after every part-level group is back to 全部. A manual display-mode click during part
+  filtering takes precedence until the part filters are cleared.
 
 ## Contributing a monster
 

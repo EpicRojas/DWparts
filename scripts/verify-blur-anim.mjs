@@ -78,19 +78,20 @@ if (mids.length) {
   } else console.log(`  ✓ 动画中段已模糊（最差 sd=${worst}，基线 ${base.sd}）`);
 } else console.log('  · 未采到中段帧');
 
-// 判据 2：动画后段（opacity ≥ 0.95）不能出现突变。
-// 只取后段是因为前段 opacity 本身在快速变化，sd 随之下降属正常。
+// 判据 2：动画后段（opacity ≥ 0.95）不得出现 sd 骤降。
+// 失败模式是「动画期间模糊未生效（sd 偏高），结束时才生效（sd 骤降）」，
+// 故只检测下降；裁剪逐步露出更多内容导致的 sd 上升属正常。
 const late = series.filter((s) => s.op >= 0.95);
-const deltas = [];
-for (let i = 1; i < late.length; i++) deltas.push(Math.abs(late[i].sd - late[i - 1].sd));
-if (!deltas.length) {
+const drops = [];
+for (let i = 1; i < late.length; i++) drops.push(late[i - 1].sd - late[i].sd);
+if (!drops.length) {
   console.log('  · 后段采样不足，跳过突变检测');
 } else {
-  const biggest = Math.max(...deltas);
-  if (biggest > 8) {
+  const biggestDrop = Math.max(...drops);
+  if (biggestDrop > 8) {
     fail++;
-    console.error(`  ✗ 后段出现突变（单步最大 Δsd=${biggest.toFixed(1)}）`);
-  } else console.log(`  ✓ 后段无突变（单步最大 Δsd=${biggest.toFixed(1)}）`);
+    console.error(`  ✗ 后段 sd 骤降 ${biggestDrop.toFixed(1)}，模糊疑在结束时才生效`);
+  } else console.log(`  ✓ 后段无骤降（最大降幅 ${biggestDrop.toFixed(1)}）`);
 }
 
 // 判据 3：带 backdrop-filter 的 .filters 上不能有 transform

@@ -91,7 +91,12 @@ for (const c of doc.querySelectorAll<HTMLButtonElement>('.chip[aria-pressed="tru
 chip('act', 'react').click();
 const reactMonsters = monsters().filter((m) => !m.hidden);
 check('至少命中 1 只', reactMonsters.length > 0, `实际 ${reactMonsters.length}`);
-check('整卡模式：命中卡四张部件全显示', reactMonsters.every((m) => shownParts(m) === 4));
+// 选中部件区标签会自动切到「仅部件」，此处显式切回「全部」以检验整卡模式
+check('自动切至仅部件显示模式', doc.documentElement.dataset.view === 'part', doc.documentElement.dataset.view);
+doc.querySelector<HTMLButtonElement>('.chip[data-view="all"]')!.click();
+await new Promise((r) => setTimeout(r, 30));
+check('切回全部后：命中所属魔物的四张部件全显示',
+  monsters().filter((m) => !m.hidden).every((m) => shownParts(m) === 4));
 
 console.log('\n[6] 模式切换：只看命中部件');
 const modeBtn = doc.querySelector<HTMLButtonElement>('[data-mode-toggle]')!;
