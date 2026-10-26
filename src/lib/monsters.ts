@@ -219,7 +219,20 @@ function rewriteImages(root: Element, name: string, issues: Issue[], file: strin
       const kidsHtml = ((e.childNodes ?? []) as Node[]).map(emit).join('');
       return `${open}${kidsHtml}</${tag}>`;
     }
-    return ((n as { value?: string }).value ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    /* 注释不进入产物。模板卡中的说明性注释因此可以任意书写，
+       包括整块注释掉的部件卡或属性说明。 */
+    if (n.nodeName === '#comment') return '';
+
+    const text = (n as { value?: string }).value ?? '';
+    if (!text) return '';
+
+    /* 连续空白折叠为单个空格。浏览器的 white-space: normal 本就如此处理，
+       渲染结果不变，但可避免源文件中为可读性添加的换行与缩进撑大产物。
+       转义在折叠之后进行，两者互不影响。 */
+    return text
+      .replace(/\s+/g, ' ')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;');
   };
   out.push(emit(root));
   return out.join('');

@@ -4,22 +4,19 @@
  *
  * 结构上是顶栏下方的一个浮层，覆盖主内容，收起时向上滑出（非线性缓动）。
  * 每个类别首位为「全部」，选中即清除该组条件。
+ *
+ * 两层结构（关键）：
+ *   .filters         只负责毛玻璃与淡入淡出，绝不做几何动画
+ *   .filters__panel  负责展开与收起的位移
+ * 带 backdrop-filter 的元素一旦自己做 transform / clip-path 动画，
+ * 浏览器会将其提升为独立合成层，该层的背景采样取不到下方内容，
+ * 表现为动画全程保持锐利、结束才出现模糊。几何动画须下放至不含滤镜的子元素。
  */
 import type { Taxonomy } from '../lib/taxonomy.ts';
 
 interface Props { tax: Taxonomy }
 const { tax } = Astro.props;
 ---
-<!--
-  两层结构（关键）：
-    .filters        只负责毛玻璃与淡入淡出 —— 它绝不做几何动画
-    .filters__panel  负责展开/收起的位移与裁切
-
-  原因：带 backdrop-filter 的元素一旦自己做 transform / clip-path 动画，
-  浏览器会把它提升到独立合成层，合成层的 backdrop 采样不到下方内容，
-  表现为动画全程"半透明锐利"、动画结束才突然变模糊（= 看起来卡一下并变纯色）。
-  把几何动画拆到没有 backdrop-filter 的子元素上即可避免。
--->
 <div class="filters" id="filters" data-filters hidden>
   <div class="filters__panel">
     <div class="filters__inner">

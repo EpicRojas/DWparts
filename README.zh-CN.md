@@ -30,6 +30,7 @@ Node.js 24.22.1，pnpm 11。
 content/                 手写内容，全项目唯一需要手工编辑的目录
   tags.yaml              标签体系的唯一真源
   monsters/*.html        每个魔物一份 HTML 文档
+  _template.html         魔物卡模板，复制后填写
 src/
   pages/index.astro      渲染承载全部魔物卡的单页
   components/            顶栏、筛选面板
@@ -62,6 +63,7 @@ dist/                    构建产物
 ## 贡献魔物
 
 新增魔物只需向 `content/monsters/` 放入一个 HTML 文件，无需修改任何代码。
+`content/_template.html` 是含完整说明的模板，复制后填写即可。
 
 ### 1. 创建文件
 

@@ -30,6 +30,7 @@ Node.js 24.22.1, pnpm 11.
 content/                 Hand-written content, the only directory edited by hand
   tags.yaml              Single source of truth for the tag taxonomy
   monsters/*.html        One HTML document per monster
+  _template.html         Card template, copy and fill in
 src/
   pages/index.astro      Renders the single page holding every monster card
   components/            Header, filter panel
@@ -65,6 +66,7 @@ the entire monster and produce no part-level subset.
 ## Contributing a monster
 
 Adding a monster requires one HTML file in `content/monsters/` and no code changes.
+`content/_template.html` documents every attribute; copy it as a starting point.
 
 ### 1. Create the file
 

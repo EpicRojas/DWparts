@@ -41,7 +41,7 @@ const desc = `《地下城深处》(Dungeon Within) 魔物图鉴：${monsters.le
 ---
 <Base title="DW Wiki — 地下城深处 魔物图鉴" description={desc}>
   <Fragment slot="top">
-    <!-- 只有这一条是 sticky；筛选面板在正常流里，滚过就消失 -->
+    {/* 仅此层 sticky；筛选面板为固定浮层，不在文档流内 */}
     <div class="site-top" data-site-top>
       <Header total={monsters.length} parts={totalParts} />
     </div>
