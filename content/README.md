@@ -5,8 +5,23 @@
 ```
 content/
 ├─ tags.yaml           标签体系，全部合法取值的唯一来源
-└─ monsters/           每个魔物一份 HTML 文档
+├─ monsters/           每个魔物一份 HTML 文档
+└─ TAG-REFERENCE.md    标签速查表，由脚本生成
 ```
+
+## 标签速查表
+
+`TAG-REFERENCE.md` 列出全部属性可填写的值，含图标预览与数值属性的实测范围。
+填写卡片时先查该表，可避免取值越界。
+
+该文件由 `scripts/build-tag-reference.mjs` 生成：
+
+```bash
+pnpm reference
+```
+
+枚举属性取自 `content/tags.yaml`，数值属性的范围由全部魔物卡扫描得出。
+修改标签体系或大批量调整数值后应重新生成，不要手工编辑。
 
 ## 文件约定
 

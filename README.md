@@ -21,6 +21,7 @@ Node.js 24.22.1, pnpm 11.
 | `pnpm build` | Validate, then build into `dist/` |
 | `pnpm preview` | Serve the built output |
 | `pnpm masks` | Generate badge masks from the PNG originals |
+| `pnpm reference` | Regenerate the tag reference table |
 | `pnpm images` | Generate WebP from the PNG originals |
 
 ## Repository layout

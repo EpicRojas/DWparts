@@ -21,6 +21,7 @@ Node.js 24.22.1，pnpm 11。
 | `pnpm build` | 先校验，再构建至 `dist/` |
 | `pnpm preview` | 预览已构建的产物 |
 | `pnpm masks` | 由 PNG 原图生成徽章遮罩 |
+| `pnpm reference` | 重新生成标签速查表 |
 | `pnpm images` | 由 PNG 原图生成 WebP |
 
 ## 目录结构
