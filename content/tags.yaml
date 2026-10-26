@@ -18,7 +18,7 @@ groups:
       - { id: beast,  label: 野兽,   icon: beast.webp }
       - { id: elf,    label: 精灵,   icon: elf.webp }
       - { id: undead, label: 亡灵,   icon: undead.webp }
-      - { id: none,   label: 无魔物, icon: undead.webp }
+      - { id: none,   label: 无魔物 }
 
   - id: level
     label: 等级

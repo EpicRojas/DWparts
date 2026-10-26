@@ -47,7 +47,7 @@
 | `beast` | 野兽 | `data-race="beast"` | <img src="../public/img/common/beast.webp" alt="野兽" height="18"> |
 | `elf` | 精灵 | `data-race="elf"` | <img src="../public/img/common/elf.webp" alt="精灵" height="18"> |
 | `undead` | 亡灵 | `data-race="undead"` | <img src="../public/img/common/undead.webp" alt="亡灵" height="18"> |
-| `none` | 无魔物 | `data-race="none"` | <img src="../public/img/common/undead.webp" alt="无魔物" height="18"> |
+| `none` | 无魔物 | `data-race="none"` | — |
 
 ### `data-level` — 等级
 
