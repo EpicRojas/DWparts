@@ -98,6 +98,7 @@ export function loadMonsters(tax: Taxonomy, opts: LoadOptions = {}): { monsters:
     for (const g of tax.groups.filter((x) => x.scope === 'monster')) {
       const raw = a[`data-${g.attr}`];
       if (raw === undefined) {
+        if (g.optional) continue;
         issues.push({ file, level: 'error', message: `article 缺少 data-${g.attr}（${g.label}）` });
         continue;
       }

@@ -15,14 +15,17 @@ groups:
     attr: race
     scope: monster
     values:
-      - { id: beast,  label: 野兽, icon: beast.webp }
-      - { id: elf,    label: 精灵, icon: elf.webp }
-      - { id: undead, label: 亡灵, icon: undead.webp }
+      - { id: beast,  label: 野兽,   icon: beast.webp }
+      - { id: elf,    label: 精灵,   icon: elf.webp }
+      - { id: undead, label: 亡灵,   icon: undead.webp }
+      - { id: none,   label: 无魔物, icon: undead.webp }
 
   - id: level
     label: 等级
     attr: level
     scope: monster
+    # 无魔物聚合卡不含等级，故允许缺省
+    optional: true
     values:
       - { id: "1", label: "1" }
       - { id: "2", label: "2" }

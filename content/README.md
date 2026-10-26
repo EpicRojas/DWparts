@@ -102,8 +102,8 @@ HTML 不需要额外语法，修改文案、调整强调、更换图标均直接
 | --- | --- | --- |
 | `id`、`data-id` | 是 | 全局唯一，采用立绘文件名，如 `BST101` |
 | `data-name` | 是 | 显示名称 |
-| `data-race` | 是 | `beast`、`elf`、`undead` |
-| `data-level` | 是 | `1` 至 `9` |
+| `data-race` | 是 | `beast`、`elf`、`undead`、`none` |
+| `data-level` | 否 | `1` 至 `9`。`data-race="none"` 时不填 |
 | `data-dom` | 否 | 支配力 |
 | `data-str` 至 `data-cha` | 是 | 六项属性值，整数 |
 | `data-hp`、`data-ac` | 是 | 最大生命值、护甲等级 |
@@ -225,6 +225,37 @@ HTML 不需要额外语法，修改文案、调整强调、更换图标均直接
 
 遮罩路径写于 CSS 自定义属性，`url()` 相对样式表解析。构建过程会将其
 补全为站点绝对路径，源文件中无需添加前缀。
+
+## 无魔物部件
+
+部分部件在游戏内可供装备，但没有所属魔物。这类部件集合于
+`content/monsters/EVT000.html` 一张卡片中，`data-race="none"`，不填等级。
+
+该类卡片无需立绘与属性栏，只写标题与部件卡即可：
+
+```html
+<article class="monster" id="EVT000" data-id="EVT000" data-name="无魔物部件"
+         data-race="none"
+         data-str="0" data-dex="0" data-con="0"
+         data-int="0" data-wis="0" data-cha="0"
+         data-hp="0" data-ac="0">
+
+  <header class="monster__head">
+    <div class="monster__title">
+      <h2 class="monster__name">无魔物部件</h2>
+      <p class="monster__meta"><span class="monster__race">无魔物</span></p>
+    </div>
+  </header>
+
+  <ul class="parts">
+    <li class="part" data-part="m" data-act="passive">…</li>
+  </ul>
+</article>
+```
+
+部件数量不受四张的限制，布局按 `parts` 网格自动排列：宽屏一行四个，
+超出则换行。六项属性与生命护甲在该类卡片上不显示，填 0 即可。
+徽章省略 `badge__portrait`，只保留边框与角标。
 
 ## 布局约束
 

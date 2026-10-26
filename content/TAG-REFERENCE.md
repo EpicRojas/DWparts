@@ -12,7 +12,7 @@
 | --- | --- | --- | --- | --- |
 | `data-id` | article | 字符串 | — | `data-id="BST101"` |
 | `data-name` | article | 字符串 | — | `data-name="拉塔托斯克"` |
-| `data-race` | article | 枚举 | 3 | `data-race="beast"` |
+| `data-race` | article | 枚举 | 4 | `data-race="beast"` |
 | `data-level` | article | 枚举 | 9 | `data-level="1"` |
 | `data-part` | li.part | 枚举 | 4 | `data-part="basic"` |
 | `data-act` | li.part | 枚举 | 3 | `data-act="main"` |
@@ -24,15 +24,15 @@
 | `data-check` | li.part | 枚举 | 2 | `data-check="hit save"` |
 | `data-hit` | li.part | 枚举（六项属性） | 6 | `data-hit="dex"` |
 | `data-save` | li.part | 字符串 `属性:DC` | — | `data-save="wis:12"` |
-| `data-str` | article | 整数 | 22 | `data-str="15"` |
-| `data-dex` | article | 整数 | 19 | `data-dex="15"` |
-| `data-con` | article | 整数 | 20 | `data-con="17"` |
-| `data-int` | article | 整数 | 23 | `data-int="14"` |
-| `data-wis` | article | 整数 | 23 | `data-wis="15"` |
-| `data-cha` | article | 整数 | 25 | `data-cha="15"` |
+| `data-str` | article | 整数 | 23 | `data-str="14"` |
+| `data-dex` | article | 整数 | 20 | `data-dex="15"` |
+| `data-con` | article | 整数 | 21 | `data-con="16"` |
+| `data-int` | article | 整数 | 24 | `data-int="14"` |
+| `data-wis` | article | 整数 | 24 | `data-wis="15"` |
+| `data-cha` | article | 整数 | 26 | `data-cha="15"` |
 | `data-dom` | article | 整数 | 9 | `data-dom="6"` |
-| `data-hp` | article | 整数 | 57 | `data-hp="62"` |
-| `data-ac` | article | 整数 | 1 | `data-ac="8"` |
+| `data-hp` | article | 整数 | 58 | `data-hp="62"` |
+| `data-ac` | article | 整数 | 2 | `data-ac="8"` |
 
 ## 枚举属性
 
@@ -47,6 +47,7 @@
 | `beast` | 野兽 | `data-race="beast"` | <img src="../public/img/common/beast.webp" alt="野兽" height="18"> |
 | `elf` | 精灵 | `data-race="elf"` | <img src="../public/img/common/elf.webp" alt="精灵" height="18"> |
 | `undead` | 亡灵 | `data-race="undead"` | <img src="../public/img/common/undead.webp" alt="亡灵" height="18"> |
+| `none` | 无魔物 | `data-race="none"` | <img src="../public/img/common/undead.webp" alt="无魔物" height="18"> |
 
 ### `data-level` — 等级
 
@@ -197,15 +198,15 @@
 
 | 属性 | 含义 | 最小值 | 最大值 | 现有取值 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| `data-str` | 力量 | 4 | 40 | 4–40（22 种） | `data-str="15"` |
-| `data-dex` | 敏捷 | 4 | 36 | 4–36（19 种） | `data-dex="15"` |
-| `data-con` | 体质 | 6 | 38 | 6–38（20 种） | `data-con="17"` |
-| `data-int` | 智力 | 3 | 38 | 3–38（23 种） | `data-int="14"` |
-| `data-wis` | 感知 | 4 | 40 | 4–40（23 种） | `data-wis="15"` |
-| `data-cha` | 魅力 | 3 | 40 | 3–40（25 种） | `data-cha="15"` |
+| `data-str` | 力量 | 0 | 40 | 0–40（23 种） | `data-str="14"` |
+| `data-dex` | 敏捷 | 0 | 36 | 0–36（20 种） | `data-dex="15"` |
+| `data-con` | 体质 | 0 | 38 | 0–38（21 种） | `data-con="16"` |
+| `data-int` | 智力 | 0 | 38 | 0–38（24 种） | `data-int="14"` |
+| `data-wis` | 感知 | 0 | 40 | 0–40（24 种） | `data-wis="15"` |
+| `data-cha` | 魅力 | 0 | 40 | 0–40（26 种） | `data-cha="15"` |
 | `data-dom` | 支配力 | 1 | 32 | 1、2、3、4、6、9、12、16、32 | `data-dom="6"` |
-| `data-hp` | 最大生命值 | 10 | 275 | 10–275（57 种） | `data-hp="62"` |
-| `data-ac` | 护甲等级 | 8 | 8 | 8 | `data-ac="8"` |
+| `data-hp` | 最大生命值 | 0 | 275 | 0–275（58 种） | `data-hp="62"` |
+| `data-ac` | 护甲等级 | 0 | 8 | 0、8 | `data-ac="8"` |
 
 ## 图标清单
 

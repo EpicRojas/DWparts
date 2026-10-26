@@ -60,7 +60,8 @@ const chip = (group: string, value: string) =>
 const url = () => window.location.search;
 
 console.log('\n[1] 初始状态');
-check('全部 76 个魔物可见', shown() === 76, `实际 ${shown()}`);
+const TOTAL = monsters().length;
+check(`全部 ${TOTAL} 个魔物可见`, shown() === TOTAL, `实际 ${shown()}`);
 check('每卡 4 张部件可见', monsters().every((m) => shownParts(m) === 4));
 check('每组「全部」默认按下', [...doc.querySelectorAll('.chip--all')].every((c) => c.getAttribute('aria-pressed') === 'true'));
 check('取值 chip 默认未选中', [...doc.querySelectorAll('.chip:not(.chip--all)')].every((c) => c.getAttribute('aria-pressed') === 'false'));
@@ -131,7 +132,7 @@ search.value = '';
 search.dispatchEvent(new window.Event('input', { bubbles: true }));
 await new Promise((r) => setTimeout(r, 200));
 check('URL 完全清空', url() === '', url());
-check('恢复全部可见', shown() === 76, `实际 ${shown()}`);
+check('恢复全部可见', shown() === TOTAL, `实际 ${shown()}`);
 check('所有「全部」均按下', [...doc.querySelectorAll('.chip--all')].every((c) => c.getAttribute('aria-pressed') === 'true'));
 
 console.log('\n[9] URL 还原（分享链接 / 浏览器后退）');

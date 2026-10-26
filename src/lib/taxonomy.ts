@@ -19,6 +19,8 @@ const TagGroup = z.object({
   label: z.string().min(1),
   attr: z.string().min(1),
   scope: z.enum(['monster', 'part']),
+  /* 标记为可选的组允许在卡片上缺省，缺省时不记入筛选索引 */
+  optional: z.boolean().default(false),
   values: z.array(TagValue).min(1),
 });
 
