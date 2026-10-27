@@ -344,6 +344,9 @@
 .tag {
   display: flex;
   flex-direction: column;
+  /* 键名与取值在标签内水平居中。原版靠 .tag 的 text-align: center 继承，
+     改用 flex 后该继承失效，此处以 align-items 恢复。 */
+  align-items: center;
   min-width: 0;
   line-height: 1.35;
 }
