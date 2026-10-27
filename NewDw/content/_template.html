@@ -1,0 +1,407 @@
+<!--
+════════════════════════════════════════════════════════════════════════════
+  魔物卡模板
+════════════════════════════════════════════════════════════════════════════
+
+  用法
+
+    1. 复制本文件到 content/monsters/，改名为魔物标识，
+       例如 content/monsters/BST101.html
+       标识须与立绘文件名一致，即 img/characters/BST101.webp
+
+    2. 填写下面 article 标签内的属性，以及部件卡的名称与说明
+
+    3. 把 XXXXXX 和中文占位文字全部替换为实际内容
+
+    4. 运行以下命令校验并预览
+
+         pnpm check                    检查取值、图片、格式
+         pnpm dev                      浏览器打开 /monsters/BST101
+
+  注释说明
+
+    构建会丢弃全部 HTML 注释，并把连续空白折叠为单个空格。
+    因此本文件中的说明可以随意书写，缩进与换行不会进入产物，
+    也不会影响页面渲染。
+
+    HTML 语法不允许在标签内部写注释，故 data 属性只能逐条列出、
+    不需要时直接删除该属性。整块的部件卡与正文区块可以注释掉。
+
+  取值查询
+
+    content/TAG-REFERENCE.md 列出全部属性的可选值与图标，
+    并给出可直接复制的属性片段。
+
+════════════════════════════════════════════════════════════════════════════
+-->
+
+
+<!--
+════════════════════════════════════════════════════════════════════════════
+  一、魔物属性
+════════════════════════════════════════════════════════════════════════════
+
+  id, data-id      必填。魔物标识，与立绘文件名一致
+  data-name        必填。显示名称
+  data-race        必填。beast 野兽 / elf 精灵 / undead 亡灵
+  data-level       必填。1 至 9
+  data-str         必填。力量
+  data-dex         必填。敏捷
+  data-con         必填。体质
+  data-int         必填。智力
+  data-wis         必填。感知
+  data-cha         必填。魅力
+  data-hp          必填。最大生命值
+  data-ac          必填。护甲等级
+  data-dom         支配力，无则该属性可删
+
+  六项属性中若有优势项，在下方对应的 ability 元素上加 adv 类，
+  数值会以金色显示。
+-->
+
+<article class="monster" id="XXXXXX" data-id="XXXXXX" data-name="魔物名称"
+         data-race="beast" data-level="1"
+         data-dom="1"
+         data-str="10" data-dex="10" data-con="10"
+         data-int="10" data-wis="10" data-cha="10"
+         data-hp="20" data-ac="10">
+
+  <header class="monster__head">
+
+    <!-- 立绘。alt 填魔物名称 -->
+    <figure class="monster__portrait">
+      <img src="img/characters/XXXXXX.webp" alt="魔物名称">
+    </figure>
+
+    <div class="monster__title">
+      <h2 class="monster__name">魔物名称</h2>
+
+      <!-- 等级、种族、支配力。三项与上方 data 属性保持一致 -->
+      <p class="monster__meta">
+        <span class="monster__level">1级</span>
+        <span class="monster__race">野兽</span>
+        <span class="monster__dom"><img src="img/common/Dom.webp" class="ico" alt="支配">1</span>
+      </p>
+    </div>
+
+    <!-- 六项属性显示。优势项在 class 上加 adv，例如 class="ability adv" -->
+    <dl class="monster__abilities">
+      <div class="ability"><dt>力量</dt><dd>10</dd></div>
+      <div class="ability"><dt>敏捷</dt><dd>10</dd></div>
+      <div class="ability"><dt>体质</dt><dd>10</dd></div>
+      <div class="ability"><dt>智力</dt><dd>10</dd></div>
+      <div class="ability"><dt>感知</dt><dd>10</dd></div>
+      <div class="ability"><dt>魅力</dt><dd>10</dd></div>
+    </dl>
+
+    <dl class="monster__vitals">
+      <div class="vital">
+        <dt><img src="img/common/MHP.webp" class="ico" alt="">最大生命值</dt>
+        <dd>20</dd>
+      </div>
+      <div class="vital">
+        <dt><img src="img/common/AC.webp" class="ico" alt="">护甲等级（AC）</dt>
+        <dd>10</dd>
+      </div>
+    </dl>
+
+  </header>
+
+
+  <!--
+  ══════════════════════════════════════════════════════════════════════════
+    二、部件卡
+  ══════════════════════════════════════════════════════════════════════════
+
+    每个魔物固定四张，data-part 分别为 basic、m、s1、s2。
+
+    一张部件卡可写的 data 属性
+
+      data-part      必填。basic 基础攻击 / m / s1 / s2
+
+      data-act       必填。main 主要 / react 反应 / passive 总是生效
+
+      data-bonus     部件提供的属性加成，多值用空格分隔
+                     str dex con int wis cha mhp ac ini hit dc
+
+      data-dmg       造成的伤害类型，多值用空格分隔
+                     phy4 ele1 ele2 ele3 ele7 mag1 mag2 mag3 mag4 heal shield
+
+      data-mult      伤害加值的来源属性，多值
+                     str dex con int wis cha
+
+      data-dcbonus   豁免 DC 加值的来源属性，多值
+                     str dex con int wis cha
+
+      data-attack    攻击类型，多值
+                     melee 近战 / ranged 远程 / spell 法术 / aoe 范围
+
+      data-check     是否需要检定，多值
+                     hit 需要命中 / save 需要豁免
+
+      data-hit       命中检定所用属性，仅 data-check 含 hit 时生效
+                     str dex con int wis cha
+
+      data-save      豁免检定，格式 属性:DC，仅 data-check 含 save 时生效
+                     例如 wis:12
+
+    以上属性按实际效果填写，不需要的整条删除。
+
+    卡片内可选区块（整块可删）
+
+      .part__bonus   标题下方的加值摘要，每条一个 span，数值以金色显示
+      .dmg           伤害骰与伤害类型
+      .part__desc    描述正文
+      .effects       效果说明，每条一个 .effect
+
+    .dmg__line 上须带伤害类型类名以取得配色，
+    可用 phy4 ele1 ele2 ele3 ele7 mag1 mag2 mag3 mag4 heal。
+
+    描述正文中可用的行内强调
+
+      span.pink    状态名、增益、减益
+      span.blue    规则术语，如命中检定、劣势
+      span.lb      关键词高亮，如重击
+      span.orange  警示
+      span.green   良性效果
+      span.red     负面效果
+      span.lgreen  强化数值
+      span.gold    数值
+
+    行内图标写法，见 TAG-REFERENCE.md 的图标清单
+
+      <img src="img/common/DEX.webp" class="ico" alt="敏捷">
+
+  ══════════════════════════════════════════════════════════════════════════
+  -->
+
+  <ul class="parts">
+
+
+    <!-- ────────── 基础攻击 ────────── -->
+    <li class="part" data-part="basic" data-act="main">
+
+      <div class="part__head">
+
+        <!-- 徽章。basic 用 b.webp 与 bt.webp，遮罩为 mask-basic.png -->
+        <span class="badge">
+          <img src="img/common/b.webp" class="badge__frame" alt="">
+          <span class="badge__portrait"
+                style="--badge-matte:url(img/common/mask-basic.png)"><img src="img/characters/XXXXXX.webp" alt=""></span>
+          <img src="img/common/bt.webp" class="badge__label" alt="">
+        </span>
+
+        <h3 class="part__name">基础攻击名称</h3>
+
+        <!-- 可选：标题下方加值摘要 -->
+        <p class="part__bonus">
+          <span>先攻+1</span>
+        </p>
+
+      </div>
+
+      <div class="part__body">
+
+        <!-- 可选：伤害行。多行伤害就写多个 dmg__line -->
+        <div class="dmg">
+          <span class="dmg__die"><img src="img/common/dice.webp" alt=""></span>
+          <span class="dmg__lines">
+            <span class="dmg__line phy4">1d10 <img class="ico" src="img/common/phy4.webp" alt="物理">物理伤害<img class="ico" src="img/common/DEX.webp" alt="敏捷"></span>
+          </span>
+        </div>
+
+        <!-- 可选：描述正文 -->
+        <p class="part__desc">描述文字，可用 <span class="blue">蓝色术语</span> 与 <span class="pink">状态名</span>。</p>
+
+        <!-- 可选：效果说明。多条就写多个 effect -->
+        <div class="effects">
+          <p class="effect">
+            <span class="effect__name">状态名</span>：效果说明文字。（持续时间：4.8秒 / 非战斗时9.6秒）
+          </p>
+        </div>
+
+      </div>
+
+    </li>
+
+
+    <!-- ────────── M 部件 ────────── -->
+    <li class="part" data-part="m" data-act="main"
+        data-bonus="dc"
+        data-dmg="phy4"
+        data-mult="dex"
+        data-dcbonus="cha"
+        data-attack="ranged"
+        data-check="hit save"
+        data-hit="dex"
+        data-save="wis:12">
+
+      <div class="part__head">
+
+        <!-- m 部件用 m.webp 与 mt.webp，遮罩为 mask-m.png -->
+        <span class="badge">
+          <img src="img/common/m.webp" class="badge__frame" alt="">
+          <span class="badge__portrait"
+                style="--badge-matte:url(img/common/mask-m.png)"><img src="img/characters/XXXXXX.webp" alt=""></span>
+          <img src="img/common/mt.webp" class="badge__label" alt="">
+        </span>
+
+        <h3 class="part__name">M 部件名称</h3>
+
+        <p class="part__bonus">
+          <span>法术豁免难度+1</span>
+        </p>
+
+      </div>
+
+      <div class="part__body">
+
+        <div class="dmg">
+          <span class="dmg__die"><img src="img/common/dice.webp" alt=""></span>
+          <span class="dmg__lines">
+            <span class="dmg__line phy4">1d12 <img class="ico" src="img/common/phy4.webp" alt="物理">物理伤害<img class="ico" src="img/common/DEX.webp" alt="敏捷"></span>
+          </span>
+        </div>
+
+        <p class="part__desc">描述文字。</p>
+
+        <div class="effects">
+          <p class="effect">
+            <span class="effect__name">状态名</span>：效果说明文字。
+          </p>
+        </div>
+
+      </div>
+
+    </li>
+
+
+    <!-- ────────── S1 部件 ────────── -->
+    <li class="part" data-part="s1" data-act="passive"
+        data-bonus="wis">
+
+      <div class="part__head">
+
+        <!-- s1 部件用 s1.webp 与 s1t.webp，遮罩为 mask-s1.png -->
+        <span class="badge">
+          <img src="img/common/s1.webp" class="badge__frame" alt="">
+          <span class="badge__portrait"
+                style="--badge-matte:url(img/common/mask-s1.png)"><img src="img/characters/XXXXXX.webp" alt=""></span>
+          <img src="img/common/s1t.webp" class="badge__label" alt="">
+        </span>
+
+        <h3 class="part__name">S1 部件名称</h3>
+
+        <p class="part__bonus">
+          <span>感知+1</span>
+        </p>
+
+      </div>
+
+      <div class="part__body">
+
+        <p class="part__desc">描述文字。</p>
+
+      </div>
+
+    </li>
+
+
+    <!-- ────────── S2 部件 ────────── -->
+    <li class="part" data-part="s2" data-act="react"
+        data-bonus="dex">
+
+      <div class="part__head">
+
+        <!-- s2 部件用 s2.webp 与 s2t.webp，遮罩为 mask-s2.png -->
+        <span class="badge">
+          <img src="img/common/s2.webp" class="badge__frame" alt="">
+          <span class="badge__portrait"
+                style="--badge-matte:url(img/common/mask-s2.png)"><img src="img/characters/XXXXXX.webp" alt=""></span>
+          <img src="img/common/s2t.webp" class="badge__label" alt="">
+        </span>
+
+        <h3 class="part__name">S2 部件名称</h3>
+
+        <p class="part__bonus">
+          <span>敏捷+1</span>
+        </p>
+
+      </div>
+
+      <div class="part__body">
+
+        <p class="part__desc">描述文字。</p>
+
+      </div>
+
+    </li>
+
+
+  </ul>
+
+</article>
+
+
+<!--
+════════════════════════════════════════════════════════════════════════════
+  三、可选写法参考
+════════════════════════════════════════════════════════════════════════════
+
+  下例展示一张含多种伤害、多条效果与伤害倍率的部件卡，整段处于注释状态。
+  需要时删除本段首尾的注释起止符即可启用，并把 XXXXXX 替换为实际标识。
+
+  注意：HTML 注释内部不能再次出现注释结束标记，因此本段只作静态示例，
+  启用时请自行核对标签是否成对。
+════════════════════════════════════════════════════════════════════════════
+-->
+<!--
+
+<li class="part" data-part="m" data-act="main"
+    data-bonus="str ini"
+    data-dmg="phy4 ele1"
+    data-mult="str"
+    data-dcbonus="wis"
+    data-attack="melee aoe"
+    data-check="save"
+    data-save="con:14">
+
+  <div class="part__head">
+    <span class="badge">
+      <img src="img/common/m.webp" class="badge__frame" alt="">
+      <span class="badge__portrait"
+            style="--badge-matte:url(img/common/mask-m.png)"><img src="img/characters/XXXXXX.webp" alt=""></span>
+      <img src="img/common/mt.webp" class="badge__label" alt="">
+    </span>
+    <h3 class="part__name">部件名称</h3>
+    <p class="part__bonus">
+      <span>力量+1</span>
+      <span>先攻+1</span>
+    </p>
+  </div>
+
+  <div class="part__body">
+
+    <div class="dmg">
+      <span class="dmg__die"><img src="img/common/dice.webp" alt=""></span>
+      <span class="dmg__lines">
+        <span class="dmg__line phy4">2d8 <img class="ico" src="img/common/phy4.webp" alt="物理">物理伤害<img class="ico" src="img/common/STR.webp" alt="力量"><span class="dmg__mult">(0.75)</span></span>
+        <span class="dmg__line ele1">+ 1d6 <img class="ico" src="img/common/ele1.webp" alt="火焰">火焰伤害</span>
+      </span>
+    </div>
+
+    <p class="part__desc">对范围内的敌人造成伤害。</p>
+
+    <div class="effects">
+      <p class="effect">
+        <span class="effect__name">灼烧</span>：每回合受到 1d4 火焰伤害。
+      </p>
+      <p class="effect">
+        <span class="effect__name">流血</span>：交战结束时受到 1d4 伤害。
+      </p>
+    </div>
+
+  </div>
+
+</li>
+-->

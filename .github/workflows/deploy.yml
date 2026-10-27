@@ -1,0 +1,81 @@
+name: Build
+
+# 站点由 GitHub Pages 的「分支」模式直接提供（main / 根目录）。
+# 本工作流只负责构建，并把产物回写到仓库：
+#   dw.html              新版站点
+#   _assets/             新版样式与脚本
+#   img/common、img/characters   新版图片
+# 原版站点（index.html 与 img/ 下的平铺 PNG）不由本工作流维护。
+#
+# 回写提交的说明含 [skip ci]，GitHub 会据此跳过后续运行，不会形成循环。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: pnpm
+          cache-dependency-path: NewDw/pnpm-lock.yaml
+
+      - name: Install
+        working-directory: NewDw
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate content
+        working-directory: NewDw
+        run: pnpm check
+
+      - name: Build
+        working-directory: NewDw
+        run: pnpm build
+
+      - name: Release to repository root
+        run: |
+          set -euo pipefail
+          cp NewDw/dist/index.html dw.html
+          rm -rf _assets img/common img/characters
+          cp -r NewDw/dist/_assets _assets
+          cp -r NewDw/dist/img/common img/common
+          cp -r NewDw/dist/img/characters img/characters
+
+      - name: Report size
+        run: |
+          echo "### 构建产物" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          raw=$(stat -c%s dw.html); gz=$(gzip -c dw.html | wc -c)
+          printf '%-12s %6s KB -> %5s KB gzip\n' dw.html "$((raw/1024))" "$((gz/1024))" >> $GITHUB_STEP_SUMMARY
+          du -sh _assets img/common img/characters >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: Commit if changed
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dw.html _assets img/common img/characters
+          if git diff --staged --quiet; then
+            echo "产物无变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "构建：更新 dw.html [skip ci]"
+          git push

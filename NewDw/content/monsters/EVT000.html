@@ -1,0 +1,108 @@
+<!--
+  无魔物附属部件
+
+  游戏内这些部件可供玩家装备，但不存在对应的魔物。
+  集合为一张卡片，便于与其它魔物一并浏览与筛选。
+
+  数据来源：script.json 中 combat.parts 的 source 字段为空者，共 4 项。
+  描述中的占位符（如 {Damage_1}）在源数据中缺少释义，保留原样。
+-->
+<article class="monster" id="EVT000" data-id="EVT000" data-name="无魔物部件"
+         data-race="none"
+         data-str="0" data-dex="0" data-con="0"
+         data-int="0" data-wis="0" data-cha="0"
+         data-hp="0" data-ac="0">
+
+  <header class="monster__head">
+
+    <div class="monster__title">
+      <h2 class="monster__name">无魔物部件</h2>
+      <p class="monster__meta">
+        <span class="monster__race">无魔物</span>
+        <span class="monster__dom">4 个部件</span>
+      </p>
+    </div>
+
+  </header>
+
+  <ul class="parts">
+
+    <!-- ────────── 怪兽巨钳 M ────────── -->
+    <li class="part" data-part="m" data-act="passive"
+        data-bonus="str">
+
+      <div class="part__head">
+        <span class="badge">
+          <img src="img/common/m.webp" class="badge__frame" alt="">
+          <img src="img/common/mt.webp" class="badge__label" alt="">
+        </span>
+        <h3 class="part__name">怪兽巨钳</h3>
+        <p class="part__bonus"><span>力量+5</span><span>敏捷-5</span></p>
+      </div>
+
+      <div class="part__body">
+        <p class="part__desc">近战攻击命中时，赋予目标 1 层使<span class="blue">护甲</span>降低 2 的<span class="pink">破甲</span>（最多 5 层）。以<span class="lb">重击</span>命中时额外赋予 1 层。</p>
+      </div>
+
+    </li>
+
+    <!-- ────────── 主脑 S ────────── -->
+    <li class="part" data-part="m" data-act="react"
+        data-bonus="int">
+
+      <div class="part__head">
+        <span class="badge">
+          <img src="img/common/m.webp" class="badge__frame" alt="">
+          <img src="img/common/mt.webp" class="badge__label" alt="">
+        </span>
+        <h3 class="part__name">主脑</h3>
+        <p class="part__bonus"><span>智力+5</span><span>力量-5</span></p>
+      </div>
+
+      <div class="part__body">
+        <p class="part__desc">使用单体目标能力时作为<span class="blue">反应</span>，对除原目标外随机 1 名敌人额外发动 1 次相同能力。</p>
+      </div>
+
+    </li>
+
+    <!-- ────────── 永不停止的心脏 S ────────── -->
+    <li class="part" data-part="m" data-act="passive"
+        data-bonus="con">
+
+      <div class="part__head">
+        <span class="badge">
+          <img src="img/common/m.webp" class="badge__frame" alt="">
+          <img src="img/common/mt.webp" class="badge__label" alt="">
+        </span>
+        <h3 class="part__name">永不停止的心脏</h3>
+        <p class="part__bonus"><span>体质+5</span><span>智力-5</span></p>
+      </div>
+
+      <div class="part__body">
+        <p class="part__desc">交战开始时对自身进行<span class="green">治疗</span>。受到<span class="ele1">火焰</span>伤害后，在接下来的 2 次交战中再生失效。</p>
+      </div>
+
+    </li>
+
+    <!-- ────────── 赤红屠夫面具 S ────────── -->
+    <li class="part" data-part="m" data-act="passive"
+        data-bonus="cha">
+
+      <div class="part__head">
+        <span class="badge">
+          <img src="img/common/m.webp" class="badge__frame" alt="">
+          <img src="img/common/mt.webp" class="badge__label" alt="">
+        </span>
+        <h3 class="part__name">赤红屠夫面具</h3>
+        <p class="part__bonus"><span>魅力-5</span></p>
+      </div>
+
+      <div class="part__body">
+        <p class="part__desc">交战开始时，有一定几率使所有敌人陷入<span class="pink">恐慌</span>状态。攻击处于<span class="pink">恐慌</span>状态的目标时，额外造成伤害。</p>
+      </div>
+
+    </li>
+
+  </ul>
+
+</article>

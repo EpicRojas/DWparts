@@ -1,0 +1,4 @@
+node_modules/
+NewDw/dist/
+NewDw/.astro/
+.DS_Store
