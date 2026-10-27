@@ -50,7 +50,7 @@ jobs:
         run: pnpm build
 
       - name: Release to repository root
-        working-directory: .
+        working-directory: ${{ github.workspace }}
         run: |
           set -euo pipefail
           cp NewDw/dist/index.html dw.html
@@ -60,7 +60,7 @@ jobs:
           cp -r NewDw/dist/img/characters img/characters
 
       - name: Report size
-        working-directory: .
+        working-directory: ${{ github.workspace }}
         run: |
           echo "### 构建产物" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
@@ -70,7 +70,7 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: Commit if changed
-        working-directory: .
+        working-directory: ${{ github.workspace }}
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
