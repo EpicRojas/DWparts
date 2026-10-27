@@ -56,6 +56,26 @@ for (const vp of VIEWPORTS) {
     else good(`列宽均匀 ${min}–${max}px`);
   }
 
+  /* 无立绘的卡片（如无魔物部件集合）标题须贴左。
+     ≤1200px 的媒体查询会把 .monster__title 放入 title 区（第 2 至 3 列），
+     该卡片第 1 列空置时标题会右移。 */
+  const headLeft = await page.evaluate(() => {
+    const m = document.querySelector('.monster:not(:has(.monster__portrait))');
+    if (!m) return null;
+    const head = m.querySelector('.monster__head');
+    if (!head) return null;
+    const hr = head.getBoundingClientRect();
+    const tr = m.querySelector('.monster__title').getBoundingClientRect();
+    return { left: Math.round(tr.left - hr.left), width: Math.round(tr.width), headW: Math.round(hr.width) };
+  });
+  if (headLeft === null) {
+    console.log('  · 无无立绘卡片，跳过');
+  } else if (headLeft.left !== 0) {
+    bad(`无立绘卡片的标题未贴左：左侧空出 ${headLeft.left}px`);
+  } else {
+    good(`无立绘卡片标题贴左（宽 ${headLeft.width}/${headLeft.headW}px）`);
+  }
+
   /* 同一行内卡片等高（宽屏/中屏必须；单列时各行只有一张，天然不等高） */
   const rows = await page.evaluate(() => {
     const items = [...document.querySelectorAll('.parts .part')];

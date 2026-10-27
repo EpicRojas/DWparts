@@ -35,11 +35,6 @@
   border-bottom: 1px solid var(--line-2);
 }
 
-/* 无立绘、无属性的卡片（如无魔物部件集合）只有标题，
-   退回单列，避免标题被推进第二格而在左侧留下空档 */
-.monster__head:not(:has(.monster__portrait)):not(:has(.monster__abilities)) {
-  grid-template-columns: minmax(0, 1fr);
-}
 
 
 /* 立绘本身是不透明矩形（游戏自带底色），不要圆角、不要光晕，
@@ -468,4 +463,19 @@
   body { background: #fff; color: #000; }
   .monster, .part { border-color: #ccc; background: #fff; break-inside: avoid; }
   .monster__name, .part__name { color: #000; }
+}
+
+/* ═══ 无立绘、无属性的卡片（如无魔物部件集合）═══
+   该卡片只有标题，退回单列，避免标题被推进第二格而在左侧留下空档。
+
+   必须置于全部媒体查询之后：≤1200px 的媒体查询会设置
+   grid-template-areas 并把 .monster__title 定位到 title 区（第 2 至 3 列），
+   第 1 列的立绘位置随之空置，标题看似右对齐。
+   故此处除列定义外，还须清空网格区域并把标题复位。 */
+.monster__head:not(:has(.monster__portrait)):not(:has(.monster__abilities)) {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: none;
+}
+.monster__head:not(:has(.monster__portrait)):not(:has(.monster__abilities)) .monster__title {
+  grid-area: auto;
 }
