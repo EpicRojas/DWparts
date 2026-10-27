@@ -1,5 +1,8 @@
 # DWparts - Dungeon Within Wiki CN
 
+- Original version: https://www.xccxc.com/
+- Rewritten version: https://www.xccxc.com/dw
+
 A fan-made wiki built with HTML, CSS, and JavaScript.
 
 ## About
